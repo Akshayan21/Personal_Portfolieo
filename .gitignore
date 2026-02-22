@@ -3,6 +3,8 @@ dist/
 
 #folders
 skills/
+agents/
+antigravity/
 
 # generated types
 .astro/
