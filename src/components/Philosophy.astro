@@ -1,0 +1,208 @@
+---
+// Chapter 05: The Belief — Philosophy
+const shifts = [
+  { from: "Interface Economy", to: "Intelligence Economy" },
+  { from: "Manual Oversight", to: "Embedded Logic" },
+  { from: "Reactive Systems", to: "Predictive Infrastructure" },
+];
+const principles = ["Anticipate friction", "Clarify authority", "Scale decision-making", "Integrate AI meaningfully"];
+---
+
+<section class="philosophy chapter-section" id="philosophy">
+  <div class="container">
+    <span class="chapter-num reveal reveal-scale">CH.05</span>
+    <h2 class="section-heading reveal reveal-up delay-1">
+      The <em class="serif">Belief</em> System
+    </h2>
+
+    <div class="phil-layout">
+      <div class="phil-left">
+        <!-- Big manifesto quote -->
+        <div class="manifesto reveal reveal-left delay-2">
+          <p class="mani-text serif">
+            "The future isn't about <em>better screens.</em><br/>
+            It's about <strong>better decisions.</strong>"
+          </p>
+          <div class="mani-attr mono">— AKSHAYAN MOHANDASS</div>
+        </div>
+
+        <!-- Shifts -->
+        <div class="shifts reveal reveal-up delay-3">
+          {shifts.map(s => (
+            <div class="shift-row">
+              <span class="s-from">{s.from}</span>
+              <span class="s-arrow">→</span>
+              <span class="s-to">{s.to}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="phil-right">
+        <div class="principles-card reveal reveal-right delay-3">
+          <div class="pc-header">
+            <span>SYSTEMS THAT —</span>
+          </div>
+          <ul class="pc-list">
+            {principles.map((p, i) => (
+              <li class={`reveal reveal-up delay-${i + 2}`}>
+                <span class="pc-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="pc-text">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="pc-footer">
+            <p class="serif"><em>That is the direction I design toward.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .phil-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Manifesto */
+  .manifesto {
+    padding: 40px 32px;
+    border: var(--border-brutal);
+    background: var(--black);
+    color: var(--white);
+    box-shadow: 12px 12px 0 var(--neon-pink);
+    margin-bottom: 40px;
+    transform: rotate(-1deg);
+  }
+
+  .mani-text {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .mani-text em { color: var(--neon-pink); }
+  .mani-text strong { color: var(--neon-green); }
+
+  .mani-attr {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--grey);
+  }
+
+  /* Shifts */
+  .shifts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: var(--border-brutal);
+  }
+
+  .shift-row {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: var(--border-thick);
+    gap: 16px;
+    transition: background 0.15s ease;
+  }
+
+  .shift-row:last-child { border-bottom: none; }
+
+  .shift-row:hover {
+    background: var(--cream);
+    padding-left: 28px;
+  }
+
+  .s-from {
+    font-size: 0.9rem;
+    color: var(--grey);
+    text-decoration: line-through;
+    flex: 1;
+  }
+
+  .s-arrow {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--neon-pink);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .s-to {
+    font-size: 0.95rem;
+    font-weight: 700;
+    flex: 1;
+    text-align: right;
+  }
+
+  /* Principles */
+  .principles-card {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .pc-header {
+    padding: 14px 20px;
+    background: var(--neon-green);
+    border-bottom: var(--border-thick);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .pc-list {
+    list-style: none;
+  }
+
+  .pc-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-bottom: var(--border-thin);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+
+  .pc-list li:hover {
+    background: var(--cream);
+    padding-left: 28px;
+  }
+
+  .pc-list li:last-child { border-bottom: none; }
+
+  .pc-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--neon-pink);
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .pc-footer {
+    padding: 16px 20px;
+    border-top: var(--border-thick);
+    background: var(--cream);
+  }
+
+  .pc-footer p {
+    font-size: 0.95rem;
+    color: var(--dark-grey);
+  }
+
+  @media (max-width: 1024px) {
+    .phil-layout { grid-template-columns: 1fr; gap: 32px; }
+    .manifesto { transform: rotate(0deg); }
+  }
+</style>

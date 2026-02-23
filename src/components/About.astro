@@ -1,0 +1,166 @@
+---
+// Chapter 02: The Origin — About
+---
+
+<section class="about chapter-section" id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-left">
+        <span class="chapter-num reveal reveal-scale">CH.02</span>
+        <h2 class="section-heading reveal reveal-up delay-1">
+          The <em class="serif">Origin</em> Story
+        </h2>
+        <p class="about-body reveal reveal-up delay-2">
+          My work spans <strong>enterprise travel platforms</strong>, institutional finance automation, and AI-powered tools — environments where usability must coexist with operational logic.
+        </p>
+        <div class="about-quote reveal reveal-left delay-3">
+          <div class="quote-mark">❝</div>
+          <p>I don't start with screens.<br/><strong>I start with structure.</strong></p>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="question-block reveal reveal-right delay-2">
+          <div class="qb-header">
+            <span class="qb-tag">BEFORE I DESIGN, I ASK —</span>
+          </div>
+          <ul class="qb-list">
+            <li class="reveal reveal-up delay-2">
+              <span class="qb-num">01</span>
+              <span>Who is making the decision?</span>
+            </li>
+            <li class="reveal reveal-up delay-3">
+              <span class="qb-num">02</span>
+              <span>What are they trying to complete?</span>
+            </li>
+            <li class="reveal reveal-up delay-4">
+              <span class="qb-num">03</span>
+              <span>Where does friction exist?</span>
+            </li>
+            <li class="reveal reveal-up delay-5">
+              <span class="qb-num">04</span>
+              <span>What constraints must be respected?</span>
+            </li>
+          </ul>
+          <div class="qb-footer">
+            <p>Strong UX isn't decoration.</p>
+            <p><strong>It's structured problem-solving.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--dark-grey);
+    margin-bottom: 32px;
+  }
+
+  .about-body strong { color: var(--black); }
+
+  .about-quote {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    border: var(--border-thick);
+    background: var(--neon-yellow);
+    box-shadow: var(--shadow-sm);
+    transform: rotate(-1deg);
+  }
+
+  .quote-mark {
+    font-size: 2rem;
+    font-family: var(--font-serif);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .about-quote p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .about-quote strong { font-weight: 900; }
+
+  /* Question block */
+  .question-block {
+    border: var(--border-brutal);
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+  }
+
+  .qb-header {
+    padding: 16px 24px;
+    border-bottom: var(--border-thick);
+    background: var(--black);
+  }
+
+  .qb-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--neon-green);
+  }
+
+  .qb-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .qb-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: var(--border-thin);
+    font-size: 0.95rem;
+    transition: background 0.15s ease;
+  }
+
+  .qb-list li:hover {
+    background: var(--cream);
+    padding-left: 32px;
+  }
+
+  .qb-list li:last-child { border-bottom: none; }
+
+  .qb-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--neon-pink);
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .qb-footer {
+    padding: 16px 24px;
+    border-top: var(--border-thick);
+    background: var(--cream);
+  }
+
+  .qb-footer p {
+    font-size: 0.9rem;
+    color: var(--dark-grey);
+    line-height: 1.5;
+  }
+
+  .qb-footer strong { color: var(--black); }
+
+  @media (max-width: 1024px) {
+    .about-layout { grid-template-columns: 1fr; gap: 40px; }
+    .about-quote { transform: rotate(0deg); }
+  }
+</style>

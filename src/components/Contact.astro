@@ -1,0 +1,191 @@
+---
+// Chapter 06: The Signal — Contact
+---
+
+<section class="contact chapter-section" id="contact">
+  <div class="container">
+    <div class="contact-layout">
+      <div class="contact-left">
+        <span class="chapter-num reveal reveal-scale">CH.06</span>
+        <h2 class="section-heading reveal reveal-up delay-1">
+          Send a <em class="serif">Signal</em>
+        </h2>
+        <p class="contact-desc reveal reveal-up delay-2">
+          Building products where complexity, automation, and scale intersect?<br/>
+          <strong>Let's talk.</strong>
+        </p>
+
+        <div class="contact-links reveal reveal-up delay-3">
+          <a href="mailto:your@email.com" class="cl-row">
+            <span class="cl-label mono">EMAIL</span>
+            <span class="cl-val">your@email.com →</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="cl-row">
+            <span class="cl-label mono">LINKEDIN</span>
+            <span class="cl-val">Connect →</span>
+          </a>
+          <a href="/resume.pdf" download class="cl-row">
+            <span class="cl-label mono">RESUME</span>
+            <span class="cl-val">Download PDF →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right reveal reveal-right delay-3">
+        <form class="contact-form">
+          <div class="cf-header">
+            <span>✦ DROP A MESSAGE</span>
+          </div>
+          <div class="cf-body">
+            <div class="cf-group">
+              <label class="mono" for="c-name">NAME</label>
+              <input type="text" id="c-name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="cf-group">
+              <label class="mono" for="c-email">EMAIL</label>
+              <input type="email" id="c-email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="cf-group">
+              <label class="mono" for="c-msg">MESSAGE</label>
+              <textarea id="c-msg" name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="cf-submit">
+              SEND IT ↗
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-desc {
+    font-size: 1.05rem;
+    color: var(--dark-grey);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .contact-desc strong { color: var(--black); font-weight: 900; font-size: 1.2rem; }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: var(--border-brutal);
+  }
+
+  .cl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: var(--border-thick);
+    transition: all 0.15s ease;
+  }
+
+  .cl-row:last-child { border-bottom: none; }
+
+  .cl-row:hover {
+    background: var(--neon-green);
+    padding-left: 28px;
+  }
+
+  .cl-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+  }
+
+  .cl-row:hover .cl-label { color: var(--black); }
+
+  .cl-val {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* Form */
+  .contact-form {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .cf-header {
+    padding: 14px 20px;
+    background: var(--black);
+    border-bottom: var(--border-thick);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--neon-green);
+  }
+
+  .cf-body {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cf-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .cf-group label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+  }
+
+  .cf-group input,
+  .cf-group textarea {
+    padding: 12px 14px;
+    border: var(--border-thick);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--white);
+    outline: none;
+    resize: vertical;
+    transition: all 0.2s ease;
+  }
+
+  .cf-group input:focus,
+  .cf-group textarea:focus {
+    background: var(--neon-yellow);
+    box-shadow: 4px 4px 0 var(--black);
+  }
+
+  .cf-submit {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    background: var(--neon-pink);
+    color: var(--white);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-pink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .cf-submit:hover {
+    box-shadow: none;
+    transform: translate(6px, 6px);
+  }
+
+  @media (max-width: 1024px) {
+    .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

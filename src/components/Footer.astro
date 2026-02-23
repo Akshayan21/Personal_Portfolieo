@@ -1,0 +1,118 @@
+---
+// Footer — Brutalist endcap with marquee
+const year = new Date().getFullYear();
+const links = [
+  { label: "01.About", href: "#about" },
+  { label: "02.Journey", href: "#experience" },
+  { label: "03.Arsenal", href: "#skills" },
+  { label: "04.Belief", href: "#philosophy" },
+  { label: "05.Signal", href: "#contact" },
+];
+---
+
+<footer class="footer">
+  <!-- Marquee -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      THANKS FOR SCROLLING ✦ AKSHAYAN MOHANDASS ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ THANKS FOR SCROLLING ✦ AKSHAYAN MOHANDASS ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦&nbsp;
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo mono">AM</span>
+        <p class="footer-tagline">Designing the infrastructure<br/>for intelligent organizations.</p>
+      </div>
+      <nav class="footer-nav">
+        {links.map(l => (
+          <a href={l.href} class="footer-link mono">{l.label}</a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="mono">© {year} AKSHAYAN MOHANDASS</p>
+      <p class="mono">DESIGNED & BUILT WITH ✦</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .footer .marquee-strip {
+    border-top: none;
+    background: var(--neon-green);
+    color: var(--black);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 48px 0 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--neon-green);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey);
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--neon-green);
+    border-bottom-color: var(--neon-green);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-bottom p {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner { flex-direction: column; }
+    .footer-bottom { flex-direction: column; }
+  }
+</style>

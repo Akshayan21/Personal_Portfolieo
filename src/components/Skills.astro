@@ -1,0 +1,210 @@
+---
+// Chapter 04: The Arsenal — Skills
+const design = ["Figma", "UX Architecture", "AI UX Design"];
+const dev = ["Flutter", "React.js", "Node.js", "MySQL", "Astro", "Tailwind CSS"];
+const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architect", "Strategic Product Thinker"];
+---
+
+<section class="skills chapter-section" id="skills">
+  <div class="container">
+    <span class="chapter-num reveal reveal-scale">CH.04</span>
+    <h2 class="section-heading reveal reveal-up delay-1">
+      The <em class="serif">Arsenal</em>
+    </h2>
+
+    <!-- Design skills -->
+    <div class="sk-group reveal reveal-up delay-2">
+      <div class="sk-label">DESIGN & PRODUCT</div>
+      <div class="sk-grid">
+        {design.map((s, i) => (
+          <div class="sk-block" style={`--delay: ${i * 0.1}s`}>
+            <span class="sk-idx">{String(i + 1).padStart(2, '0')}</span>
+            <span class="sk-name">{s}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Dev skills -->
+    <div class="sk-group reveal reveal-up delay-3">
+      <div class="sk-label">DEV UNDERSTANDING</div>
+      <div class="sk-chips">
+        {dev.map(s => (
+          <span class="sk-chip">{s}</span>
+        ))}
+      </div>
+      <p class="sk-note">My technical foundation lets me design systems that are <strong>implementation-aware</strong>, not concept-driven.</p>
+    </div>
+
+    <!-- Future -->
+    <div class="sk-future reveal reveal-up delay-4">
+      <div class="sf-header">
+        <span>FUTURE DIRECTION ✦</span>
+      </div>
+      <div class="sf-body">
+        <p class="sf-statement serif">
+          The next generation of designers won't just design UI.<br/>
+          <strong>They'll design intelligence.</strong>
+        </p>
+        <div class="sf-roles">
+          {future.map(r => (
+            <span class="sf-role">{r}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sk-group { margin-bottom: 40px; }
+
+  .sk-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--grey);
+    margin-bottom: 16px;
+  }
+
+  .sk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: var(--border-brutal);
+  }
+
+  .sk-block {
+    padding: 28px 20px;
+    border-right: var(--border-thick);
+    border-bottom: var(--border-thick);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.15s ease;
+    cursor: default;
+  }
+
+  .sk-block:nth-child(3n) { border-right: none; }
+  .sk-block:nth-last-child(-n+3) { border-bottom: none; }
+
+  .sk-block:hover {
+    background: var(--neon-green);
+  }
+
+  .sk-idx {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--neon-pink);
+  }
+
+  .sk-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  /* Dev chips */
+  .sk-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .sk-chip {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s ease;
+    cursor: default;
+  }
+
+  .sk-chip:hover {
+    background: var(--black);
+    color: var(--neon-green);
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+
+  .sk-note {
+    font-size: 0.9rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .sk-note strong { color: var(--black); }
+
+  /* Future */
+  .sk-future {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-neon);
+    overflow: hidden;
+  }
+
+  .sf-header {
+    padding: 14px 20px;
+    background: var(--black);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--neon-green);
+    border-bottom: var(--border-thick);
+  }
+
+  .sf-body {
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .sf-statement {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    color: var(--dark-grey);
+  }
+
+  .sf-statement strong {
+    color: var(--black);
+    font-size: 1.4rem;
+  }
+
+  .sf-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .sf-role {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: var(--border-thick);
+    background: var(--neon-yellow);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s ease;
+  }
+
+  .sf-role:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px) rotate(-2deg);
+  }
+
+  @media (max-width: 768px) {
+    .sk-grid { grid-template-columns: 1fr; }
+    .sk-block { border-right: none !important; }
+    .sk-block:last-child { border-bottom: none; }
+  }
+</style>
