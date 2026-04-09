@@ -61,10 +61,10 @@
   }
 
   .about-body {
-    font-size: 1.05rem;
+    font-size: var(--text-base);
     line-height: 1.8;
     color: var(--dark-grey);
-    margin-bottom: 32px;
+    margin-bottom: var(--space-6);
   }
 
   .about-body strong { color: var(--black); }
@@ -74,9 +74,15 @@
     gap: 12px;
     padding: 20px;
     border: var(--border-thick);
-    background: var(--neon-yellow);
+    background: var(--primary);
     box-shadow: var(--shadow-sm);
     transform: rotate(-1deg);
+    transition: all 0.15s ease;
+  }
+
+  .about-quote:hover {
+    box-shadow: none;
+    transform: rotate(0deg) translate(4px, 4px);
   }
 
   .quote-mark {
@@ -84,34 +90,42 @@
     font-family: var(--font-serif);
     line-height: 1;
     flex-shrink: 0;
+    color: var(--black);
   }
 
   .about-quote p {
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.6;
+    color: var(--black);
   }
 
   .about-quote strong { font-weight: 900; }
 
-  /* Question block */
+  /* Question block — neobrutalism card */
   .question-block {
     border: var(--border-brutal);
     background: var(--white);
     box-shadow: var(--shadow-md);
+    transition: all 0.15s ease;
+  }
+
+  .question-block:hover {
+    box-shadow: none;
+    transform: translate(6px, 6px);
   }
 
   .qb-header {
     padding: 16px 24px;
     border-bottom: var(--border-thick);
-    background: var(--black);
+    background: var(--secondary);
   }
 
   .qb-tag {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--neon-green);
+    color: var(--white);
   }
 
   .qb-list {
@@ -125,8 +139,8 @@
     gap: 16px;
     padding: 16px 24px;
     border-bottom: var(--border-thin);
-    font-size: 0.95rem;
-    transition: background 0.15s ease;
+    font-size: var(--text-sm);
+    transition: all 0.15s ease;
   }
 
   .qb-list li:hover {
@@ -138,9 +152,9 @@
 
   .qb-num {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--text-xs);
     font-weight: 700;
-    color: var(--neon-pink);
+    color: var(--secondary);
     flex-shrink: 0;
     width: 28px;
   }
@@ -148,16 +162,16 @@
   .qb-footer {
     padding: 16px 24px;
     border-top: var(--border-thick);
-    background: var(--cream);
+    background: var(--primary);
   }
 
   .qb-footer p {
-    font-size: 0.9rem;
-    color: var(--dark-grey);
+    font-size: var(--text-sm);
+    color: var(--black);
     line-height: 1.5;
   }
 
-  .qb-footer strong { color: var(--black); }
+  .qb-footer strong { color: var(--black); font-weight: 900; }
 
   @media (max-width: 1024px) {
     .about-layout { grid-template-columns: 1fr; gap: 40px; }

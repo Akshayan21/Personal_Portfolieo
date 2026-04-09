@@ -68,19 +68,21 @@
   }
 
   .contact-desc {
-    font-size: 1.05rem;
+    font-size: var(--text-base);
     color: var(--dark-grey);
     line-height: 1.8;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-6);
   }
 
-  .contact-desc strong { color: var(--black); font-weight: 900; font-size: 1.2rem; }
+  .contact-desc strong { color: var(--black); font-weight: 900; font-size: var(--text-lg); }
 
+  /* Contact links — neobrutalism list */
   .contact-links {
     display: flex;
     flex-direction: column;
     gap: 0;
     border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
   }
 
   .cl-row {
@@ -90,17 +92,18 @@
     padding: 18px 20px;
     border-bottom: var(--border-thick);
     transition: all 0.15s ease;
+    background: var(--white);
   }
 
   .cl-row:last-child { border-bottom: none; }
 
   .cl-row:hover {
-    background: var(--neon-green);
+    background: var(--primary);
     padding-left: 28px;
   }
 
   .cl-label {
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--grey);
@@ -109,26 +112,32 @@
   .cl-row:hover .cl-label { color: var(--black); }
 
   .cl-val {
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-weight: 600;
+    color: var(--text);
   }
 
-  /* Form */
+  /* Form — neobrutalism card */
   .contact-form {
     border: var(--border-brutal);
     box-shadow: var(--shadow-md);
     overflow: hidden;
+    transition: all 0.15s ease;
+  }
+
+  .contact-form:hover {
+    box-shadow: var(--shadow-sm);
   }
 
   .cf-header {
     padding: 14px 20px;
-    background: var(--black);
+    background: var(--secondary);
     border-bottom: var(--border-thick);
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--neon-green);
+    color: var(--white);
   }
 
   .cf-body {
@@ -136,12 +145,13 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    background: var(--white);
   }
 
   .cf-group { display: flex; flex-direction: column; gap: 6px; }
 
   .cf-group label {
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--grey);
@@ -152,8 +162,9 @@
     padding: 12px 14px;
     border: var(--border-thick);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     background: var(--white);
+    color: var(--text);
     outline: none;
     resize: vertical;
     transition: all 0.2s ease;
@@ -161,27 +172,34 @@
 
   .cf-group input:focus,
   .cf-group textarea:focus {
-    background: var(--neon-yellow);
-    box-shadow: 4px 4px 0 var(--black);
+    background: var(--primary);
+    box-shadow: var(--shadow-sm);
+    transform: translate(-2px, -2px);
   }
 
   .cf-submit {
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 16px 28px;
-    background: var(--neon-pink);
-    color: var(--white);
+    background: var(--primary);
+    color: var(--black);
     border: var(--border-thick);
-    box-shadow: var(--shadow-pink);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
     transition: all 0.15s ease;
   }
 
   .cf-submit:hover {
     box-shadow: none;
+    transform: translate(4px, 4px);
+    background: var(--secondary);
+    color: var(--white);
+  }
+
+  .cf-submit:active {
     transform: translate(6px, 6px);
   }
 
