@@ -1,233 +1,298 @@
 ---
-// Chapter 01: The Designer — Hero
+// Hero — Bazil-inspired layout with Neobrutalism theme
 ---
 
 <section class="hero" id="hero">
-  <!-- Grain overlay -->
-  <div class="grain"></div>
+  <div class="hero-content">
+    <!-- Intro line -->
+    <p class="hero-intro anim-fade anim-d1">
+      👋, my name is <strong>Akshayan</strong> and I am a
+    </p>
 
-  <div class="hero-inner">
-    <!-- Sticker badge -->
-    <div class="sticker reveal reveal-scale delay-2" data-parallax="0.12">
-      <span>AVAILABLE FOR WORK ★</span>
-    </div>
+    <!-- Massive title block -->
+    <div class="hero-title-wrap">
+      <h1 class="hero-title-solid anim-fade anim-d2">
+        <span>Product</span>
+        <span>Designer</span>
+      </h1>
 
-    <!-- Main name — z-index above photo -->
-    <div class="hero-title-block">
-      <p class="hero-chapter mono reveal reveal-up">CHAPTER 01 — THE DESIGNER</p>
-      <h1 class="hero-name reveal reveal-up delay-1">
-        <span class="name-line">Akshayan</span>
-        <span class="name-line name-outline">Mohandass</span>
+      <!-- Photo overlapping the text from center -->
+      <div class="hero-photo anim-fade anim-d3">
+        <div class="photo-frame">
+          <img src="/hero-portrait.png" alt="Akshayan Mohandass" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="photo-placeholder">
+            <span class="photo-initials">AM</span>
+          </div>
+        </div>
+        <div class="photo-sticker">DESIGNER ✦</div>
+      </div>
+
+      <h1 class="hero-title-stroke anim-fade anim-d4">
+        <span>& Systems</span>
+        <span>Thinker</span>
       </h1>
     </div>
 
-    <!-- Tagline with scramble -->
-    <div class="hero-tagline reveal reveal-up delay-2">
-      <p class="tagline-static">Designing the infrastructure for</p>
-      <p class="tagline-dynamic" data-scramble="Intelligent Organizations|Complex Systems|AI-Driven Products|Enterprise Scale">
-        Intelligent Organizations
-      </p>
-    </div>
 
-    <!-- Statement -->
-    <div class="hero-statement reveal reveal-up delay-3">
-      <div class="statement-bar"></div>
-      <p>I don't design interfaces.<br/><strong>I design how decisions move.</strong></p>
-    </div>
 
-    <!-- CTA row -->
-    <div class="hero-cta reveal reveal-up delay-4">
-      <a href="#experience" class="cta-brutal">
-        VIEW MY WORK
+    <!-- CTAs -->
+    <div class="hero-ctas anim-fade anim-d6">
+      <a href="#experience" class="cta-btn cta-primary">
+        <span>View my work</span>
         <span class="cta-arrow">↗</span>
       </a>
-      <a href="#contact" class="cta-outline">SAY HELLO</a>
+      <a href="#contact" class="cta-btn cta-secondary">
+        <span>Get in touch</span>
+      </a>
     </div>
-
-    <!-- Photo card — right side -->
-    <div class="photo-card reveal reveal-scale delay-3" data-parallax="0.08">
-      <div class="pc-frame">
-        <div class="pc-image">
-          <img src="/hero-portrait.png" alt="Akshayan Mohandass" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="pc-placeholder">
-            <span class="pc-initials">AM</span>
-            <span class="pc-hint mono">YOUR PHOTO</span>
-          </div>
-        </div>
-        <div class="pc-caption mono">
-          <span>AKSHAYAN M.</span>
-          <span class="pc-dot">●</span>
-          <span>2026</span>
-        </div>
-      </div>
-      <!-- Role sticker on card -->
-      <div class="pc-sticker">
-        <span>DESIGNER ✦</span>
-      </div>
-    </div>
-
-    <!-- Small deco -->
-    <div class="deco deco-cross" data-parallax="-0.15">✦</div>
   </div>
 
   <!-- Marquee -->
   <div class="marquee-strip">
     <div class="marquee-inner">
-      PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦&nbsp;
+      PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦&nbsp;
     </div>
   </div>
 </section>
 
 <style>
+  /* ---- ENTRY ANIMATIONS (no JS required) ---- */
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .anim-fade {
+    animation: heroFadeUp 0.7s ease forwards;
+    opacity: 0;
+  }
+
+  .anim-d1 { animation-delay: 0.1s; }
+  .anim-d2 { animation-delay: 0.25s; }
+  .anim-d3 { animation-delay: 0.45s; }
+  .anim-d4 { animation-delay: 0.55s; }
+  .anim-d5 { animation-delay: 0.7s; }
+  .anim-d6 { animation-delay: 0.85s; }
+
+  /* ---- HERO LAYOUT ---- */
   .hero {
-    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     border-bottom: var(--border-brutal);
-    overflow: hidden;
     background: var(--bg);
-  }
-
-  .grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain 8s steps(10) infinite;
-  }
-
-  .hero-inner {
-    position: relative; z-index: 1;
-    max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px;
-    display: flex; flex-direction: column; align-items: flex-start;
-  }
-
-  .hero-title-block {
+    overflow: hidden;
     position: relative;
-    z-index: 5;
   }
 
-  /* Sticker — neobrutalism: thick border, hard shadow, punchy color */
-  .sticker {
-    position: absolute; top: 120px; right: 60px;
-    background: var(--primary);
-    border: var(--border-thick);
-    box-shadow: var(--shadow-sm);
-    padding: 12px 20px;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs); font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase;
-    color: var(--black);
-    transform: rotate(12deg);
-    animation: wobble 3s ease-in-out infinite;
-    z-index: 5;
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 24px 40px;
+    width: 100%;
   }
 
-  /* Chapter label */
-  .hero-chapter {
-    font-size: var(--text-xs); font-weight: 700;
-    letter-spacing: 4px;
-    color: var(--grey);
-    margin-bottom: 20px;
-  }
-
-  /* Name */
-  .hero-name {
+  /* ---- INTRO ---- */
+  .hero-intro {
     font-family: var(--font-sans);
-    font-size: clamp(3.5rem, 9vw, 8rem);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -3px;
-    margin-bottom: 24px;
-    color: var(--text);
+    font-size: clamp(1rem, 2vw, var(--text-lg));
+    color: var(--dark-grey);
+    margin-bottom: 16px;
+    line-height: 1.5;
   }
 
-  .name-line {
+  .hero-intro strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  /* ---- TITLE WRAPPER ---- */
+  .hero-title-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  /* ---- SOLID FILLED TITLE ---- */
+  .hero-title-solid {
+    font-family: var(--font-sans);
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .hero-title-solid span {
     display: block;
   }
 
-  .name-outline {
-    -webkit-text-stroke: 3px var(--black);
+  /* ---- OUTLINE STROKE TITLE ---- */
+  .hero-title-stroke {
+    font-family: var(--font-sans);
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .hero-title-stroke span {
+    display: block;
+    -webkit-text-stroke: 3px var(--text);
     color: transparent;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
   }
 
-  .name-outline:hover {
+  .hero-title-stroke span:hover {
     color: var(--primary);
-    -webkit-text-stroke: 3px var(--black);
   }
 
-  /* Tagline */
-  .hero-tagline {
-    margin-bottom: 24px;
+  /* ---- PHOTO OVERLAP ---- */
+  .hero-photo {
+    position: absolute;
+    bottom: -60px; /* Pull photo down */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
   }
 
-  .tagline-static {
-    font-family: var(--font-serif);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 700;
-    font-style: italic;
-    color: var(--dark-grey);
-    margin-bottom: 4px;
+  .photo-frame {
+    width: 260px;
+    height: 320px;
+    overflow: hidden;
+    border: var(--border-brutal);
+    box-shadow: 8px 8px 0 var(--primary);
+    background: var(--white);
+    transition: all 0.25s ease;
   }
 
-  .tagline-dynamic {
-    font-family: var(--font-mono);
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    font-weight: 700;
-    color: var(--secondary);
-    min-height: 1.5em;
+  .hero-photo:hover .photo-frame {
+    box-shadow: 4px 4px 0 var(--secondary);
+    transform: scale(1.03);
   }
 
-  :global(.scramble-char) {
-    color: var(--grey);
-    font-weight: 400;
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 
-  /* Statement */
-  .hero-statement {
-    display: flex; align-items: flex-start; gap: 16px;
-    margin-bottom: 36px;
-    max-width: 500px;
+  .photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--primary) 0%, #ffe566 60%, var(--bg) 100%);
   }
 
-  .statement-bar {
-    width: 4px; min-height: 100%; flex-shrink: 0;
+  .photo-initials {
+    font-family: var(--font-sans);
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -6px;
+  }
+
+  .photo-sticker {
+    position: absolute;
+    top: -14px;
+    right: -24px;
     background: var(--secondary);
-  }
-
-  .hero-statement p {
-    font-size: var(--text-base);
-    color: var(--dark-grey);
-    line-height: 1.7;
-  }
-
-  .hero-statement strong {
-    color: var(--black);
-    font-weight: 700;
-  }
-
-  /* CTA — neobrutalism buttons */
-  .hero-cta {
-    display: flex; gap: 16px; flex-wrap: wrap;
-  }
-
-  .cta-brutal {
+    color: var(--white);
     font-family: var(--font-mono);
-    font-size: var(--text-sm); font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    background: var(--black);
-    color: var(--primary);
-    padding: 16px 28px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 14px;
     border: var(--border-thick);
-    box-shadow: var(--shadow-primary);
-    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 3px 3px 0 var(--black);
+    transform: rotate(12deg);
+    z-index: 5;
+    animation: sticker-wobble 4s ease-in-out infinite;
+  }
+
+  @keyframes sticker-wobble {
+    0%, 100% { transform: rotate(10deg); }
+    50% { transform: rotate(15deg); }
+  }
+
+
+
+  /* ---- CTAs ---- */
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: var(--border-thick);
     transition: all 0.15s ease;
   }
 
-  .cta-brutal:hover {
+  .cta-primary {
+    background: var(--primary);
+    color: var(--black);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta-primary:hover {
     box-shadow: none;
-    transform: translate(6px, 6px);
+    transform: translate(4px, 4px);
+    background: var(--secondary);
+    color: var(--white);
+  }
+
+  .cta-secondary {
+    background: var(--white);
+    color: var(--black);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta-secondary:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px);
   }
 
   .cta-arrow {
@@ -235,164 +300,83 @@
     transition: transform 0.2s ease;
   }
 
-  .cta-brutal:hover .cta-arrow {
+  .cta-primary:hover .cta-arrow {
     transform: translate(3px, -3px);
   }
 
-  .cta-outline {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm); font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    background: transparent;
-    color: var(--black);
-    padding: 16px 28px;
-    border: var(--border-thick);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.15s ease;
-  }
-
-  .cta-outline:hover {
-    background: var(--secondary);
-    color: var(--white);
-    box-shadow: none;
-    transform: translate(4px, 4px);
-  }
-
-  /* Decorative */
-  .deco { position: absolute; pointer-events: none; }
-
-  .deco-cross {
-    font-size: 3rem; color: var(--secondary);
-    top: 40%; right: 15%;
-    animation: float-slow 6s ease-in-out infinite;
-  }
-
-  /* Photo Card — neobrutalism card */
-  .photo-card {
-    position: absolute;
-    top: 50%;
-    right: 80px;
-    transform: translateY(-50%) rotate(-3deg);
-    z-index: 2;
-  }
-
-  .pc-frame {
-    border: var(--border-brutal);
-    box-shadow: 8px 8px 0 var(--primary);
-    background: var(--white);
-    width: 240px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .photo-card:hover .pc-frame {
-    transform: rotate(2deg);
-    box-shadow: 4px 4px 0 var(--primary);
-  }
-
-  .pc-image {
-    width: 240px;
-    height: 280px;
-    overflow: hidden;
-    position: relative;
-    background: var(--cream);
-    border-bottom: var(--border-thick);
-  }
-
-  .pc-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .pc-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    gap: 8px;
-    background: var(--cream);
-  }
-
-  .pc-initials {
-    font-family: var(--font-sans);
-    font-size: 4rem;
-    font-weight: 900;
-    color: var(--black);
-    letter-spacing: -2px;
-    line-height: 1;
-  }
-
-  .pc-hint {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--grey);
-  }
-
-  .pc-caption {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--dark-grey);
-  }
-
-  .pc-dot {
-    color: var(--primary);
-    font-size: 8px;
-  }
-
-  .pc-sticker {
-    position: absolute;
-    top: -12px;
-    right: -14px;
-    background: var(--secondary);
-    color: var(--white);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border: 2px solid var(--black);
-    box-shadow: 3px 3px 0 var(--black);
-    transform: rotate(8deg);
-    z-index: 5;
-  }
-
-  /* Marquee at bottom of hero */
+  /* ---- MARQUEE ---- */
   .hero > .marquee-strip {
     margin-top: auto;
     flex-shrink: 0;
   }
 
+  /* ---- RESPONSIVE ---- */
   @media (max-width: 1024px) {
-    .photo-card {
-      position: relative;
-      top: auto; right: auto;
-      transform: rotate(-2deg);
-      margin-top: 40px;
-      align-self: center;
+    .hero-title-solid,
+    .hero-title-stroke {
+      font-size: clamp(2.5rem, 7vw, 6rem);
     }
+
+    .photo-frame {
+      width: 220px;
+      height: 270px;
+    }
+
+
   }
 
   @media (max-width: 768px) {
-    .hero-inner { padding: 100px 16px 60px; }
-    .sticker { top: 90px; right: 16px; font-size: 10px; padding: 8px 14px; }
-    .deco-cross { display: none; }
-    .name-outline { -webkit-text-stroke-width: 2px; }
-    .cta-brutal, .cta-outline { font-size: var(--text-xs); padding: 12px 20px; }
-    .photo-card { transform: rotate(-1deg); }
-    .pc-frame { width: 200px; }
-    .pc-image { width: 200px; height: 240px; }
-    .pc-initials { font-size: 3rem; }
+    .hero-content {
+      padding: 100px 16px 32px;
+    }
+
+    .hero-title-solid,
+    .hero-title-stroke {
+      font-size: clamp(2rem, 9vw, 4.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero-title-stroke span {
+      -webkit-text-stroke-width: 2px;
+    }
+
+    .photo-frame {
+      width: 180px;
+      height: 230px;
+    }
+
+    .photo-initials {
+      font-size: 4rem;
+      letter-spacing: -3px;
+    }
+
+    .cta-btn {
+      padding: 14px 28px;
+      font-size: var(--text-xs);
+    }
+
+
+  }
+
+  @media (max-width: 480px) {
+    .hero-title-solid,
+    .hero-title-stroke {
+      font-size: clamp(1.5rem, 10vw, 3rem);
+    }
+
+    .photo-frame {
+      width: 150px;
+      height: 190px;
+    }
+
+    .hero-photo {
+      margin: -10px 0;
+    }
+
+    .photo-sticker {
+      font-size: 8px;
+      padding: 5px 10px;
+      right: -16px;
+    }
   }
 </style>
