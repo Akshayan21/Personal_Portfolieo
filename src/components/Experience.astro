@@ -49,7 +49,7 @@ const jobs = [
 
     <div class="exp-stack">
       {jobs.map((j, i) => (
-        <div class={`exp-card reveal reveal-up delay-${(i % 3) + 1}`} style={`--card-accent: ${j.accent}`}>
+        <div class={`exp-card reveal reveal-up delay-${(i % 3) + 1}`} style={`--card-accent: ${j.accent}`} data-depth="1">
           <div class="ec-top">
             <span class="ec-co">{j.co}</span>
             {j.tag && <span class="ec-tag">{j.tag}</span>}
@@ -67,7 +67,7 @@ const jobs = [
     </div>
 
     <!-- System Highlight -->
-    <div class="sys-highlight reveal reveal-up delay-2">
+    <div class="sys-highlight reveal reveal-up delay-2" data-depth="1.5">
       <div class="sh-badge">★ SYSTEM HIGHLIGHT</div>
       <div class="sh-body">
         <h3>Fees Management Automation System</h3>
