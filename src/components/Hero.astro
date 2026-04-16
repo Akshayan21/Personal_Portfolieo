@@ -1,66 +1,112 @@
 ---
-// Hero — Bazil-inspired layout with Neobrutalism theme
+// Hero — Clean two-column split layout with Neobrutalism theme
 ---
 
 <section class="hero" id="hero">
-  <div class="hero-content">
-    <!-- Intro line -->
-    <p class="hero-intro anim-fade anim-d1">
-      👋, my name is <strong>Akshayan</strong> and I am a
-    </p>
-
-    <!-- Massive title block -->
-    <div class="hero-title-wrap">
-      <h1 class="hero-title-solid anim-fade anim-d2">
-        <span>Product</span>
-        <span>Designer</span>
-      </h1>
-
-      <!-- Photo overlapping the text from center -->
-      <div class="hero-photo anim-fade anim-d3">
-        <div class="photo-frame">
-          <img src="/hero-portrait.png" alt="Akshayan Mohandass" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="photo-placeholder">
-            <span class="photo-initials">AM</span>
-          </div>
-        </div>
-        <div class="photo-sticker">DESIGNER ✦</div>
+  <div class="hero-inner">
+    <!-- ── LEFT COLUMN: Text ── -->
+    <div class="hero-left">
+      <!-- Chapter badge -->
+      <div class="hero-badge anim-fade anim-d1">
+        <span class="badge-dot"></span>
+        <span>Available for work</span>
       </div>
 
-      <h1 class="hero-title-stroke anim-fade anim-d4">
-        <span>& Systems</span>
-        <span>Thinker</span>
+      <!-- Intro greeting -->
+      <p class="hero-greeting anim-fade anim-d2">👋 Hi, I'm</p>
+
+      <!-- Name -->
+      <h1 class="hero-name anim-fade anim-d3">
+        <span class="name-solid">Akshayan</span>
+        <span class="name-stroke">Mohandass</span>
       </h1>
+
+      <!-- Role tag line -->
+      <p class="hero-role anim-fade anim-d4">
+        <span class="role-tag">Product Designer</span>
+        <span class="role-sep">×</span>
+        <span class="role-tag">Systems Thinker</span>
+      </p>
+
+      <!-- Short bio -->
+      <p class="hero-bio anim-fade anim-d5">
+        I craft <strong>intuitive digital products</strong> from enterprise UX systems
+        to AI-native interfaces with a focus on clarity, scalability and delight.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-ctas anim-fade anim-d6">
+        <a href="#experience" class="cta-btn cta-primary">
+          <span>View my work</span>
+          <span class="cta-arrow">↗</span>
+        </a>
+        <a href="#contact" class="cta-btn cta-secondary">
+          <span>Get in touch</span>
+        </a>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="hero-stats anim-fade anim-d6">
+        <div class="stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Years exp.</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">5★</span>
+          <span class="stat-label">Avg. rating</span>
+        </div>
+      </div>
     </div>
 
-
-
-    <!-- CTAs -->
-    <div class="hero-ctas anim-fade anim-d6">
-      <a href="#experience" class="cta-btn cta-primary">
-        <span>View my work</span>
-        <span class="cta-arrow">↗</span>
-      </a>
-      <a href="#contact" class="cta-btn cta-secondary">
-        <span>Get in touch</span>
-      </a>
+    <!-- ── RIGHT COLUMN: Photo ── -->
+    <div class="hero-right anim-fade anim-d3">
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img
+            class="photo-initial"
+            src="/inttial_state.jpg"
+            alt="Akshayan Mohandass — B&W"
+          />
+          <img
+            class="photo-hover"
+            src="/final_state.jpg"
+            alt="Akshayan Mohandass — Color"
+          />
+        </div>
+        <div class="photo-sticker">DESIGNER ✦</div>
+        <div class="photo-tag">UX · AI · Systems</div>
+      </div>
     </div>
   </div>
+
+  <!-- Scroll hint -->
+  <!-- <div class="scroll-hint anim-fade anim-d6">
+    <span class="scroll-line"></span>
+    <span class="scroll-label">scroll</span>
+  </div> -->
 
   <!-- Marquee -->
   <div class="marquee-strip">
     <div class="marquee-inner">
-      PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦&nbsp;
+      PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦ ENTERPRISE
+      ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ UX ARCHITECT ✦
+      ENTERPRISE ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦&nbsp;
     </div>
   </div>
 </section>
 
 <style>
-  /* ---- ENTRY ANIMATIONS (no JS required) ---- */
+  /* ── ENTRY ANIMATIONS ── */
   @keyframes heroFadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(28px);
     }
     to {
       opacity: 1;
@@ -69,18 +115,30 @@
   }
 
   .anim-fade {
-    animation: heroFadeUp 0.7s ease forwards;
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     opacity: 0;
   }
 
-  .anim-d1 { animation-delay: 0.1s; }
-  .anim-d2 { animation-delay: 0.25s; }
-  .anim-d3 { animation-delay: 0.45s; }
-  .anim-d4 { animation-delay: 0.55s; }
-  .anim-d5 { animation-delay: 0.7s; }
-  .anim-d6 { animation-delay: 0.85s; }
+  .anim-d1 {
+    animation-delay: 0.05s;
+  }
+  .anim-d2 {
+    animation-delay: 0.15s;
+  }
+  .anim-d3 {
+    animation-delay: 0.28s;
+  }
+  .anim-d4 {
+    animation-delay: 0.4s;
+  }
+  .anim-d5 {
+    animation-delay: 0.52s;
+  }
+  .anim-d6 {
+    animation-delay: 0.65s;
+  }
 
-  /* ---- HERO LAYOUT ---- */
+  /* ── HERO SHELL ── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -91,171 +149,152 @@
     position: relative;
   }
 
-  .hero-content {
+  /* ── TWO-COLUMN INNER ── */
+  .hero-inner {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 1400px;
+    gap: clamp(32px, 5vw, 80px);
+    max-width: 1280px;
+    width: 100%;
     margin: 0 auto;
-    padding: 120px 24px 40px;
-    width: 100%;
+    padding: clamp(110px, 15vh, 150px) clamp(32px, 6vw, 96px)
+      clamp(48px, 7vh, 80px);
   }
 
-  /* ---- INTRO ---- */
-  .hero-intro {
-    font-family: var(--font-sans);
-    font-size: clamp(1rem, 2vw, var(--text-lg));
-    color: var(--dark-grey);
-    margin-bottom: 16px;
-    line-height: 1.5;
+  /* ── LEFT: TEXT COLUMN ── */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
-  .hero-intro strong {
-    color: var(--text);
+  /* Available badge */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
     font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--primary);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-sm);
+    padding: 6px 14px;
+    margin-bottom: 28px;
   }
 
-  /* ---- TITLE WRAPPER ---- */
-  .hero-title-wrap {
-    position: relative;
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--black);
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.7;
+    }
+  }
+
+  /* Greeting line */
+  .hero-greeting {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--dark-grey);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  /* Name */
+  .hero-name {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 24px;
+    align-items: flex-start;
+    font-family: var(--font-sans);
+    font-size: clamp(3.2rem, 7vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
   }
 
-  /* ---- SOLID FILLED TITLE ---- */
-  .hero-title-solid {
-    font-family: var(--font-sans);
-    font-size: clamp(3.5rem, 8vw, 8rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.06em;
-    text-transform: uppercase;
+  .name-solid {
     color: var(--text);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    margin: 0;
   }
 
-  .hero-title-solid span {
-    display: block;
-  }
-
-  /* ---- OUTLINE STROKE TITLE ---- */
-  .hero-title-stroke {
-    font-family: var(--font-sans);
-    font-size: clamp(3.5rem, 8vw, 8rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.06em;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    margin: 0;
-  }
-
-  .hero-title-stroke span {
-    display: block;
+  .name-stroke {
     -webkit-text-stroke: 3px var(--text);
     color: transparent;
     transition: color 0.3s ease;
   }
 
-  .hero-title-stroke span:hover {
+  .name-stroke:hover {
     color: var(--primary);
   }
 
-  /* ---- PHOTO OVERLAP ---- */
-  .hero-photo {
-    position: absolute;
-    bottom: -60px; /* Pull photo down */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-  }
-
-  .photo-frame {
-    width: 260px;
-    height: 320px;
-    overflow: hidden;
-    border: var(--border-brutal);
-    box-shadow: 8px 8px 0 var(--primary);
-    background: var(--white);
-    transition: all 0.25s ease;
-  }
-
-  .hero-photo:hover .photo-frame {
-    box-shadow: 4px 4px 0 var(--secondary);
-    transform: scale(1.03);
-  }
-
-  .photo-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
-
-  .photo-placeholder {
+  /* Role tags */
+  .hero-role {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(160deg, var(--primary) 0%, #ffe566 60%, var(--bg) 100%);
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
   }
 
-  .photo-initials {
-    font-family: var(--font-sans);
-    font-size: 6rem;
-    font-weight: 900;
-    color: var(--text);
-    letter-spacing: -6px;
-  }
-
-  .photo-sticker {
-    position: absolute;
-    top: -14px;
-    right: -24px;
-    background: var(--secondary);
-    color: var(--white);
+  .role-tag {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 8px 14px;
     border: var(--border-thick);
+    padding: 5px 12px;
+    background: var(--white);
     box-shadow: 3px 3px 0 var(--black);
-    transform: rotate(12deg);
-    z-index: 5;
-    animation: sticker-wobble 4s ease-in-out infinite;
   }
 
-  @keyframes sticker-wobble {
-    0%, 100% { transform: rotate(10deg); }
-    50% { transform: rotate(15deg); }
+  .role-sep {
+    font-weight: 900;
+    color: var(--secondary);
+    font-size: 1.1rem;
   }
 
+  /* Bio */
+  .hero-bio {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    color: var(--dark-grey);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
 
+  .hero-bio strong {
+    color: var(--text);
+    font-weight: 700;
+  }
 
-  /* ---- CTAs ---- */
+  /* CTAs */
   .hero-ctas {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     flex-wrap: wrap;
-    justify-content: center;
+    margin-bottom: 48px;
   }
 
   .cta-btn {
@@ -269,6 +308,7 @@
     letter-spacing: 1px;
     border: var(--border-thick);
     transition: all 0.15s ease;
+    cursor: pointer;
   }
 
   .cta-primary {
@@ -296,7 +336,7 @@
   }
 
   .cta-arrow {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: transform 0.2s ease;
   }
 
@@ -304,79 +344,295 @@
     transform: translate(3px, -3px);
   }
 
-  /* ---- MARQUEE ---- */
+  /* Stats strip */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-num {
+    font-family: var(--font-sans);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dark-grey);
+  }
+
+  .stat-divider {
+    width: 2px;
+    height: 36px;
+    background: var(--black);
+    opacity: 0.15;
+  }
+
+  /* ── RIGHT: PHOTO COLUMN ── */
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: clamp(16px, 3vw, 48px);
+  }
+
+  .hero-photo {
+    position: relative;
+  }
+
+  .photo-frame {
+    width: clamp(240px, 24vw, 340px);
+    height: clamp(300px, 30vw, 420px);
+    overflow: hidden;
+    border: var(--border-brutal);
+    box-shadow: 10px 10px 0 var(--primary);
+    background: var(--white);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    position: relative;
+  }
+
+  .hero-photo:hover .photo-frame {
+    box-shadow: 6px 6px 0 var(--secondary);
+    transform: scale(1.02) rotate(-1deg);
+  }
+
+  /* Stacked images — crossfade on hover */
+  .photo-frame .photo-initial,
+  .photo-frame .photo-hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: opacity 0.5s ease;
+  }
+
+  .photo-frame .photo-initial {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .photo-frame .photo-hover {
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .hero-photo:hover .photo-frame .photo-initial {
+    opacity: 0;
+  }
+
+  .hero-photo:hover .photo-frame .photo-hover {
+    opacity: 1;
+  }
+
+  /* Sticker */
+  .photo-sticker {
+    position: absolute;
+    top: -16px;
+    right: -28px;
+    background: var(--secondary);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: var(--border-thick);
+    box-shadow: 3px 3px 0 var(--black);
+    transform: rotate(12deg);
+    z-index: 5;
+    animation: sticker-wobble 4s ease-in-out infinite;
+  }
+
+  @keyframes sticker-wobble {
+    0%,
+    100% {
+      transform: rotate(10deg);
+    }
+    50% {
+      transform: rotate(16deg);
+    }
+  }
+
+  /* Bottom photo tag */
+  .photo-tag {
+    position: absolute;
+    bottom: -14px;
+    left: -14px;
+    background: var(--primary);
+    color: var(--black);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border: var(--border-thick);
+    box-shadow: 3px 3px 0 var(--black);
+    z-index: 5;
+    transform: rotate(-3deg);
+  }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 56px;
+    left: clamp(32px, 6vw, 96px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.35;
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: var(--black);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%,
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scaleY(0.5);
+      opacity: 0.4;
+    }
+  }
+
+  .scroll-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    color: var(--dark-grey);
+  }
+
+  /* ── MARQUEE ── */
   .hero > .marquee-strip {
-    margin-top: auto;
     flex-shrink: 0;
   }
 
-  /* ---- RESPONSIVE ---- */
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+
+  /* Tablet landscape */
   @media (max-width: 1024px) {
-    .hero-title-solid,
-    .hero-title-stroke {
-      font-size: clamp(2.5rem, 7vw, 6rem);
+    .hero-inner {
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+    }
+
+    .hero-name {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+    }
+  }
+
+  /* Tablet portrait — stack vertically */
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      text-align: center;
+      padding-top: clamp(90px, 12vh, 120px);
+      gap: 40px;
+    }
+
+    .hero-left {
+      align-items: center;
+      order: 2;
+    }
+
+    .hero-right {
+      order: 1;
+    }
+
+    .hero-name {
+      align-items: center;
+      font-size: clamp(2.2rem, 8.5vw, 4.5rem);
+    }
+
+    .hero-bio {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .hero-role {
+      justify-content: center;
+    }
+
+    .hero-stats {
+      justify-content: center;
+    }
+
+    .hero-ctas {
+      justify-content: center;
     }
 
     .photo-frame {
-      width: 220px;
-      height: 270px;
+      width: 200px;
+      height: 250px;
     }
 
-
-  }
-
-  @media (max-width: 768px) {
-    .hero-content {
-      padding: 100px 16px 32px;
+    .scroll-hint {
+      display: none;
     }
 
-    .hero-title-solid,
-    .hero-title-stroke {
-      font-size: clamp(2rem, 9vw, 4.5rem);
-      letter-spacing: -0.04em;
-    }
-
-    .hero-title-stroke span {
+    .name-stroke {
       -webkit-text-stroke-width: 2px;
     }
-
-    .photo-frame {
-      width: 180px;
-      height: 230px;
-    }
-
-    .photo-initials {
-      font-size: 4rem;
-      letter-spacing: -3px;
-    }
-
-    .cta-btn {
-      padding: 14px 28px;
-      font-size: var(--text-xs);
-    }
-
-
   }
 
+  /* Mobile */
   @media (max-width: 480px) {
-    .hero-title-solid,
-    .hero-title-stroke {
-      font-size: clamp(1.5rem, 10vw, 3rem);
+    .hero-inner {
+      padding-top: 90px;
+      gap: 28px;
+    }
+
+    .hero-name {
+      font-size: clamp(2rem, 10vw, 3.2rem);
     }
 
     .photo-frame {
-      width: 150px;
-      height: 190px;
-    }
-
-    .hero-photo {
-      margin: -10px 0;
+      width: 170px;
+      height: 210px;
     }
 
     .photo-sticker {
-      font-size: 8px;
+      font-size: 9px;
       padding: 5px 10px;
-      right: -16px;
+      right: -18px;
+    }
+
+    .photo-tag {
+      font-size: 10px;
+      padding: 4px 10px;
+      left: -10px;
     }
   }
 </style>
