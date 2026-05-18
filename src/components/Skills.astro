@@ -1,43 +1,62 @@
 ---
-// Chapter 04: The Arsenal — Skills
-const design = ["Figma", "UX Architecture", "AI UX Design"];
-const dev = ["Flutter", "React.js", "Node.js", "MySQL", "Astro", "Tailwind CSS"];
+// Chapter 05: The Arsenal — Skills
+const design = [
+  { name: "Figma",               sub: "Tool mastery"        },
+  { name: "UX Architecture",     sub: "Systems thinking"    },
+  { name: "AI UX Design",        sub: "Emerging practice"   },
+  { name: "Design Systems",      sub: "Scalable patterns"   },
+  { name: "User Research",       sub: "Evidence-driven"     },
+  { name: "Interaction Design",  sub: "Motion & flow"       },
+];
+const pm = ["Jira", "Asana", "Linear", "Notion", "Confluence", "Miro", "FigJam", "Slack"];
+const dev = ["Flutter", "React.js", "Node.js", "MySQL", "Astro", "Tailwind CSS", "TypeScript", "Git"];
 const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architect", "Strategic Product Thinker"];
 ---
 
 <section class="skills chapter-section" id="skills">
   <div class="container">
-    <span class="chapter-num reveal reveal-scale">CH.04</span>
+    <span class="chapter-num reveal reveal-scale">CH.05</span>
     <h2 class="section-heading reveal reveal-up delay-1">
       The <em class="serif">Arsenal</em>
     </h2>
 
-    <!-- Design skills -->
-    <div class="sk-group reveal reveal-up delay-2" data-depth="0.8">
+    <!-- Design & Product skills -->
+    <div class="sk-group reveal reveal-up delay-2">
       <div class="sk-label">DESIGN & PRODUCT</div>
       <div class="sk-grid">
         {design.map((s, i) => (
-          <div class="sk-block" style={`--delay: ${i * 0.1}s`}>
+          <div class="sk-block" style={`--delay: ${i * 0.07}s`}>
             <span class="sk-idx">{String(i + 1).padStart(2, '0')}</span>
-            <span class="sk-name">{s}</span>
+            <span class="sk-name">{s.name}</span>
+            <span class="sk-sub">{s.sub}</span>
           </div>
         ))}
       </div>
     </div>
 
+    <!-- PM tools -->
+    <div class="sk-group reveal reveal-up delay-3">
+      <div class="sk-label">PROJECT & PRODUCT MANAGEMENT</div>
+      <div class="sk-chips">
+        {pm.map((s, i) => (
+          <span class="sk-chip" style={`--chip-delay: ${i * 0.06}s`}>{s}</span>
+        ))}
+      </div>
+    </div>
+
     <!-- Dev skills -->
-    <div class="sk-group reveal reveal-up delay-3" data-depth="0.8">
+    <div class="sk-group reveal reveal-up delay-4">
       <div class="sk-label">DEV UNDERSTANDING</div>
       <div class="sk-chips">
-        {dev.map(s => (
-          <span class="sk-chip">{s}</span>
+        {dev.map((s, i) => (
+          <span class="sk-chip" style={`--chip-delay: ${i * 0.06}s`}>{s}</span>
         ))}
       </div>
       <p class="sk-note">My technical foundation lets me design systems that are <strong>implementation-aware</strong>, not concept-driven.</p>
     </div>
 
-    <!-- Future -->
-    <div class="sk-future reveal reveal-up delay-4" data-depth="1.2">
+    <!-- Future direction -->
+    <div class="sk-future reveal reveal-up delay-5">
       <div class="sf-header">
         <span>FUTURE DIRECTION ✦</span>
       </div>
@@ -47,8 +66,8 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
           <strong>They'll design intelligence.</strong>
         </p>
         <div class="sf-roles">
-          {future.map(r => (
-            <span class="sf-role">{r}</span>
+          {future.map((r, i) => (
+            <span class="sf-role" style={`--role-delay: ${i * 0.1}s`}>{r}</span>
           ))}
         </div>
       </div>
@@ -57,7 +76,7 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
 </section>
 
 <style>
-  .sk-group { margin-bottom: 40px; }
+  .sk-group { margin-bottom: 48px; }
 
   .sk-label {
     font-family: var(--font-mono);
@@ -68,6 +87,7 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
     margin-bottom: var(--space-4);
   }
 
+  /* ── Design grid ── */
   .sk-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -77,24 +97,38 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
   }
 
   .sk-block {
-    padding: 28px 20px;
+    padding: 28px 22px;
     border-right: var(--border-thick);
     border-bottom: var(--border-thick);
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    transition: all 0.15s ease;
-    cursor: default;
+    gap: 6px;
     background: var(--white);
+    cursor: default;
+    /* stagger entrance */
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity    0.45s ease var(--delay, 0s),
+      transform  0.45s ease var(--delay, 0s),
+      background 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
-  .sk-block:nth-child(3n) { border-right: none; }
-  .sk-block:nth-last-child(-n+3) { border-bottom: none; }
+  /* trigger stagger when parent is revealed */
+  .sk-group.revealed .sk-block {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sk-block:nth-child(3n)       { border-right: none; }
+  .sk-block:nth-last-child(-n+3){ border-bottom: none; }
 
   .sk-block:hover {
     background: var(--primary);
-    transform: translate(-4px, -4px);
+    transform: translate(-4px, -4px) !important;
     box-shadow: var(--shadow-sm);
+    z-index: 1;
   }
 
   .sk-idx {
@@ -108,9 +142,19 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
     font-size: var(--text-lg);
     font-weight: 700;
     color: var(--text);
+    line-height: 1.2;
   }
 
-  /* Dev chips — neobrutalism tags */
+  .sk-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  /* ── Dev chips ── */
   .sk-chips {
     display: flex;
     flex-wrap: wrap;
@@ -127,16 +171,29 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
     padding: 10px 18px;
     border: var(--border-thick);
     box-shadow: var(--shadow-sm);
-    transition: all 0.15s ease;
-    cursor: default;
     background: var(--white);
+    cursor: default;
+    /* stagger entrance */
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition:
+      opacity    0.35s ease var(--chip-delay, 0s),
+      transform  0.35s ease var(--chip-delay, 0s),
+      background 0.15s ease,
+      color      0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .sk-group.revealed .sk-chip {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
   .sk-chip:hover {
     background: var(--secondary);
     color: var(--white);
     box-shadow: none;
-    transform: translate(4px, 4px);
+    transform: translate(4px, 4px) !important;
   }
 
   .sk-note {
@@ -147,12 +204,12 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
 
   .sk-note strong { color: var(--black); }
 
-  /* Future — neobrutalism featured card */
+  /* ── Future direction ── */
   .sk-future {
     border: var(--border-brutal);
     box-shadow: var(--shadow-primary);
     overflow: hidden;
-    transition: all 0.15s ease;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
   }
 
   .sk-future:hover {
@@ -207,20 +264,51 @@ const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architec
     border: var(--border-thick);
     background: var(--primary);
     box-shadow: var(--shadow-sm);
-    transition: all 0.15s ease;
     color: var(--black);
+    /* stagger entrance */
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity    0.4s ease var(--role-delay, 0s),
+      transform  0.4s ease var(--role-delay, 0s),
+      background 0.15s ease,
+      color      0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .sk-future.revealed .sf-role {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .sf-role:hover {
     box-shadow: none;
-    transform: translate(4px, 4px) rotate(-2deg);
+    transform: translate(4px, 4px) rotate(-2deg) !important;
     background: var(--secondary);
     color: var(--white);
   }
 
   @media (max-width: 768px) {
+    .sk-grid { grid-template-columns: 1fr 1fr; }
+    .sk-block { border-right: var(--border-thick); border-bottom: var(--border-thick); }
+    .sk-block:nth-child(2n)  { border-right: none; }
+    .sk-block:nth-last-child(-n+2):nth-child(odd) { border-bottom: none; }
+    .sk-block:last-child { border-bottom: none; border-right: none; }
+
+    .sk-block {
+      padding: 20px 16px;
+    }
+
+    .sk-name {
+      font-size: var(--text-base);
+    }
+  }
+
+  @media (max-width: 480px) {
     .sk-grid { grid-template-columns: 1fr; }
-    .sk-block { border-right: none !important; }
-    .sk-block:last-child { border-bottom: none; }
+    .sk-block { border-right: none !important; border-bottom: var(--border-thick) !important; }
+    .sk-block:last-child { border-bottom: none !important; }
+    .sk-chips { gap: 8px; }
+    .sk-chip { padding: 8px 14px; font-size: 11px; }
   }
 </style>

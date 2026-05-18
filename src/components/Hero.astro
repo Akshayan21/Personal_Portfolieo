@@ -4,68 +4,31 @@
 
 <section class="hero" id="hero">
   <div class="hero-inner">
-    <!-- ── LEFT COLUMN: Text ── -->
-    <div class="hero-left">
-      <!-- Chapter badge -->
+
+    <!-- ── TOP LEFT: Badge / Name / Role / Bio ── -->
+    <div class="hero-text-top" data-parallax="-0.1">
       <div class="hero-badge anim-fade anim-d1">
         <span class="badge-dot"></span>
         <span>Available for work</span>
       </div>
-
-      <!-- Intro greeting -->
       <p class="hero-greeting anim-fade anim-d2">👋 Hi, I'm</p>
-
-      <!-- Name -->
       <h1 class="hero-name anim-fade anim-d3">
         <span class="name-solid">Akshayan</span>
         <span class="name-stroke">Mohandass</span>
       </h1>
-
-      <!-- Role tag line -->
       <p class="hero-role anim-fade anim-d4">
         <span class="role-tag">Product Designer</span>
         <span class="role-sep">×</span>
         <span class="role-tag">Systems Thinker</span>
       </p>
-
-      <!-- Short bio -->
       <p class="hero-bio anim-fade anim-d5">
         I craft <strong>intuitive digital products</strong> from enterprise UX systems
         to AI-native interfaces with a focus on clarity, scalability and delight.
       </p>
-
-      <!-- CTAs -->
-      <div class="hero-ctas anim-fade anim-d6">
-        <a href="#experience" class="cta-btn cta-primary">
-          <span>View my work</span>
-          <span class="cta-arrow">↗</span>
-        </a>
-        <a href="#contact" class="cta-btn cta-secondary">
-          <span>Get in touch</span>
-        </a>
-      </div>
-
-      <!-- Stat strip -->
-      <div class="hero-stats anim-fade anim-d6">
-        <div class="stat">
-          <span class="stat-num">1.5+</span>
-          <span class="stat-label">Years exp.</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num">5+</span>
-          <span class="stat-label">Projects</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num">5★</span>
-          <span class="stat-label">Avg. rating</span>
-        </div>
-      </div>
     </div>
 
-    <!-- ── RIGHT COLUMN: Photo ── -->
-    <div class="hero-right anim-fade anim-d3">
+    <!-- ── RIGHT: Photo ── -->
+    <div class="hero-right anim-fade anim-d3" data-parallax="-0.05">
       <div class="hero-photo">
         <div class="photo-frame">
           <img
@@ -83,13 +46,37 @@
         <div class="photo-tag">UX · AI · Systems</div>
       </div>
     </div>
-  </div>
 
-  <!-- Scroll hint -->
-  <!-- <div class="scroll-hint anim-fade anim-d6">
-    <span class="scroll-line"></span>
-    <span class="scroll-label">scroll</span>
-  </div> -->
+    <!-- ── BOTTOM LEFT: CTAs / Stats ── -->
+    <div class="hero-text-bottom anim-fade anim-d6">
+      <div class="hero-ctas">
+        <a href="#experience" class="cta-btn cta-primary">
+          <span>View my work</span>
+          <span class="cta-arrow">↗</span>
+        </a>
+        <a href="#contact" class="cta-btn cta-secondary">
+          <span>Get in touch</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">1.5+</span>
+          <span class="stat-label">Years exp.</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">5★</span>
+          <span class="stat-label">Avg. rating</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <!-- Marquee -->
   <div class="marquee-strip">
@@ -104,39 +91,17 @@
 <style>
   /* ── ENTRY ANIMATIONS ── */
   @keyframes heroFadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .anim-fade {
-    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    opacity: 0;
-  }
-
-  .anim-d1 {
-    animation-delay: 0.05s;
-  }
-  .anim-d2 {
-    animation-delay: 0.15s;
-  }
-  .anim-d3 {
-    animation-delay: 0.28s;
-  }
-  .anim-d4 {
-    animation-delay: 0.4s;
-  }
-  .anim-d5 {
-    animation-delay: 0.52s;
-  }
-  .anim-d6 {
-    animation-delay: 0.65s;
-  }
+  .anim-fade { animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+  .anim-d1 { animation-delay: 0.05s; }
+  .anim-d2 { animation-delay: 0.15s; }
+  .anim-d3 { animation-delay: 0.28s; }
+  .anim-d4 { animation-delay: 0.4s; }
+  .anim-d5 { animation-delay: 0.52s; }
+  .anim-d6 { animation-delay: 0.65s; }
 
   /* ── HERO SHELL ── */
   .hero {
@@ -149,29 +114,52 @@
     position: relative;
   }
 
-  /* ── TWO-COLUMN INNER ── */
+  /* ══════════════════════════════════════
+     DESKTOP — 2-column grid with areas
+     Left col: text-top (rows 1) + text-bottom (row 2)
+     Right col: photo spanning both rows
+  ══════════════════════════════════════ */
   .hero-inner {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: clamp(32px, 5vw, 80px);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "top   photo"
+      "bottom photo";
+    align-items: start;
+    gap: 0 clamp(32px, 5vw, 80px);
     max-width: 1280px;
     width: 100%;
     margin: 0 auto;
-    padding: clamp(110px, 15vh, 150px) clamp(32px, 6vw, 96px)
-      clamp(48px, 7vh, 80px);
+    padding: clamp(110px, 15vh, 150px) clamp(32px, 6vw, 96px) clamp(48px, 7vh, 80px);
   }
 
-  /* ── LEFT: TEXT COLUMN ── */
-  .hero-left {
+  .hero-text-top {
+    grid-area: top;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0;
   }
 
-  /* Available badge */
+  .hero-right {
+    grid-area: photo;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: clamp(16px, 3vw, 48px);
+    align-self: center;
+  }
+
+  .hero-text-bottom {
+    grid-area: bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 8px;
+  }
+
+  /* ── Available badge ── */
   .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -199,18 +187,11 @@
   }
 
   @keyframes pulse-dot {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.4);
-      opacity: 0.7;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.4); opacity: 0.7; }
   }
 
-  /* Greeting line */
+  /* ── Greeting ── */
   .hero-greeting {
     font-family: var(--font-sans);
     font-size: clamp(1rem, 1.8vw, 1.25rem);
@@ -219,7 +200,7 @@
     line-height: 1.4;
   }
 
-  /* Name */
+  /* ── Name ── */
   .hero-name {
     display: flex;
     flex-direction: column;
@@ -233,21 +214,19 @@
     margin: 0 0 24px;
   }
 
-  .name-solid {
-    color: var(--text);
-  }
+  .name-solid { color: var(--text); }
 
   .name-stroke {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
     -webkit-text-stroke: 3px var(--text);
     color: transparent;
     transition: color 0.3s ease;
   }
 
-  .name-stroke:hover {
-    color: var(--primary);
-  }
+  .name-stroke:hover { color: var(--primary); }
 
-  /* Role tags */
+  /* ── Role tags ── */
   .hero-role {
     display: flex;
     align-items: center;
@@ -274,22 +253,19 @@
     font-size: 1.1rem;
   }
 
-  /* Bio */
+  /* ── Bio ── */
   .hero-bio {
     font-family: var(--font-sans);
     font-size: clamp(0.95rem, 1.4vw, 1.1rem);
     color: var(--dark-grey);
     line-height: 1.7;
     max-width: 480px;
-    margin-bottom: 36px;
+    margin-bottom: 0;
   }
 
-  .hero-bio strong {
-    color: var(--text);
-    font-weight: 700;
-  }
+  .hero-bio strong { color: var(--text); font-weight: 700; }
 
-  /* CTAs */
+  /* ── CTAs ── */
   .hero-ctas {
     display: flex;
     gap: 14px;
@@ -340,11 +316,9 @@
     transition: transform 0.2s ease;
   }
 
-  .cta-primary:hover .cta-arrow {
-    transform: translate(3px, -3px);
-  }
+  .cta-primary:hover .cta-arrow { transform: translate(3px, -3px); }
 
-  /* Stats strip */
+  /* ── Stats ── */
   .hero-stats {
     display: flex;
     align-items: center;
@@ -381,17 +355,8 @@
     opacity: 0.15;
   }
 
-  /* ── RIGHT: PHOTO COLUMN ── */
-  .hero-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: clamp(16px, 3vw, 48px);
-  }
-
-  .hero-photo {
-    position: relative;
-  }
+  /* ── Photo column ── */
+  .hero-photo { position: relative; }
 
   .photo-frame {
     width: clamp(240px, 24vw, 340px);
@@ -400,9 +365,7 @@
     border: var(--border-brutal);
     box-shadow: 10px 10px 0 var(--primary);
     background: var(--white);
-    transition:
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
   }
 
@@ -411,7 +374,6 @@
     transform: scale(1.02) rotate(-1deg);
   }
 
-  /* Stacked images — crossfade on hover */
   .photo-frame .photo-initial,
   .photo-frame .photo-hover {
     position: absolute;
@@ -423,25 +385,12 @@
     transition: opacity 0.5s ease;
   }
 
-  .photo-frame .photo-initial {
-    opacity: 1;
-    z-index: 1;
-  }
+  .photo-frame .photo-initial { opacity: 1; z-index: 1; }
+  .photo-frame .photo-hover   { opacity: 0; z-index: 2; }
 
-  .photo-frame .photo-hover {
-    opacity: 0;
-    z-index: 2;
-  }
+  .hero-photo:hover .photo-frame .photo-initial { opacity: 0; }
+  .hero-photo:hover .photo-frame .photo-hover   { opacity: 1; }
 
-  .hero-photo:hover .photo-frame .photo-initial {
-    opacity: 0;
-  }
-
-  .hero-photo:hover .photo-frame .photo-hover {
-    opacity: 1;
-  }
-
-  /* Sticker */
   .photo-sticker {
     position: absolute;
     top: -16px;
@@ -462,16 +411,10 @@
   }
 
   @keyframes sticker-wobble {
-    0%,
-    100% {
-      transform: rotate(10deg);
-    }
-    50% {
-      transform: rotate(16deg);
-    }
+    0%, 100% { transform: rotate(10deg); }
+    50%       { transform: rotate(16deg); }
   }
 
-  /* Bottom photo tag */
   .photo-tag {
     position: absolute;
     bottom: -14px;
@@ -489,62 +432,15 @@
     transform: rotate(-3deg);
   }
 
-  /* ── SCROLL HINT ── */
-  .scroll-hint {
-    position: absolute;
-    bottom: 56px;
-    left: clamp(32px, 6vw, 96px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0.35;
-  }
-
-  .scroll-line {
-    display: block;
-    width: 1px;
-    height: 48px;
-    background: var(--black);
-    animation: scroll-pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scroll-pulse {
-    0%,
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scaleY(0.5);
-      opacity: 0.4;
-    }
-  }
-
-  .scroll-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    writing-mode: vertical-rl;
-    color: var(--dark-grey);
-  }
-
-  /* ── MARQUEE ── */
-  .hero > .marquee-strip {
-    flex-shrink: 0;
-  }
+  /* ── Marquee ── */
+  .hero > .marquee-strip { flex-shrink: 0; }
 
   /* ══════════════════════════════════════
-     RESPONSIVE
+     TABLET LANDSCAPE (≤1024px)
   ══════════════════════════════════════ */
-
-  /* Tablet landscape */
   @media (max-width: 1024px) {
     .hero-inner {
-      grid-template-columns: 1fr auto;
-      gap: 40px;
+      gap: 0 40px;
     }
 
     .hero-name {
@@ -552,44 +448,58 @@
     }
   }
 
-  /* Tablet portrait — stack vertically */
+  /* ══════════════════════════════════════
+     TABLET PORTRAIT / MOBILE (≤768px)
+     Single column: text-top → photo → text-bottom
+  ══════════════════════════════════════ */
   @media (max-width: 768px) {
     .hero-inner {
       grid-template-columns: 1fr;
-      grid-template-rows: auto auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        "top"
+        "photo"
+        "bottom";
+      padding: clamp(90px, 12vh, 110px) 24px 48px;
+      gap: 36px 0;
       text-align: center;
-      padding-top: clamp(90px, 12vh, 120px);
-      gap: 40px;
     }
 
-    .hero-left {
-      align-items: center;
-      order: 2;
-    }
+    .hero-text-top { align-items: center; }
 
     .hero-right {
-      order: 1;
+      justify-content: center;
+      padding-right: 0;
+      align-self: auto;
+    }
+
+    .hero-text-bottom {
+      align-items: center;
+      padding-top: 0;
     }
 
     .hero-name {
       align-items: center;
-      font-size: clamp(2.2rem, 8.5vw, 4.5rem);
+      width: 100%;
+      font-size: clamp(2.4rem, 7.5vw, 3.8rem);
     }
+
+    .name-stroke { -webkit-text-stroke-width: 2px; }
 
     .hero-bio {
-      max-width: 100%;
+      max-width: 480px;
       text-align: center;
+      margin-bottom: 0;
     }
 
-    .hero-role {
-      justify-content: center;
-    }
+    .hero-role { justify-content: center; flex-wrap: wrap; }
+    .hero-ctas { justify-content: center; flex-wrap: wrap; }
+    .hero-stats { justify-content: center; flex-wrap: wrap; }
 
-    .hero-stats {
-      justify-content: center;
-    }
-
-    .hero-ctas {
+    /* Photo: generous padding so stickers stay inside container */
+    .hero-photo {
+      padding: 24px 44px 28px 24px;
+      display: flex;
       justify-content: center;
     }
 
@@ -598,41 +508,130 @@
       height: 250px;
     }
 
-    .scroll-hint {
-      display: none;
+    .photo-sticker {
+      top: 4px;
+      right: 14px;
     }
 
-    .name-stroke {
-      -webkit-text-stroke-width: 2px;
+    .photo-tag {
+      bottom: 8px;
+      left: 6px;
     }
   }
 
-  /* Mobile */
+  /* ══════════════════════════════════════
+     MOBILE (≤480px)
+  ══════════════════════════════════════ */
   @media (max-width: 480px) {
     .hero-inner {
-      padding-top: 90px;
-      gap: 28px;
+      padding: 88px 20px 44px;
+      gap: 28px 0;
     }
 
-    .hero-name {
-      font-size: clamp(2rem, 10vw, 3.2rem);
+    .hero-name { font-size: clamp(2rem, 9.5vw, 2.8rem); }
+    .hero-badge { margin-bottom: 16px; }
+
+    .hero-greeting { margin-bottom: 4px; }
+
+    .hero-bio {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .cta-btn {
+      justify-content: center;
+      padding: 14px 32px;
+      font-size: 12px;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    /* Photo: keep stickers fully inside */
+    .hero-photo {
+      padding: 22px 40px 26px 22px;
+      display: flex;
+      justify-content: center;
     }
 
     .photo-frame {
       width: 170px;
-      height: 210px;
+      height: 215px;
     }
 
     .photo-sticker {
       font-size: 9px;
       padding: 5px 10px;
-      right: -18px;
+      top: 4px;
+      right: 14px;
     }
 
     .photo-tag {
       font-size: 10px;
       padding: 4px 10px;
-      left: -10px;
+      bottom: 6px;
+      left: 4px;
     }
+
+    .hero-stats { gap: 14px; flex-wrap: nowrap; }
+    .stat-num { font-size: 1.3rem; }
+    .stat-label { font-size: 10px; }
+    .stat-divider { height: 28px; }
+  }
+
+  /* ══════════════════════════════════════
+     IPHONE SE (≤375px)
+  ══════════════════════════════════════ */
+  @media (max-width: 375px) {
+    .hero-inner {
+      padding: 80px 16px 40px;
+      gap: 22px 0;
+    }
+
+    .hero-name { font-size: clamp(1.7rem, 10vw, 2.4rem); }
+
+    .hero-photo {
+      padding: 20px 34px 24px 18px;
+    }
+
+    .photo-frame {
+      width: 150px;
+      height: 190px;
+    }
+
+    .photo-sticker {
+      font-size: 8px;
+      padding: 4px 8px;
+      top: 2px;
+      right: 10px;
+    }
+
+    .photo-tag {
+      font-size: 9px;
+      padding: 4px 8px;
+      bottom: 4px;
+      left: 2px;
+    }
+
+    .hero-role { gap: 6px; margin-bottom: 14px; }
+
+    .hero-bio {
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .hero-ctas { gap: 8px; margin-bottom: 20px; }
+    .cta-btn { padding: 12px 18px; max-width: 240px; }
+
+    .hero-stats { gap: 10px; }
+    .stat-num { font-size: 1.15rem; }
+    .stat-divider { height: 24px; }
   }
 </style>

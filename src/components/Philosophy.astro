@@ -10,7 +10,7 @@ const principles = ["Anticipate friction", "Clarify authority", "Scale decision-
 
 <section class="philosophy chapter-section" id="philosophy">
   <div class="container">
-    <span class="chapter-num reveal reveal-scale">CH.05</span>
+    <span class="chapter-num reveal reveal-scale">CH.06</span>
     <h2 class="section-heading reveal reveal-up delay-1">
       The <em class="serif">Belief</em> System
     </h2>
@@ -18,12 +18,12 @@ const principles = ["Anticipate friction", "Clarify authority", "Scale decision-
     <div class="phil-layout">
       <div class="phil-left">
         <!-- Big manifesto quote -->
-        <div class="manifesto reveal reveal-left delay-2" data-parallax="-0.06">
+        <div class="manifesto reveal reveal-left delay-2">
           <p class="mani-text serif">
             "The future isn't about <em>better screens.</em><br/>
             It's about <strong>better decisions.</strong>"
           </p>
-          <div class="mani-attr mono">— AKSHAYAN MOHANDASS</div>
+          <div class="mani-attr mono">/ AKSHAYAN MOHANDASS</div>
         </div>
 
         <!-- Shifts -->
@@ -39,9 +39,9 @@ const principles = ["Anticipate friction", "Clarify authority", "Scale decision-
       </div>
 
       <div class="phil-right">
-        <div class="principles-card reveal reveal-right delay-3" data-depth="1.3">
+        <div class="principles-card reveal reveal-right delay-3">
           <div class="pc-header">
-            <span>SYSTEMS THAT —</span>
+            <span>SYSTEMS THAT:</span>
           </div>
           <ul class="pc-list">
             {principles.map((p, i) => (
@@ -221,5 +221,46 @@ const principles = ["Anticipate friction", "Clarify authority", "Scale decision-
   @media (max-width: 1024px) {
     .phil-layout { grid-template-columns: 1fr; gap: 32px; }
     .manifesto { transform: rotate(0deg); }
+  }
+
+  @media (max-width: 480px) {
+    .manifesto {
+      padding: 28px 20px;
+    }
+
+    .mani-text {
+      font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+    }
+
+    .shift-row {
+      padding: 14px 16px;
+      gap: 10px;
+    }
+
+    .shift-row:hover {
+      padding-left: 20px;
+    }
+
+    .s-from,
+    .s-to {
+      font-size: var(--text-xs);
+    }
+
+    .s-arrow {
+      font-size: var(--text-base);
+    }
+
+    .pc-list li {
+      padding: 14px 16px;
+    }
+
+    .pc-list li:hover {
+      padding-left: 22px;
+    }
+
+    .pc-header,
+    .pc-footer {
+      padding: 12px 16px;
+    }
   }
 </style>

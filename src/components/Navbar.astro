@@ -8,8 +8,9 @@
     <div class="nav-links" id="nav-links">
       <a href="#about" class="nav-link">01.About</a>
       <a href="#experience" class="nav-link">02.Journey</a>
-      <a href="#skills" class="nav-link">03.Arsenal</a>
-      <a href="#philosophy" class="nav-link">04.Belief</a>
+      <a href="#projects" class="nav-link">03.Works</a>
+      <a href="#skills" class="nav-link">04.Arsenal</a>
+      <a href="#philosophy" class="nav-link">05.Belief</a>
       <a href="#contact" class="nav-cta">SAY HELLO ✦</a>
     </div>
     <button class="nav-burger" id="nav-burger" aria-label="Menu">
@@ -132,13 +133,24 @@
   @media (max-width: 768px) {
     .nav-burger { display: flex; }
     .nav-links {
-      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px;
+      position: fixed; top: 0; right: -100%; width: 85%; max-width: 300px;
       height: 100vh; background: var(--bg); border-left: var(--border-brutal);
       box-shadow: -8px 0 0 var(--primary);
-      flex-direction: column; justify-content: center; gap: 20px; padding: 48px;
+      flex-direction: column; justify-content: center; gap: 16px; padding: 40px 28px;
       transition: right 0.3s ease;
+      overflow-y: auto;
     }
     .nav-links.open { right: 0; }
     .nav-link { font-size: var(--text-sm); }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links {
+      width: 100%;
+      max-width: 100%;
+      padding: 80px 24px 40px;
+      gap: 12px;
+    }
+    .nav-cta { text-align: center; }
   }
 </style>

@@ -4,9 +4,10 @@ const year = new Date().getFullYear();
 const links = [
   { label: "01.About", href: "#about" },
   { label: "02.Journey", href: "#experience" },
-  { label: "03.Arsenal", href: "#skills" },
-  { label: "04.Belief", href: "#philosophy" },
-  { label: "05.Signal", href: "#contact" },
+  { label: "03.Works", href: "#projects" },
+  { label: "04.Arsenal", href: "#skills" },
+  { label: "05.Belief", href: "#philosophy" },
+  { label: "06.Signal", href: "#contact" },
 ];
 ---
 
@@ -117,5 +118,30 @@ const links = [
   @media (max-width: 768px) {
     .footer-inner { flex-direction: column; }
     .footer-bottom { flex-direction: column; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner {
+      padding: 36px 0 24px;
+      gap: 24px;
+    }
+
+    .footer-nav {
+      gap: 10px;
+    }
+
+    .footer-link {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      gap: 4px;
+    }
+
+    .footer-logo {
+      font-size: var(--text-xl);
+    }
   }
 </style>
