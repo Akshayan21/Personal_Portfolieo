@@ -1,0 +1,1154 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects, getProject } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProject(slug);
+if (!project) return Astro.redirect('/');
+
+const currentIndex = projects.findIndex(p => p.slug === slug);
+const prevProject  = projects[currentIndex - 1] ?? null;
+const nextProject  = projects[currentIndex + 1] ?? null;
+---
+
+<Layout>
+  <div class="case-study">
+
+    <!-- ── TOP NAV ─────────────────────────────────────────── -->
+    <nav class="cs-topnav">
+      <div class="cs-topnav-inner">
+        <a href="/#projects" class="cs-back">← All Works</a>
+        <span class="cs-breadcrumb mono">
+          <a href="/">Home</a> / <a href="/#projects">Works</a> / {project.title}
+        </span>
+      </div>
+    </nav>
+
+    <!-- ── HERO ──────────────────────────────────────────────── -->
+    <header class="cs-hero" style={`--accent: ${project.accent}; --accent-dark: ${project.accentDark}`}>
+      <div class="cs-container">
+        <span class="cs-type-badge mono">{project.type}</span>
+        <h1 class="cs-title">{project.title}</h1>
+        <p class="cs-tagline">{project.desc}</p>
+
+        <div class="cs-meta-strip">
+          <div class="cs-meta-item">
+            <span class="cmi-label mono">ROLE</span>
+            <span class="cmi-val">{project.role}</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cmi-label mono">COMPANY</span>
+            <span class="cmi-val">{project.company}</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cmi-label mono">DURATION</span>
+            <span class="cmi-val">{project.duration}</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cmi-label mono">YEAR</span>
+            <span class="cmi-val">{project.year}</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cmi-label mono">TOOLS</span>
+            <span class="cmi-val">{project.tools.join(' · ')}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── HERO VISUAL PLACEHOLDER ────────────────────────── -->
+    <div class="cs-hero-visual" style={`--accent: ${project.accent}`}>
+      <div class="cs-container">
+        <div class="cs-cover-placeholder">
+          <div class="cs-cover-browser">
+            <div class="cs-cover-bar">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="cs-cover-url mono">{project.company.toLowerCase().replace(/\s/g, '')}.design / {project.slug}</span>
+            </div>
+            <div class="cs-cover-screen">
+              <span class="cs-cover-label mono">{project.title.toUpperCase()}<br/>— PROJECT VISUALS —<br/>COMING SOON</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-container cs-body">
+
+      <!-- ── OVERVIEW ───────────────────────────────────────── -->
+      <section class="cs-section">
+        <div class="cs-overview-grid">
+          <div class="cs-overview-left">
+            <span class="cs-section-label mono">OVERVIEW</span>
+            <p class="cs-overview-text">{project.overview}</p>
+          </div>
+          <div class="cs-overview-right">
+            {project.outcomes.slice(0, 1).map(o => (
+              <div class="cs-stat-hero" style={`--accent: ${project.accent}`}>
+                <span class="cs-stat-num">{o.metric}</span>
+                <span class="cs-stat-label mono">{o.label}</span>
+              </div>
+            ))}
+            <div class="cs-team-card">
+              <span class="cmi-label mono">TEAM</span>
+              <span class="cs-team-val">{project.team}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── THE CHALLENGE ──────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">THE CHALLENGE</span>
+        <div class="cs-challenge-grid">
+          <div class="cs-challenge-left">
+            <p class="cs-challenge-text">{project.problem}</p>
+          </div>
+          <div class="cs-challenge-right">
+            <div class="cs-pain-list">
+              <div class="cs-pain-header mono">PAIN POINTS IDENTIFIED</div>
+              {project.painPoints.map((p, i) => (
+                <div class="cs-pain-item">
+                  <span class="cs-pain-num mono">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="cs-pain-text">{p}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── RESEARCH & DISCOVERY ───────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">RESEARCH & DISCOVERY</span>
+        <div class="cs-research-grid">
+          {project.researchMethods.map((m, i) => (
+            <div class="cs-research-card" style={`--delay: ${i * 0.08}s`}>
+              <span class="cs-research-num mono" style={`color: ${project.accent}`}>{String(i + 1).padStart(2, '0')}</span>
+              <span class="cs-research-label">{m.label}</span>
+              <span class="cs-research-desc mono">{m.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="cs-insights">
+          <div class="cs-insights-header">
+            <span class="mono">KEY INSIGHTS ✦</span>
+          </div>
+          {project.insights.map((insight, i) => (
+            <div class="cs-insight-row">
+              <span class="cs-insight-num mono" style={`color: ${project.accent}`}>{String(i + 1).padStart(2, '0')}</span>
+              <span class="cs-insight-text">{insight}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── DESIGN PROCESS ──────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">DESIGN PROCESS</span>
+        <div class="cs-process-track">
+          {project.processSteps.map((step, i) => (
+            <div class="cs-process-step" style={`--accent: ${project.accent}`}>
+              <div class="cs-ps-num mono">{step.num}</div>
+              <div class="cs-ps-content">
+                <div class="cs-ps-title">{step.title}</div>
+                <div class="cs-ps-desc mono">{step.desc}</div>
+              </div>
+              {i < project.processSteps.length - 1 && (
+                <div class="cs-ps-arrow">→</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── KEY SCREENS ─────────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">KEY SCREENS</span>
+        <div class="cs-screens-grid">
+          {project.screens.map((screen, i) => (
+            <div class="cs-screen-card" style={`--delay: ${i * 0.1}s; --accent: ${project.accent}`}>
+              <div class="cs-screen-placeholder">
+                <div class="cs-screen-bar">
+                  <span class="dot" style="background:#ef4444"></span>
+                  <span class="dot" style="background:#eab308"></span>
+                  <span class="dot" style="background:#22c55e"></span>
+                </div>
+                <div class="cs-screen-area">
+                  <span class="mono">SCREEN {String(i + 1).padStart(2,'0')}</span>
+                </div>
+              </div>
+              <div class="cs-screen-info">
+                <h3 class="cs-screen-title">{screen.title}</h3>
+                <p class="cs-screen-desc">{screen.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── DESIGN DECISIONS ────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">KEY DESIGN DECISIONS</span>
+        <div class="cs-decisions-list">
+          {project.decisions.map((d, i) => (
+            <div class="cs-decision-row" style={`--accent: ${project.accent}`}>
+              <div class="cs-decision-left">
+                <span class="cs-decision-num mono">{String(i + 1).padStart(2,'0')}</span>
+                <span class="cs-decision-label">DECISION</span>
+                <p class="cs-decision-text">{d.decision}</p>
+              </div>
+              <div class="cs-decision-arrow">→</div>
+              <div class="cs-decision-right">
+                <span class="cs-decision-label">RATIONALE</span>
+                <p class="cs-decision-text">{d.rationale}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── OUTCOMES ────────────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">OUTCOMES & IMPACT</span>
+        <div class="cs-outcomes-grid">
+          {project.outcomes.map(o => (
+            <div class="cs-outcome-card" style={`--accent: ${project.accent}`}>
+              <span class="cs-outcome-metric">{o.metric}</span>
+              <span class="cs-outcome-label mono">{o.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── LEARNINGS ───────────────────────────────────────── -->
+      <section class="cs-section">
+        <span class="cs-section-label mono">LEARNINGS & REFLECTION</span>
+        <div class="cs-learnings-grid">
+          <div class="cs-learning-col cs-learning-worked">
+            <div class="cs-learning-header" style={`background: ${project.accent}`}>
+              <span class="mono">✦ WHAT WORKED</span>
+            </div>
+            <ul class="cs-learning-list">
+              {project.learnings.worked.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="cs-learning-col cs-learning-improve">
+            <div class="cs-learning-header">
+              <span class="mono">✦ WHAT I'D IMPROVE</span>
+            </div>
+            <ul class="cs-learning-list">
+              {project.learnings.improve.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ── PROJECT NAVIGATION ──────────────────────────────── -->
+    <nav class="cs-project-nav">
+      <div class="cs-container">
+        <div class="cs-pnav-inner">
+          {prevProject ? (
+            <a href={`/projects/${prevProject.slug}`} class="cs-pnav-card cs-pnav-prev">
+              <span class="cs-pnav-dir mono">← PREVIOUS</span>
+              <span class="cs-pnav-title">{prevProject.title}</span>
+              <span class="cs-pnav-type mono">{prevProject.type}</span>
+            </a>
+          ) : <div />}
+
+          <a href="/#projects" class="cs-pnav-all mono">ALL WORKS ↗</a>
+
+          {nextProject ? (
+            <a href={`/projects/${nextProject.slug}`} class="cs-pnav-card cs-pnav-next">
+              <span class="cs-pnav-dir mono">NEXT →</span>
+              <span class="cs-pnav-title">{nextProject.title}</span>
+              <span class="cs-pnav-type mono">{nextProject.type}</span>
+            </a>
+          ) : <div />}
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</Layout>
+
+<style>
+  /* ── Base ─────────────────────────────────────────────────── */
+  .case-study {
+    background: var(--bg);
+    min-height: 100vh;
+  }
+
+  .cs-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .cs-body {
+    padding-top: 0;
+    padding-bottom: 80px;
+  }
+
+  .cs-section {
+    padding: 64px 0;
+    border-bottom: var(--border-thin);
+  }
+
+  .cs-section:last-child { border-bottom: none; }
+
+  .cs-section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--grey);
+    margin-bottom: 32px;
+    padding: 6px 14px;
+    border: var(--border-thick);
+    background: var(--cream);
+  }
+
+  /* ── Top Nav ───────────────────────────────────────────────── */
+  .cs-topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: var(--border-thick);
+    padding: 14px 0;
+    box-shadow: 0 4px 0 var(--primary);
+  }
+
+  .cs-topnav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cs-back {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--black);
+    padding: 8px 16px;
+    border: var(--border-thick);
+    background: var(--primary);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s ease;
+  }
+
+  .cs-back:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+
+  .cs-breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--grey);
+    letter-spacing: 1px;
+  }
+
+  .cs-breadcrumb a {
+    color: var(--grey);
+    transition: color 0.15s ease;
+  }
+
+  .cs-breadcrumb a:hover { color: var(--secondary); }
+
+  /* ── Hero ──────────────────────────────────────────────────── */
+  .cs-hero {
+    padding: 72px 0 48px;
+    border-bottom: var(--border-brutal);
+  }
+
+  .cs-type-badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: var(--accent);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+  }
+
+  .cs-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .cs-tagline {
+    font-size: var(--text-lg);
+    color: var(--dark-grey);
+    line-height: 1.6;
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .cs-meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    width: fit-content;
+  }
+
+  .cs-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 24px;
+    border-right: var(--border-thick);
+    background: var(--white);
+  }
+
+  .cs-meta-item:last-child { border-right: none; }
+
+  .cmi-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    text-transform: uppercase;
+  }
+
+  .cmi-val {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  /* ── Cover Visual ──────────────────────────────────────────── */
+  .cs-hero-visual {
+    padding: 40px 0;
+    background: var(--cream);
+    border-bottom: var(--border-brutal);
+  }
+
+  .cs-cover-placeholder {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .cs-cover-browser {
+    width: 100%;
+  }
+
+  .cs-cover-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--cream);
+    border-bottom: var(--border-thick);
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+
+  .dot.red    { background: #ef4444; }
+  .dot.yellow { background: #eab308; }
+  .dot.green  { background: #22c55e; }
+
+  .cs-cover-url {
+    font-size: 11px;
+    color: var(--grey);
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+  }
+
+  .cs-cover-screen {
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--cream) 0px,
+      var(--cream) 10px,
+      var(--bg) 10px,
+      var(--bg) 20px
+    );
+  }
+
+  .cs-cover-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--grey);
+    text-align: center;
+    line-height: 2;
+    padding: 24px 40px;
+    background: var(--white);
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ── Overview ──────────────────────────────────────────────── */
+  .cs-overview-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .cs-overview-text {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--dark-grey);
+  }
+
+  .cs-stat-hero {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-primary);
+    padding: 32px 24px;
+    text-align: center;
+    background: var(--white);
+    margin-bottom: 16px;
+    transition: all 0.15s ease;
+  }
+
+  .cs-stat-hero:hover {
+    box-shadow: none;
+    transform: translate(6px, 6px);
+  }
+
+  .cs-stat-num {
+    display: block;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+
+  .cs-stat-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    text-transform: uppercase;
+  }
+
+  .cs-team-card {
+    border: var(--border-thick);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--white);
+  }
+
+  .cs-team-val {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ── Challenge ──────────────────────────────────────────────── */
+  .cs-challenge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .cs-challenge-text {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--dark-grey);
+  }
+
+  .cs-pain-list {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .cs-pain-header {
+    padding: 12px 20px;
+    background: var(--black);
+    color: var(--primary);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-bottom: var(--border-thick);
+  }
+
+  .cs-pain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: var(--border-thin);
+    background: var(--white);
+    transition: all 0.15s ease;
+  }
+
+  .cs-pain-item:last-child { border-bottom: none; }
+
+  .cs-pain-item:hover {
+    background: var(--cream);
+    padding-left: 28px;
+  }
+
+  .cs-pain-num {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--secondary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .cs-pain-text {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── Research ───────────────────────────────────────────────── */
+  .cs-research-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 40px;
+  }
+
+  .cs-research-card {
+    padding: 28px 20px;
+    border-right: var(--border-thick);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .cs-research-card:last-child { border-right: none; }
+
+  .cs-research-card:hover {
+    background: var(--cream);
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cs-research-num {
+    font-size: var(--text-xs);
+    font-weight: 700;
+  }
+
+  .cs-research-label {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .cs-research-desc {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--grey);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  .cs-insights {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .cs-insights-header {
+    padding: 12px 20px;
+    background: var(--secondary);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-bottom: var(--border-thick);
+  }
+
+  .cs-insight-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 24px;
+    border-bottom: var(--border-thin);
+    background: var(--white);
+    transition: all 0.15s ease;
+  }
+
+  .cs-insight-row:last-child { border-bottom: none; }
+
+  .cs-insight-row:hover {
+    background: var(--cream);
+    padding-left: 32px;
+  }
+
+  .cs-insight-num {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .cs-insight-text {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── Process ────────────────────────────────────────────────── */
+  .cs-process-track {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .cs-process-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 24px;
+    border-right: var(--border-thick);
+    background: var(--white);
+    position: relative;
+    transition: all 0.15s ease;
+  }
+
+  .cs-process-step:last-child { border-right: none; }
+
+  .cs-process-step:hover {
+    background: var(--accent, var(--primary));
+  }
+
+  .cs-ps-num {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--secondary);
+  }
+
+  .cs-ps-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .cs-ps-desc {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--grey);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+  }
+
+  .cs-ps-arrow {
+    display: none;
+  }
+
+  /* ── Screens ────────────────────────────────────────────────── */
+  .cs-screens-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .cs-screen-card {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    background: var(--white);
+    transition: all 0.15s ease;
+  }
+
+  .cs-screen-card:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+
+  .cs-screen-placeholder {
+    border-bottom: var(--border-thick);
+  }
+
+  .cs-screen-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--cream);
+    border-bottom: var(--border-thin);
+  }
+
+  .cs-screen-bar .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cs-screen-area {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--cream) 0px,
+      var(--cream) 8px,
+      var(--bg) 8px,
+      var(--bg) 16px
+    );
+  }
+
+  .cs-screen-area span {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    padding: 10px 16px;
+    background: var(--white);
+    border: var(--border-thin);
+  }
+
+  .cs-screen-info {
+    padding: 20px;
+  }
+
+  .cs-screen-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .cs-screen-desc {
+    font-size: var(--text-sm);
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── Design Decisions ───────────────────────────────────────── */
+  .cs-decisions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .cs-decision-row {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr;
+    border-bottom: var(--border-thick);
+    background: var(--white);
+    transition: background 0.15s ease;
+  }
+
+  .cs-decision-row:last-child { border-bottom: none; }
+
+  .cs-decision-row:hover { background: var(--cream); }
+
+  .cs-decision-left,
+  .cs-decision-right {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cs-decision-left {
+    border-right: var(--border-thin);
+  }
+
+  .cs-decision-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--secondary);
+    border-right: var(--border-thin);
+  }
+
+  .cs-decision-num {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .cs-decision-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    text-transform: uppercase;
+  }
+
+  .cs-decision-text {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── Outcomes ───────────────────────────────────────────────── */
+  .cs-outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .cs-outcome-card {
+    padding: 40px 24px;
+    border-right: var(--border-thick);
+    background: var(--white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.15s ease;
+  }
+
+  .cs-outcome-card:last-child { border-right: none; }
+
+  .cs-outcome-card:hover {
+    background: var(--accent, var(--primary));
+    transform: translate(-4px, -4px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cs-outcome-metric {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .cs-outcome-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--grey);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ── Learnings ──────────────────────────────────────────────── */
+  .cs-learnings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .cs-learning-col {
+    background: var(--white);
+  }
+
+  .cs-learning-col:first-child {
+    border-right: var(--border-thick);
+  }
+
+  .cs-learning-header {
+    padding: 14px 24px;
+    background: var(--cream);
+    border-bottom: var(--border-thick);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--black);
+  }
+
+  .cs-learning-worked .cs-learning-header {
+    background: var(--accent, var(--primary));
+  }
+
+  .cs-learning-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cs-learning-list li {
+    padding: 18px 24px;
+    border-bottom: var(--border-thin);
+    font-size: var(--text-sm);
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 40px;
+    position: relative;
+    transition: all 0.15s ease;
+  }
+
+  .cs-learning-list li:last-child { border-bottom: none; }
+
+  .cs-learning-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 20px;
+    color: var(--secondary);
+    font-size: 10px;
+    top: 21px;
+  }
+
+  .cs-learning-list li:hover {
+    background: var(--cream);
+    padding-left: 48px;
+  }
+
+  /* ── Project Navigation ─────────────────────────────────────── */
+  .cs-project-nav {
+    border-top: var(--border-brutal);
+    padding: 48px 0;
+    background: var(--cream);
+  }
+
+  .cs-pnav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .cs-pnav-card {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .cs-pnav-card:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+    background: var(--primary);
+  }
+
+  .cs-pnav-next { text-align: right; }
+
+  .cs-pnav-dir {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--grey);
+    text-transform: uppercase;
+  }
+
+  .cs-pnav-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .cs-pnav-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--grey);
+  }
+
+  .cs-pnav-all {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    padding: 14px 20px;
+    border: var(--border-brutal);
+    background: var(--primary);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+
+  .cs-pnav-all:hover {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .cs-overview-grid    { grid-template-columns: 1fr; }
+    .cs-challenge-grid   { grid-template-columns: 1fr; }
+    .cs-research-grid    { grid-template-columns: repeat(2, 1fr); }
+    .cs-research-card:nth-child(2) { border-right: none; }
+    .cs-research-card:nth-child(1),
+    .cs-research-card:nth-child(2) { border-bottom: var(--border-thick); }
+    .cs-screens-grid     { grid-template-columns: 1fr 1fr; }
+    .cs-process-track    { flex-direction: column; }
+    .cs-process-step     { border-right: none; border-bottom: var(--border-thick); }
+    .cs-process-step:last-child { border-bottom: none; }
+    .cs-meta-strip       { flex-wrap: wrap; }
+    .cs-meta-item        { border-bottom: var(--border-thin); }
+  }
+
+  @media (max-width: 768px) {
+    .cs-title            { font-size: clamp(2rem, 8vw, 3rem); }
+    .cs-screens-grid     { grid-template-columns: 1fr; }
+    .cs-outcomes-grid    { grid-template-columns: 1fr; }
+    .cs-outcome-card     { border-right: none; border-bottom: var(--border-thick); }
+    .cs-outcome-card:last-child { border-bottom: none; }
+    .cs-learnings-grid   { grid-template-columns: 1fr; }
+    .cs-learning-col:first-child { border-right: none; border-bottom: var(--border-thick); }
+    .cs-decision-row     { grid-template-columns: 1fr; }
+    .cs-decision-left    { border-right: none; border-bottom: var(--border-thin); }
+    .cs-decision-arrow   { display: none; }
+    .cs-pnav-inner       { grid-template-columns: 1fr; }
+    .cs-pnav-all         { order: -1; }
+    .cs-breadcrumb       { display: none; }
+  }
+</style>

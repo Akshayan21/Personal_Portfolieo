@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
-
 /* ===================================== */
 /* NEOBRUTALISM DESIGN SYSTEM            */
 /* TypeUI Neobrutalism Skill Applied     */
@@ -17,11 +15,6 @@
     --white: #FBFBF9;
     --cream: #F3F1EA;
 
-    /* Legacy compat aliases */
-    --neon-green: #FDC800;
-    --neon-pink: #432DD7;
-    --neon-yellow: #FDC800;
-    --neon-blue: #432DD7;
     --grey: #6B7280;
     --dark-grey: #374151;
 
@@ -52,10 +45,6 @@
     --shadow-lg: 8px 8px 0 var(--black);
     --shadow-primary: 6px 6px 0 var(--primary);
     --shadow-secondary: 6px 6px 0 var(--secondary);
-
-    /* Legacy aliases */
-    --shadow-neon: 6px 6px 0 var(--primary);
-    --shadow-pink: 6px 6px 0 var(--secondary);
 
     /* Spacing (4px base unit) */
     --space-1: 4px;
@@ -263,4 +252,39 @@ button {
     :root {
         --section-pad: clamp(60px, 10vw, 80px);
     }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--space-3);
+    }
+
+    :root {
+        --section-pad: 56px;
+    }
+
+    .section-heading {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+}
+
+/* ========================= */
+/* ROUNDED BUTTONS PREVIEW   */
+/* ========================= */
+.cta-btn,
+.nav-cta,
+.nav-link,
+.cf-submit,
+.cs-back,
+.cs-pnav-all,
+.footer-link,
+.chapter-num,
+.sk-chip,
+.sf-role,
+.et-tag,
+.hero-badge,
+.role-tag,
+.cs-type-badge,
+.cs-section-label {
+    border-radius: 999px;
 }

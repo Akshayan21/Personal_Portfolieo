@@ -11,7 +11,7 @@
           The <em class="serif">Origin</em> Story
         </h2>
         <p class="about-body reveal reveal-up delay-2">
-          I design systems where decisions have consequences —
+          I design systems where decisions have consequences:
           <strong>enterprise travel, finance workflows, and AI-driven products.</strong>
           <br /><br />
           These aren't just interfaces.<br />
@@ -19,7 +19,6 @@
         </p>
         <div
           class="about-quote reveal reveal-left delay-3"
-          data-parallax="-0.08"
         >
           <div class="quote-mark">❝</div>
           <p>
@@ -31,10 +30,9 @@
       <div class="about-right">
         <div
           class="question-block reveal reveal-right delay-2"
-          data-depth="1.2"
         >
           <div class="qb-header">
-            <span class="qb-tag">BEFORE I DESIGN, I ASK —</span>
+            <span class="qb-tag">BEFORE I DESIGN, I ASK:</span>
           </div>
           <ul class="qb-list">
             <li class="reveal reveal-up delay-2">
@@ -201,6 +199,38 @@
     }
     .about-quote {
       transform: rotate(0deg);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-layout {
+      gap: 28px;
+    }
+
+    .about-quote {
+      padding: 16px;
+      gap: 10px;
+    }
+
+    .quote-mark {
+      font-size: 1.5rem;
+    }
+
+    .qb-list li {
+      padding: 12px 16px;
+      gap: 12px;
+    }
+
+    .qb-list li:hover {
+      padding-left: 20px;
+    }
+
+    .qb-header {
+      padding: 12px 16px;
+    }
+
+    .qb-footer {
+      padding: 12px 16px;
     }
   }
 </style>

@@ -1,0 +1,359 @@
+---
+// Chapter 04: The Archive — Projects
+const projects = [
+  {
+    title: "PayDart",
+    type: "FinTech Workflow",
+    desc: "A scalable financial workflow system built with Flutter + Provider. Features role-based authority, real-time reporting, and automated late-fee logic.",
+    tags: ["Flutter", "Provider", "Admin UI"],
+    accent: "var(--primary)",
+    link: "/projects/paydart",
+  },
+  {
+    title: "Inniyal Wellness App",
+    type: "Health & Wellness",
+    desc: "Mobile application focused on mental wellness. Designed with strict cognitive load constraints and an emotional-first visual approach.",
+    tags: ["Mobile UX", "Accessibility", "Prototyping"],
+    accent: "var(--warning)",
+    link: "/projects/inniyal-wellness-app",
+  },
+  {
+    title: "PregTrack App",
+    type: "Health Tech",
+    desc: "Government-approved MSME product for pregnancy tracking. Focused on creating simple, stress-free user flows for expectant mothers.",
+    tags: ["FlutterFlow", "UI Design", "MSME"],
+    accent: "var(--primary)",
+    link: "/projects/pregtrack-app",
+  },
+  {
+    title: "FamConnect",
+    type: "Community Super App",
+    desc: "A unified platform connecting families, housing societies, and institutional alumni — one place for all your communities, events, and relationships.",
+    tags: ["Mobile", "Community", "Social"],
+    accent: "var(--secondary)",
+    link: "/projects/famconnect",
+  },
+  {
+    title: "Staffezee",
+    type: "B2B SaaS / IT Staffing",
+    desc: "Bench sales management platform for UK IT staffing agencies — consultant tracking, submission pipelines, duplicate detection, and hotlist management in one workspace.",
+    tags: ["SaaS", "B2B", "UK Market"],
+    accent: "var(--secondary)",
+    link: "/projects/staffezee",
+  },
+  {
+    title: "Ops 360",
+    type: "Operations Management",
+    desc: "A college operations platform covering admissions tracking, staff scheduling, and a student booking system for doubt-clearing and management meetings.",
+    tags: ["Operations", "Dashboard", "B2B"],
+    accent: "var(--success)",
+    link: "/projects/ops-360",
+  },
+  {
+    title: "PharmaVault",
+    type: "Health Tech",
+    desc: "A pharmaceutical management platform streamlining inventory, prescription tracking, and compliance workflows for healthcare organisations.",
+    tags: ["Pharma", "Healthcare", "B2B"],
+    accent: "var(--warning)",
+    link: "/projects/pharmavault",
+  },
+];
+---
+
+<section class="projects chapter-section" id="projects">
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="projects-head reveal reveal-up">
+      <span class="chapter-num">CH.04</span>
+      <h2 class="section-heading">Selected <em class="serif">Works</em></h2>
+    </div>
+
+    <!-- Project Grid -->
+    <div class="proj-grid reveal reveal-up delay-1">
+      {projects.map((p, i) => (
+        <a href={p.link} class="proj-card" style={`--card-accent: ${p.accent}`}>
+          <!-- Image Placeholder / Window -->
+          <div class="pc-window">
+             <!-- Fake browser buttons -->
+             <div class="pc-browser-bar">
+               <span class="dot" style="background:#ef4444"></span>
+               <span class="dot" style="background:#eab308"></span>
+               <span class="dot" style="background:#22c55e"></span>
+             </div>
+             <!-- The actual "image" area -->
+             <div class="pc-image-area">
+                <span class="pc-placeholder-text">Project<br/>Visual</span>
+             </div>
+          </div>
+
+          <!-- Content Details -->
+          <div class="pc-content">
+            <p class="pc-type">{p.type}</p>
+            <h3 class="pc-title">{p.title}</h3>
+            <p class="pc-desc">{p.desc}</p>
+            
+            <div class="pc-bottom">
+              <div class="pc-tags">
+                {p.tags.map(t => (
+                  <span>{t}</span>
+                ))}
+              </div>
+              <div class="pc-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 19L19 5M19 5V15.5M19 5H8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .projects-head {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .projects-head .section-heading {
+    margin-bottom: 0;
+  }
+
+  /* Grid Layout */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  /* Last card alone in a row spans full width */
+  .proj-card:last-child:nth-child(3n - 2) {
+    grid-column: span 3;
+    max-width: 420px;
+  }
+
+  /* Card Container */
+  .proj-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border: var(--border-brutal);
+    background: var(--white);
+    box-shadow: var(--shadow-secondary);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proj-card:hover {
+    box-shadow: none;
+    transform: translate(6px, 6px);
+  }
+
+  /* Fake Browser Window for Project Images */
+  .pc-window {
+    border-bottom: var(--border-brutal);
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pc-browser-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: var(--border-thick);
+    background: var(--white);
+  }
+
+  .pc-browser-bar .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+  }
+
+  .pc-image-area {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-accent); /* Tinted background based on accent */
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .proj-card:hover .pc-image-area {
+    opacity: 0.9;
+  }
+
+  .pc-placeholder-text {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 0.3;
+    transform: rotate(-5deg);
+  }
+
+  /* Card Content */
+  .pc-content {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .pc-type {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+  }
+
+  .pc-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+  }
+
+  .proj-card:hover .pc-title {
+    color: var(--card-accent);
+  }
+
+  .pc-desc {
+    font-size: var(--text-base);
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* Tags & Arrow */
+  .pc-bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .pc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pc-tags span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border: 2px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .pc-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--black);
+    background: var(--card-accent);
+    color: var(--black);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .proj-card:hover .pc-arrow {
+    transform: translate(4px, -4px);
+    box-shadow: -3px 3px 0 var(--black);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .proj-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    /* reset 3-col span rule on 2-col grid */
+    .proj-card:last-child:nth-child(3n - 2) {
+      grid-column: auto;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .proj-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .projects-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .pc-content {
+      padding: 24px 20px;
+    }
+
+    .pc-image-area {
+      height: 160px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .proj-grid {
+      gap: 16px;
+    }
+
+    .pc-image-area {
+      height: 130px;
+    }
+
+    .pc-content {
+      padding: 18px 16px;
+    }
+
+    .pc-desc {
+      font-size: var(--text-sm);
+      margin-bottom: 16px;
+    }
+
+    .pc-tags span {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+
+    .pc-arrow {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>
