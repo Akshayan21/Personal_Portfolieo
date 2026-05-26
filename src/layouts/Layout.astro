@@ -1,6 +1,26 @@
 ---
 import '../styles/global.css';
 import '../styles/animations.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	ogType?: string;
+	canonicalUrl?: string;
+	keywords?: string;
+	author?: string;
+}
+
+const {
+	title = "Akshayan Mohandass | AI-Native Product Designer & Systems Thinker",
+	description = "Akshayan Mohandass — AI-Native Product Designer. Crafting intuitive digital products from enterprise UX systems to AI-native interfaces.",
+	ogImage = "/final_state.jpg",
+	ogType = "website",
+	canonicalUrl = Astro.url.href,
+	keywords = "Akshayan Mohandass, Product Designer, AI UX Design, Systems Thinker, UX Architect, Design Sandbox, Portfolio, Enterprise UX, Frontend Developer, Astro, Figma Canvas",
+	author = "Akshayan Mohandass"
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -9,8 +29,29 @@ import '../styles/animations.css';
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Akshayan Mohandass — AI-Native Product Designer. This is the story of designing intelligence." />
-		<title>Akshayan Mohandass | Portfolio</title>
+
+		<!-- Primary SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content={author} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+
+		<!-- Open Graph / Facebook / LinkedIn -->
+		<meta property="og:type" content={ogType} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.url).href} />
+		<meta property="og:site_name" content="Akshayan Mohandass Portfolio" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.url).href} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />

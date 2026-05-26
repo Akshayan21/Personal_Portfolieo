@@ -16,7 +16,13 @@ const prevProject  = projects[currentIndex - 1] ?? null;
 const nextProject  = projects[currentIndex + 1] ?? null;
 ---
 
-<Layout>
+<Layout 
+  title={`${project.title} | ${project.type} Case Study — Akshayan Mohandass`}
+  description={project.desc}
+  ogImage="/final_state.jpg"
+  ogType="article"
+  keywords={`${project.title}, ${project.type}, ${project.tools.join(', ')}, ${project.tags.join(', ')}, Akshayan Mohandass, Product Design Case Study`}
+>
   <FigmaEditor>
     <div class="case-study">
 
