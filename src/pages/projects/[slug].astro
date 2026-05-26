@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import FigmaEditor from '../../components/FigmaEditor.astro';
 import { projects, getProject } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -16,10 +17,11 @@ const nextProject  = projects[currentIndex + 1] ?? null;
 ---
 
 <Layout>
-  <div class="case-study">
+  <FigmaEditor>
+    <div class="case-study">
 
-    <!-- ── TOP NAV ─────────────────────────────────────────── -->
-    <nav class="cs-topnav">
+      <!-- ── TOP NAV ─────────────────────────────────────────── -->
+      <nav class="cs-topnav" id="cs-topnav">
       <div class="cs-topnav-inner">
         <a href="/#projects" class="cs-back">← All Works</a>
         <span class="cs-breadcrumb mono">
@@ -29,7 +31,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     </nav>
 
     <!-- ── HERO ──────────────────────────────────────────────── -->
-    <header class="cs-hero" style={`--accent: ${project.accent}; --accent-dark: ${project.accentDark}`}>
+    <header class="cs-hero" id="cs-hero" style={`--accent: ${project.accent}; --accent-dark: ${project.accentDark}`}>
       <div class="cs-container">
         <span class="cs-type-badge mono">{project.type}</span>
         <h1 class="cs-title">{project.title}</h1>
@@ -82,7 +84,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     <div class="cs-container cs-body">
 
       <!-- ── OVERVIEW ───────────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-overview">
         <div class="cs-overview-grid">
           <div class="cs-overview-left">
             <span class="cs-section-label mono">OVERVIEW</span>
@@ -104,7 +106,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── THE CHALLENGE ──────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-challenge">
         <span class="cs-section-label mono">THE CHALLENGE</span>
         <div class="cs-challenge-grid">
           <div class="cs-challenge-left">
@@ -125,7 +127,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── RESEARCH & DISCOVERY ───────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-research">
         <span class="cs-section-label mono">RESEARCH & DISCOVERY</span>
         <div class="cs-research-grid">
           {project.researchMethods.map((m, i) => (
@@ -151,7 +153,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── DESIGN PROCESS ──────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-process">
         <span class="cs-section-label mono">DESIGN PROCESS</span>
         <div class="cs-process-track">
           {project.processSteps.map((step, i) => (
@@ -170,7 +172,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── KEY SCREENS ─────────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-screens">
         <span class="cs-section-label mono">KEY SCREENS</span>
         <div class="cs-screens-grid">
           {project.screens.map((screen, i) => (
@@ -195,7 +197,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── DESIGN DECISIONS ────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-decisions">
         <span class="cs-section-label mono">KEY DESIGN DECISIONS</span>
         <div class="cs-decisions-list">
           {project.decisions.map((d, i) => (
@@ -216,7 +218,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── OUTCOMES ────────────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-outcomes">
         <span class="cs-section-label mono">OUTCOMES & IMPACT</span>
         <div class="cs-outcomes-grid">
           {project.outcomes.map(o => (
@@ -229,7 +231,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </section>
 
       <!-- ── LEARNINGS ───────────────────────────────────────── -->
-      <section class="cs-section">
+      <section class="cs-section" id="cs-learnings">
         <span class="cs-section-label mono">LEARNINGS & REFLECTION</span>
         <div class="cs-learnings-grid">
           <div class="cs-learning-col cs-learning-worked">
@@ -258,7 +260,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     </div>
 
     <!-- ── PROJECT NAVIGATION ──────────────────────────────── -->
-    <nav class="cs-project-nav">
+    <nav class="cs-project-nav" id="cs-project-nav">
       <div class="cs-container">
         <div class="cs-pnav-inner">
           {prevProject ? (
@@ -283,6 +285,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     </nav>
 
   </div>
+  </FigmaEditor>
 </Layout>
 
 <style>
@@ -390,6 +393,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     border: var(--border-thick);
     box-shadow: var(--shadow-sm);
     margin-bottom: 24px;
+    color: var(--black);
   }
 
   .cs-title {
