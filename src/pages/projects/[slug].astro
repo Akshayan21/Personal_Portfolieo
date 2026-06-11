@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import FigmaEditor from '../../components/FigmaEditor.astro';
 import { projects, getProject } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -23,8 +22,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
   ogType="article"
   keywords={`${project.title}, ${project.type}, ${project.tools.join(', ')}, ${project.tags.join(', ')}, Akshayan Mohandass, Product Design Case Study`}
 >
-  <FigmaEditor>
-    <div class="case-study">
+  <div class="case-study">
 
       <!-- ── TOP NAV ─────────────────────────────────────────── -->
       <nav class="cs-topnav" id="cs-topnav">
@@ -291,7 +289,6 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     </nav>
 
   </div>
-  </FigmaEditor>
 </Layout>
 
 <style>
