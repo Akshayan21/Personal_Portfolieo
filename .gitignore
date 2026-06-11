@@ -5,6 +5,11 @@ dist/
 skills/
 agents/
 antigravity/
+skills/
+
+#files
+*.md
+
 
 # generated types
 .astro/
