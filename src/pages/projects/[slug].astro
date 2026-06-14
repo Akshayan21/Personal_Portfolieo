@@ -2,6 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import { projects, getProject } from '../../data/projects';
 
+import paydartBanner from '../../assets/paydart__banner.png';
+import pregtrackBanner from '../../assets/Pregtrack_banner.png';
+import famconnectBanner from '../../assets/famconnect__banner.png';
+import staffezeeBanner from '../../assets/staffezee_banner.png';
+import pharmavaultBanner from '../../assets/Pharamavault__banner.png';
+
+const bannerMap: Record<string, ImageMetadata> = {
+  'paydart': paydartBanner,
+  'pregtrack-app': pregtrackBanner,
+  'famconnect': famconnectBanner,
+  'staffezee': staffezeeBanner,
+  'pharmavault': pharmavaultBanner,
+};
+
 export function getStaticPaths() {
   return projects.map(p => ({ params: { slug: p.slug } }));
 }
@@ -13,6 +27,7 @@ if (!project) return Astro.redirect('/');
 const currentIndex = projects.findIndex(p => p.slug === slug);
 const prevProject  = projects[currentIndex - 1] ?? null;
 const nextProject  = projects[currentIndex + 1] ?? null;
+const banner = slug ? bannerMap[slug] ?? null : null;
 ---
 
 <Layout 
@@ -66,7 +81,7 @@ const nextProject  = projects[currentIndex + 1] ?? null;
       </div>
     </header>
 
-    <!-- ── HERO VISUAL PLACEHOLDER ────────────────────────── -->
+    <!-- ── HERO VISUAL ────────────────────────────────────── -->
     <div class="cs-hero-visual" style={`--accent: ${project.accent}`}>
       <div class="cs-container">
         <div class="cs-cover-placeholder">
@@ -77,8 +92,12 @@ const nextProject  = projects[currentIndex + 1] ?? null;
               <span class="dot green"></span>
               <span class="cs-cover-url mono">{project.company.toLowerCase().replace(/\s/g, '')}.design / {project.slug}</span>
             </div>
-            <div class="cs-cover-screen">
-              <span class="cs-cover-label mono">{project.title.toUpperCase()}<br/>— PROJECT VISUALS —<br/>COMING SOON</span>
+            <div class={`cs-cover-screen ${banner ? 'has-banner' : ''}`}>
+              {banner ? (
+                <img src={banner.src} alt={`${project.title} banner`} class="cs-cover-banner-img" loading="eager" />
+              ) : (
+                <span class="cs-cover-label mono">{project.title.toUpperCase()}<br/>— PROJECT VISUALS —<br/>COMING SOON</span>
+              )}
             </div>
           </div>
         </div>
@@ -522,6 +541,24 @@ const nextProject  = projects[currentIndex + 1] ?? null;
     background: var(--white);
     border: var(--border-brutal);
     box-shadow: var(--shadow-md);
+  }
+
+  .cs-cover-screen.has-banner {
+    background: none;
+    height: auto;
+    min-height: 380px;
+  }
+
+  .cs-cover-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cs-cover-placeholder:hover .cs-cover-banner-img {
+    transform: scale(1.03);
   }
 
   /* ── Overview ──────────────────────────────────────────────── */
