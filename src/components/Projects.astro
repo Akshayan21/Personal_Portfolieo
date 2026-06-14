@@ -1,5 +1,11 @@
 ---
 // Chapter 04: The Archive — Projects
+import paydartBanner from '../assets/paydart__banner.png';
+import pregtrackBanner from '../assets/Pregtrack_banner.png';
+import famconnectBanner from '../assets/famconnect__banner.png';
+import staffezeeBanner from '../assets/staffezee_banner.png';
+import pharmavaultBanner from '../assets/Pharamavault__banner.png';
+
 const projects = [
   {
     title: "PayDart",
@@ -8,14 +14,7 @@ const projects = [
     tags: ["Flutter", "Provider", "Admin UI"],
     accent: "var(--primary)",
     link: "/projects/paydart",
-  },
-  {
-    title: "Inniyal Wellness App",
-    type: "Health & Wellness",
-    desc: "Mobile application focused on mental wellness. Designed with strict cognitive load constraints and an emotional-first visual approach.",
-    tags: ["Mobile UX", "Accessibility", "Prototyping"],
-    accent: "var(--warning)",
-    link: "/projects/inniyal-wellness-app",
+    banner: paydartBanner,
   },
   {
     title: "PregTrack App",
@@ -24,6 +23,7 @@ const projects = [
     tags: ["FlutterFlow", "UI Design", "MSME"],
     accent: "var(--primary)",
     link: "/projects/pregtrack-app",
+    banner: pregtrackBanner,
   },
   {
     title: "FamConnect",
@@ -32,6 +32,7 @@ const projects = [
     tags: ["Mobile", "Community", "Social"],
     accent: "var(--secondary)",
     link: "/projects/famconnect",
+    banner: famconnectBanner,
   },
   {
     title: "Staffezee",
@@ -40,14 +41,7 @@ const projects = [
     tags: ["SaaS", "B2B", "UK Market"],
     accent: "var(--secondary)",
     link: "/projects/staffezee",
-  },
-  {
-    title: "Ops 360",
-    type: "Operations Management",
-    desc: "A college operations platform covering admissions tracking, staff scheduling, and a student booking system for doubt-clearing and management meetings.",
-    tags: ["Operations", "Dashboard", "B2B"],
-    accent: "var(--success)",
-    link: "/projects/ops-360",
+    banner: staffezeeBanner,
   },
   {
     title: "PharmaVault",
@@ -56,6 +50,7 @@ const projects = [
     tags: ["Pharma", "Healthcare", "B2B"],
     accent: "var(--warning)",
     link: "/projects/pharmavault",
+    banner: pharmavaultBanner,
   },
 ];
 ---
@@ -83,7 +78,11 @@ const projects = [
              </div>
              <!-- The actual "image" area -->
              <div class="pc-image-area">
-                <span class="pc-placeholder-text">Project<br/>Visual</span>
+                {p.banner ? (
+                  <img src={p.banner.src} alt={`${p.title} banner`} class="pc-banner-img" loading="lazy" />
+                ) : (
+                  <span class="pc-placeholder-text">Project<br/>Visual</span>
+                )}
              </div>
           </div>
 
@@ -190,6 +189,18 @@ const projects = [
     position: relative;
     overflow: hidden;
     transition: background 0.3s ease;
+  }
+
+  .pc-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .proj-card:hover .pc-banner-img {
+    transform: scale(1.05);
   }
 
   .proj-card:hover .pc-image-area {
