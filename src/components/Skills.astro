@@ -1,315 +1,199 @@
 ---
-// Chapter 05: The Arsenal — Skills
+// Arsenal - Bordered spec-panel grid
 const design = [
-  { name: "Figma",               sub: "Tool mastery"        },
-  { name: "UX Architecture",     sub: "Systems thinking"    },
-  { name: "AI UX Design",        sub: "Emerging practice"   },
-  { name: "Design Systems",      sub: "Scalable patterns"   },
-  { name: "User Research",       sub: "Evidence-driven"     },
-  { name: "Interaction Design",  sub: "Motion & flow"       },
+  "Figma", "UX Architecture", "AI UX Design",
+  "Design Systems", "User Research", "Interaction Design",
+  "Wireframing", "Prototyping",
 ];
-const pm = ["Jira", "Asana", "Linear", "Notion", "Confluence", "Miro", "FigJam", "Slack"];
-const dev = ["Flutter", "React.js", "Node.js", "MySQL", "Astro", "Tailwind CSS", "TypeScript", "Git"];
-const future = ["AI-Orchestrated Product Designer", "Enterprise Systems Architect", "Strategic Product Thinker"];
+const product = [
+  "Jira", "Asana", "Linear", "Notion",
+  "Confluence", "Miro", "FigJam", "Slack",
+];
+const dev = [
+  "Flutter", "React.js", "Node.js", "TypeScript",
+  "Astro", "Tailwind CSS", "MySQL", "Git",
+];
 ---
 
 <section class="skills chapter-section" id="skills">
   <div class="container">
-    <span class="chapter-num reveal reveal-scale">CH.05</span>
-    <h2 class="section-heading reveal reveal-up delay-1">
-      The <em class="serif">Arsenal</em>
-    </h2>
 
-    <!-- Design & Product skills -->
-    <div class="sk-group reveal reveal-up delay-2">
-      <div class="sk-label">DESIGN & PRODUCT</div>
-      <div class="sk-grid">
-        {design.map((s, i) => (
-          <div class="sk-block" style={`--delay: ${i * 0.07}s`}>
-            <span class="sk-idx">{String(i + 1).padStart(2, '0')}</span>
-            <span class="sk-name">{s.name}</span>
-            <span class="sk-sub">{s.sub}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <p class="section-eyebrow" data-reveal>Arsenal</p>
+    <h2 class="section-title" data-reveal="clip" style="--reveal-delay: 80ms">Tools I<br/><em>think with.</em></h2>
 
-    <!-- PM tools -->
-    <div class="sk-group reveal reveal-up delay-3">
-      <div class="sk-label">PROJECT & PRODUCT MANAGEMENT</div>
-      <div class="sk-chips">
-        {pm.map((s, i) => (
-          <span class="sk-chip" style={`--chip-delay: ${i * 0.06}s`}>{s}</span>
-        ))}
-      </div>
-    </div>
-
-    <!-- Dev skills -->
-    <div class="sk-group reveal reveal-up delay-4">
-      <div class="sk-label">DEV UNDERSTANDING</div>
-      <div class="sk-chips">
-        {dev.map((s, i) => (
-          <span class="sk-chip" style={`--chip-delay: ${i * 0.06}s`}>{s}</span>
-        ))}
-      </div>
-      <p class="sk-note">My technical foundation lets me design systems that are <strong>implementation-aware</strong>, not concept-driven.</p>
-    </div>
-
-    <!-- Future direction -->
-    <div class="sk-future reveal reveal-up delay-5">
-      <div class="sf-header">
-        <span>FUTURE DIRECTION ✦</span>
-      </div>
-      <div class="sf-body">
-        <p class="sf-statement serif">
-          The next generation of designers won't just design UI.<br/>
-          <strong>They'll design intelligence.</strong>
-        </p>
-        <div class="sf-roles">
-          {future.map((r, i) => (
-            <span class="sf-role" style={`--role-delay: ${i * 0.1}s`}>{r}</span>
-          ))}
+    <div class="skills-grid">
+      <div class="sk-col" data-reveal style="--reveal-delay: 160ms">
+        <div class="sk-col-header">
+          <span class="sk-col-idx">01</span>
+          <h3 class="sk-col-head">Design &amp; Product</h3>
         </div>
+        <ul class="sk-list">
+          {design.map(s => <li>{s}</li>)}
+        </ul>
+      </div>
+      <div class="sk-col" data-reveal style="--reveal-delay: 240ms">
+        <div class="sk-col-header">
+          <span class="sk-col-idx">02</span>
+          <h3 class="sk-col-head">Project Management</h3>
+        </div>
+        <ul class="sk-list">
+          {product.map(s => <li>{s}</li>)}
+        </ul>
+      </div>
+      <div class="sk-col" data-reveal style="--reveal-delay: 320ms">
+        <div class="sk-col-header">
+          <span class="sk-col-idx">03</span>
+          <h3 class="sk-col-head">Development</h3>
+        </div>
+        <ul class="sk-list">
+          {dev.map(s => <li>{s}</li>)}
+        </ul>
+        <p class="sk-note">
+          Technical depth lets me design systems that are
+          implementation-aware, not concept-driven.
+        </p>
       </div>
     </div>
+
+    <div class="sk-footer" data-reveal style="--reveal-delay: 420ms">
+      <span class="sk-footer-idx">// DIRECTION</span>
+      <p class="sk-direction">
+        The next generation of designers won't just design UI -
+        <span>they'll design intelligence.</span>
+      </p>
+    </div>
+
   </div>
 </section>
 
 <style>
-  .sk-group { margin-bottom: 48px; }
-
-  .sk-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--grey);
-    margin-bottom: var(--space-4);
-  }
-
-  /* ── Design grid ── */
-  .sk-grid {
+  .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: var(--border-brutal);
-    box-shadow: var(--shadow-sm);
+    border-top: 1px solid rgba(204, 255, 0, 0.15);
+    border-left: 1px solid rgba(204, 255, 0, 0.15);
+    margin-bottom: 0;
   }
 
-  .sk-block {
-    padding: 28px 22px;
-    border-right: var(--border-thick);
-    border-bottom: var(--border-thick);
+  .sk-col {
+    padding: 28px 24px 24px;
+    border-right: 1px solid rgba(204, 255, 0, 0.15);
+    border-bottom: 1px solid rgba(204, 255, 0, 0.15);
+    position: relative;
+  }
+
+  .sk-col-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(204, 255, 0, 0.08);
+    margin-bottom: 4px;
+  }
+
+  .sk-col-idx {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(204, 255, 0, 0.35);
+  }
+
+  .sk-col-head {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(242, 237, 227, 0.3);
+  }
+
+  .sk-list {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    background: var(--white);
+    gap: 0;
+    margin-bottom: 16px;
+  }
+
+  .sk-list li {
+    font-size: 13px;
+    color: rgba(242, 237, 227, 0.55);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(204, 255, 0, 0.06);
+    transition: color 0s steps(1), padding-left 0s steps(1);
     cursor: default;
-    /* stagger entrance */
-    opacity: 0;
-    transform: translateY(16px);
-    transition:
-      opacity    0.45s ease var(--delay, 0s),
-      transform  0.45s ease var(--delay, 0s),
-      background 0.15s ease,
-      box-shadow 0.15s ease;
-  }
-
-  /* trigger stagger when parent is revealed */
-  .sk-group.revealed .sk-block {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .sk-block:nth-child(3n)       { border-right: none; }
-  .sk-block:nth-last-child(-n+3){ border-bottom: none; }
-
-  .sk-block:hover {
-    background: var(--primary);
-    transform: translate(-4px, -4px) !important;
-    box-shadow: var(--shadow-sm);
-    z-index: 1;
-  }
-
-  .sk-idx {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--secondary);
-  }
-
-  .sk-name {
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.2;
-  }
-
-  .sk-sub {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--grey);
-  }
-
-  /* ── Dev chips ── */
-  .sk-chips {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: var(--space-4);
+    align-items: center;
+    gap: 8px;
   }
 
-  .sk-chip {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 10px 18px;
-    border: var(--border-thick);
-    box-shadow: var(--shadow-sm);
-    background: var(--white);
-    color: var(--black);
-    cursor: default;
-    /* stagger entrance */
-    opacity: 0;
-    transform: translateY(10px) scale(0.95);
-    transition:
-      opacity    0.35s ease var(--chip-delay, 0s),
-      transform  0.35s ease var(--chip-delay, 0s),
-      background 0.15s ease,
-      color      0.15s ease,
-      box-shadow 0.15s ease;
+  .sk-list li::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    background: rgba(204, 255, 0, 0.2);
+    flex-shrink: 0;
+    transition: background 0s steps(1);
   }
 
-  .sk-group.revealed .sk-chip {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  .sk-list li:hover {
+    color: var(--text);
+    padding-left: 4px;
   }
 
-  .sk-chip:hover {
-    background: var(--secondary);
-    color: var(--white);
-    box-shadow: none;
-    transform: translate(4px, 4px) !important;
+  .sk-list li:hover::before {
+    background: var(--primary);
   }
 
   .sk-note {
-    font-size: var(--text-sm);
-    color: var(--grey);
+    font-size: 11px;
+    color: rgba(242, 237, 227, 0.25);
     line-height: 1.6;
   }
 
-  .sk-note strong { color: var(--black); }
-
-  /* ── Future direction ── */
-  .sk-future {
-    border: var(--border-brutal);
-    box-shadow: var(--shadow-primary);
-    overflow: hidden;
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-
-  .sk-future:hover {
-    box-shadow: none;
-    transform: translate(6px, 6px);
-  }
-
-  .sf-header {
-    padding: 14px 20px;
-    background: var(--black);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--primary);
-    border-bottom: var(--border-thick);
-  }
-
-  .sf-body {
-    padding: var(--space-6) var(--space-5);
-    text-align: center;
-    background: var(--white);
-  }
-
-  .sf-statement {
-    font-size: clamp(1.3rem, 2.5vw, var(--text-xl));
-    font-weight: 700;
-    line-height: 1.5;
-    margin-bottom: var(--space-5);
-    color: var(--dark-grey);
-  }
-
-  .sf-statement strong {
-    color: var(--black);
-    font-size: clamp(1.4rem, 2.8vw, var(--text-2xl));
-  }
-
-  .sf-roles {
+  /* Footer direction bar */
+  .sk-footer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+    align-items: baseline;
+    gap: 24px;
+    padding: 28px 24px;
+    border-left: 1px solid rgba(204, 255, 0, 0.15);
+    border-right: 1px solid rgba(204, 255, 0, 0.15);
+    border-bottom: 1px solid rgba(204, 255, 0, 0.15);
   }
 
-  .sf-role {
+  .sk-footer-idx {
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(204, 255, 0, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .sk-direction {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+    font-weight: 400;
+    color: rgba(242, 237, 227, 0.25);
+    line-height: 1.1;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    padding: 8px 16px;
-    border: var(--border-thick);
-    background: var(--primary);
-    box-shadow: var(--shadow-sm);
-    color: var(--black);
-    /* stagger entrance */
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity    0.4s ease var(--role-delay, 0s),
-      transform  0.4s ease var(--role-delay, 0s),
-      background 0.15s ease,
-      color      0.15s ease,
-      box-shadow 0.15s ease;
   }
 
-  .sk-future.revealed .sf-role {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .sf-role:hover {
-    box-shadow: none;
-    transform: translate(4px, 4px) rotate(-2deg) !important;
-    background: var(--secondary);
-    color: var(--white);
+  .sk-direction span {
+    color: var(--text);
   }
 
   @media (max-width: 768px) {
-    .sk-grid { grid-template-columns: 1fr 1fr; }
-    .sk-block { border-right: var(--border-thick); border-bottom: var(--border-thick); }
-    .sk-block:nth-child(2n)  { border-right: none; }
-    .sk-block:nth-last-child(-n+2):nth-child(odd) { border-bottom: none; }
-    .sk-block:last-child { border-bottom: none; border-right: none; }
-
-    .sk-block {
-      padding: 20px 16px;
-    }
-
-    .sk-name {
-      font-size: var(--text-base);
-    }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .sk-col:nth-child(3) { grid-column: 1 / -1; }
+    .sk-footer { flex-direction: column; gap: 12px; }
   }
 
   @media (max-width: 480px) {
-    .sk-grid { grid-template-columns: 1fr; }
-    .sk-block { border-right: none !important; border-bottom: var(--border-thick) !important; }
-    .sk-block:last-child { border-bottom: none !important; }
-    .sk-chips { gap: 8px; }
-    .sk-chip { padding: 8px 14px; font-size: 11px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .sk-col:nth-child(3) { grid-column: auto; }
+    .sk-col { padding: 20px 16px; }
   }
 </style>

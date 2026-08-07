@@ -1,0 +1,79 @@
+.aura .aura-panel {
+  width: min(292px, calc(100vw - 18px));
+  border: 4px solid #101214;
+  border-radius: 26px 20px 28px 18px / 22px 28px 20px 26px;
+  background: #fffef8;
+  box-shadow:
+    8px 8px 0 #101214,
+    12px 12px 0 var(--primary);
+  transform: rotate(-.35deg) translateY(14px) scale(.97);
+}
+
+.aura.is-open .aura-panel {
+  transform: rotate(-.35deg) translateY(0) scale(1);
+}
+
+.aura .aura-panel::before {
+  width: 30px;
+  height: 28px;
+  bottom: -29px;
+  background: #101214;
+}
+
+.aura .aura-panel::after {
+  width: 20px;
+  height: 20px;
+  bottom: -19px;
+  background: #fffef8;
+}
+
+.aura.panel-below .aura-panel::before { top: -29px; }
+.aura.panel-below .aura-panel::after { top: -19px; }
+
+.aura .aura-panel > header {
+  cursor: grab;
+  touch-action: none;
+  padding: 9px 12px;
+  border-bottom: 3px solid #101214;
+  border-radius: 20px 16px 0 0;
+  background:
+    repeating-linear-gradient(-45deg, rgba(183,243,91,.52) 0 3px, transparent 3px 8px),
+    #fffef8;
+  font-weight: 700;
+}
+
+.aura.is-dragging-panel .aura-panel > header { cursor: grabbing; }
+
+.aura .aura-log {
+  max-height: 132px;
+  padding: 14px 15px 11px;
+}
+
+.aura .aura-message {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.48;
+}
+
+.aura .aura-message::before {
+  border: 2px solid #101214;
+  box-shadow: 2px 2px 0 #101214;
+  transform: rotate(-2deg);
+}
+
+.aura .prompts button {
+  box-shadow: 2px 2px 0 #101214;
+}
+
+.aura .aura-input {
+  border-top-width: 3px;
+}
+
+@media (max-width: 520px) {
+  .aura .aura-panel {
+    width: min(276px, calc(100vw - 14px));
+    border-width: 3px;
+    box-shadow: 6px 6px 0 #101214, 9px 9px 0 var(--primary);
+  }
+}

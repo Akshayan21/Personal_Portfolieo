@@ -1,103 +1,98 @@
 ---
-// Footer — Neobrutalism endcap with marquee
+// Footer - Minimal endcap
 const year = new Date().getFullYear();
-const links = [
-  { label: "01.About", href: "#about" },
-  { label: "02.Journey", href: "#experience" },
-  { label: "03.Works", href: "#projects" },
-  { label: "04.Arsenal", href: "#skills" },
-  { label: "05.Belief", href: "#philosophy" },
-  { label: "06.Signal", href: "#contact" },
-];
 ---
 
 <footer class="footer" id="footer">
-  <!-- Marquee -->
-  <div class="marquee-strip">
-    <div class="marquee-inner">
-      THANKS FOR SCROLLING ✦ AKSHAYAN MOHANDASS ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦ THANKS FOR SCROLLING ✦ AKSHAYAN MOHANDASS ✦ PRODUCT DESIGNER ✦ SYSTEMS THINKER ✦ AI-NATIVE ✦&nbsp;
-    </div>
-  </div>
-
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-logo mono">AM</span>
-        <p class="footer-tagline">Designing the infrastructure<br/>for intelligent organizations.</p>
+        <span class="footer-logo">AM</span>
+        <p class="footer-tagline">Designing intelligent systems<br/>for people who build things.</p>
       </div>
       <nav class="footer-nav">
-        {links.map(l => (
-          <a href={l.href} class="footer-link mono">{l.label}</a>
-        ))}
+        <a href="#about" class="footer-link">About</a>
+        <a href="#experience" class="footer-link">Experience</a>
+        <a href="#projects" class="footer-link">Work</a>
+        <a href="#skills" class="footer-link">Skills</a>
+        <a href="#philosophy" class="footer-link">Philosophy</a>
+        <a href="#contact" class="footer-link">Contact</a>
       </nav>
     </div>
 
     <div class="footer-bottom">
-      <p class="mono">© {year} AKSHAYAN MOHANDASS</p>
-      <p class="mono">DESIGNED & BUILT WITH COFFEE ☕</p>
+      <p>(c) {year} Akshayan Mohandass</p>
+      <p>Product Designer | Systems Thinker</p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: var(--black);
-    color: var(--white);
-  }
-
-  .footer .marquee-strip {
-    border-top: none;
-    background: var(--primary);
-    color: var(--black);
+    background: var(--bg);
+    border-top: 1px solid rgba(204, 255, 0, 0.12);
   }
 
   .footer-inner {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 48px 0 32px;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding: 56px 0 40px;
+    border-bottom: 1px solid rgba(204, 255, 0, 0.08);
     gap: 32px;
     flex-wrap: wrap;
   }
 
   .footer-logo {
-    font-size: var(--text-2xl);
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    font-style: normal;
     color: var(--primary);
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+  }
+
+  .footer-logo::before {
+    content: 'AM';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(204, 255, 0, 0.18);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+    letter-spacing: inherit;
   }
 
   .footer-tagline {
-    font-size: var(--text-sm);
-    color: var(--grey);
-    line-height: 1.5;
+    font-size: 13px;
+    color: rgba(242, 237, 227, 0.3);
+    line-height: 1.6;
   }
 
   .footer-nav {
     display: flex;
-    gap: 20px;
+    gap: 28px;
     flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 4px;
   }
 
   .footer-link {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--grey);
-    padding: 6px 12px;
-    border: 2px solid transparent;
-    transition: all 0.15s ease;
+    font-size: 13px;
+    color: rgba(242, 237, 227, 0.35);
+    transition: color 0.2s ease;
   }
 
   .footer-link:hover {
-    color: var(--black);
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 3px 3px 0 var(--primary);
-    transform: translate(-3px, -3px);
+    color: var(--text);
   }
 
   .footer-bottom {
@@ -109,39 +104,16 @@ const links = [
   }
 
   .footer-bottom p {
+    font-family: var(--font-mono);
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--grey);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(242, 237, 227, 0.2);
   }
 
-  @media (max-width: 768px) {
-    .footer-inner { flex-direction: column; }
-    .footer-bottom { flex-direction: column; }
-  }
-
-  @media (max-width: 480px) {
-    .footer-inner {
-      padding: 36px 0 24px;
-      gap: 24px;
-    }
-
-    .footer-nav {
-      gap: 10px;
-    }
-
-    .footer-link {
-      font-size: 11px;
-      padding: 5px 10px;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      gap: 4px;
-    }
-
-    .footer-logo {
-      font-size: var(--text-xl);
-    }
+  @media (max-width: 640px) {
+    .footer-inner { flex-direction: column; padding: 40px 0 32px; }
+    .footer-nav { gap: 16px; }
+    .footer-bottom { flex-direction: column; gap: 6px; }
   }
 </style>

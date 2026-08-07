@@ -1,4 +1,4 @@
-// Scroll Reveal — IntersectionObserver
+// Scroll Reveal - IntersectionObserver
 document.addEventListener('DOMContentLoaded', () => {
     const reveals = document.querySelectorAll('.reveal');
 

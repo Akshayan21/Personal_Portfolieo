@@ -1,50 +1,55 @@
 /* ===================================== */
-/* NEOBRUTALISM DESIGN SYSTEM            */
-/* TypeUI Neobrutalism Skill Applied     */
+/* Y2K RETRO DESIGN SYSTEM               */
 /* ===================================== */
 :root {
-    /* Neobrutalism Palette */
-    --primary: #FDC800;
-    --secondary: #432DD7;
-    --success: #16A34A;
-    --warning: #D97706;
-    --error: #DC2626;
-    --bg: #FBFBF9;
-    --text: #1C293C;
-    --black: #1C293C;
-    --white: #FBFBF9;
-    --cream: #F3F1EA;
+    /* Y2K Palette */
+    --primary: #B7F35B;        /* acid lime - main accent */
+    --secondary: #6D7CFF;      /* hot magenta */
+    --tertiary: #8FD7E8;       /* cyan */
+    --success: #00FF41;
+    --warning: #FF6600;
+    --error: #FF3366;
 
-    --grey: #6B7280;
-    --dark-grey: #374151;
+    /* Backgrounds */
+    --bg: #101214;             /* deep indigo-black */
+    --white: #171A1D;          /* card surfaces */
+    --cream: #20252A;          /* elevated surface */
 
-    /* Typography — Neobrutalism */
-    --font-sans: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-serif: 'Playfair Display', serif;
+    /* Text */
+    --text: #F3F5F4;           /* cool off-white */
+    --black: #F3F5F4;          /* legacy alias */
+    --on-primary: #101214;     /* text on lime */
+    --grey: #68736F;
+    --dark-grey: #A4ACAA;
 
-    /* Type scale (neobrutalism odd progression) */
-    --text-xs: 13px;
-    --text-sm: 15px;
-    --text-base: 17px;
-    --text-lg: 21px;
-    --text-xl: 27px;
-    --text-2xl: 35px;
+    /* Typography - Y2K */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-sans: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-serif: 'Cormorant Garamond', serif;
 
-    /* Borders — thick, structural */
-    --border-thin: 2px solid var(--black);
-    --border-thick: 3px solid var(--black);
-    --border-brutal: 3px solid var(--black);
+    /* Type scale */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 26px;
+    --text-2xl: 34px;
 
-    /* Radius — sharp edges for neobrutalism */
+    /* Borders - lime-tinted */
+    --border-thin: 1px solid rgba(204, 255, 0, 0.12);
+    --border-thick: 1px solid rgba(204, 255, 0, 0.25);
+    --border-brutal: 1px solid rgba(204, 255, 0, 0.18);
+
+    /* Radius - sharp */
     --radius: 0;
 
-    /* Hard Shadows — offset, NO blur */
-    --shadow-sm: 4px 4px 0 var(--black);
-    --shadow-md: 6px 6px 0 var(--black);
-    --shadow-lg: 8px 8px 0 var(--black);
-    --shadow-primary: 6px 6px 0 var(--primary);
-    --shadow-secondary: 6px 6px 0 var(--secondary);
+    /* Shadows - neon glow */
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.75);
+    --shadow-primary: 0 0 20px rgba(204, 255, 0, 0.4), 0 0 40px rgba(204, 255, 0, 0.15);
+    --shadow-secondary: 0 0 20px rgba(255, 20, 147, 0.4);
 
     /* Spacing (4px base unit) */
     --space-1: 4px;
@@ -59,6 +64,14 @@
 
     /* Section spacing */
     --section-pad: clamp(80px, 12vw, 120px);
+
+    /* Lime opacity ladder */
+    --lime-60: rgba(204, 255, 0, 0.6);
+    --lime-40: rgba(204, 255, 0, 0.4);
+    --lime-20: rgba(204, 255, 0, 0.2);
+    --lime-10: rgba(204, 255, 0, 0.1);
+    --lime-06: rgba(204, 255, 0, 0.06);
+    --lime-03: rgba(204, 255, 0, 0.03);
 }
 
 /* ========================= */
@@ -84,8 +97,9 @@ body {
     background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
-    cursor: crosshair;
+    cursor: default;
     -webkit-font-smoothing: antialiased;
+    counter-reset: section-num;
 }
 
 img {
@@ -107,7 +121,7 @@ button {
 
 ::selection {
     background: var(--primary);
-    color: var(--black);
+    color: var(--on-primary);
 }
 
 /* ========================= */
@@ -118,39 +132,88 @@ button {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-5);
+    position: relative;
+    z-index: 1;
 }
 
 .chapter-section {
     padding: var(--section-pad) 0;
     border-bottom: var(--border-brutal);
     position: relative;
-    overflow: hidden;
+    overflow: clip; /* clip = visual clipping only, does NOT break position:sticky */
+    counter-increment: section-num;
 }
 
-/* Chapter labels — neobrutalism style */
+/* Dot matrix on each section */
+.chapter-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(204, 255, 0, 0.06) 1px, transparent 0);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+}
+
+/* Giant section number */
+.chapter-section::after {
+    content: none;
+    position: absolute;
+    top: var(--section-pad);
+    right: 0;
+    font-family: var(--font-display);
+    font-size: clamp(11rem, 26vw, 24rem);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 0.85;
+    color: rgba(204, 255, 0, 0.04);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: 0.04em;
+}
+
+/* Chapter labels */
 .chapter-num {
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 8px 16px;
-    border: var(--border-thick);
+    padding: 4px 10px;
+    border: 1px solid rgba(204, 255, 0, 0.35);
     display: inline-block;
     margin-bottom: var(--space-5);
-    background: var(--primary);
-    box-shadow: var(--shadow-sm);
-    transform: rotate(-2deg);
+    background: transparent;
+    color: var(--primary);
 }
 
 .section-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -1px;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0.04em;
     margin-bottom: 20px;
     color: var(--text);
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 11vw, 12rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-bottom: 80px;
+}
+
+.section-title em {
+    color: var(--primary);
+    font-style: normal;
 }
 
 .mono {
@@ -161,51 +224,61 @@ button {
     font-family: var(--font-serif);
 }
 
-/* Scroll reveal */
-.reveal {
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 40px;
 }
 
-.reveal-up {
-    transform: translateY(30px);
+.section-eyebrow::before {
+    content: '// ';
+    color: var(--secondary);
 }
 
-.reveal-left {
-    transform: translateX(-40px);
-}
-
-.reveal-right {
-    transform: translateX(40px);
-}
-
-.reveal-scale {
-    transform: scale(0.9);
-}
-
-.reveal.revealed {
+/*  Scroll Reveal  */
+[data-reveal] {
     opacity: 1;
-    transform: translate(0, 0) scale(1) rotate(0deg);
+    transform: none;
+    transition:
+        opacity 0.4s steps(5, end),
+        transform 0.45s steps(6, end);
+    transition-delay: var(--reveal-delay, 0ms);
 }
 
-.delay-1 {
-    transition-delay: 0.1s;
+[data-reveal].in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.delay-2 {
-    transition-delay: 0.2s;
+/* Curtain wipe - chunky step reveal */
+[data-reveal="clip"] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: clip-path 0.6s steps(8, end);
+    transition-delay: var(--reveal-delay, 0ms);
 }
 
-.delay-3 {
-    transition-delay: 0.3s;
+[data-reveal="clip"].in-view {
+    clip-path: inset(0 0 0% 0);
 }
 
-.delay-4 {
-    transition-delay: 0.4s;
-}
-
-.delay-5 {
-    transition-delay: 0.5s;
+#scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary), 0 0 16px rgba(204, 255, 0, 0.5);
+    transform-origin: left center;
+    transform: scaleX(0);
+    z-index: 9999;
+    pointer-events: none;
 }
 
 /* ========================= */
@@ -213,14 +286,14 @@ button {
 /* ========================= */
 .marquee-strip {
     overflow: hidden;
-    border-top: var(--border-thick);
-    border-bottom: var(--border-thick);
-    background: var(--black);
-    color: var(--primary);
+    border-top: var(--border-brutal);
+    border-bottom: var(--border-brutal);
+    background: var(--primary);
+    color: var(--on-primary);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     padding: 12px 0;
     white-space: nowrap;
@@ -232,13 +305,21 @@ button {
 }
 
 @keyframes marquee-scroll {
-    from {
-        transform: translateX(0);
-    }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
 
-    to {
-        transform: translateX(-50%);
-    }
+/* ========================= */
+/* Y2K ANIMATIONS            */
+/* ========================= */
+@keyframes blink-cursor {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+@keyframes neon-pulse {
+    0%, 100% { text-shadow: 0 0 8px var(--primary), 0 0 16px rgba(204, 255, 0, 0.4); }
+    50%       { text-shadow: 0 0 4px var(--primary), 0 0 8px rgba(204, 255, 0, 0.2); }
 }
 
 /* ========================= */
@@ -269,22 +350,60 @@ button {
 }
 
 /* ========================= */
-/* ROUNDED BUTTONS PREVIEW   */
+/* GRAIN OVERLAY             */
 /* ========================= */
-.cta-btn,
-.nav-cta,
-.nav-link,
-.cf-submit,
-.cs-back,
-.cs-pnav-all,
-.footer-link,
-.chapter-num,
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+}
+
+.grain-overlay svg { display: block; width: 100%; height: 100%; }
+
+/* ========================= */
+/* UTILITIES                 */
+/* ========================= */
+.text-outline {
+    color: transparent !important;
+    -webkit-text-stroke: 1px currentColor;
+}
+
+/* ========================= */
+/* ROUNDED PILL ELEMENTS     */
+/* ========================= */
 .sk-chip,
 .sf-role,
 .et-tag,
 .hero-badge,
 .role-tag,
-.cs-type-badge,
-.cs-section-label {
+.pf-label,
+.pc-type-badge,
+.cs-type-badge {
     border-radius: 999px;
 }
+
+/* Operational fieldbook accessibility baseline */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    [data-reveal], [data-reveal="clip"] {
+        clip-path: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+/* Philosophy manifesto is intentionally free of decorative background type. */
+#philosophy::after { display: none !important; }

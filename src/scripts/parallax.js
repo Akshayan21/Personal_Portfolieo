@@ -1,4 +1,4 @@
-// Parallax Scroll Engine v2 — Smooth lerp, depth tilt, GPU-accelerated
+// Parallax Scroll Engine v2 - Smooth lerp, depth tilt, GPU-accelerated
 (() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -13,15 +13,15 @@
   let viewH = window.innerHeight;
   window.addEventListener('resize', () => { viewH = window.innerHeight; }, { passive: true });
 
-  // ── Layer parallax  (data-parallax="speed") ──────────────────────────────
-  // Negative speed  → element drifts UP as you scroll down (floats away faster)
-  // Positive speed  → element drifts DOWN (lags behind the scroll)
+  //  Layer parallax  (data-parallax="speed") 
+  // Negative speed  -> element drifts UP as you scroll down (floats away faster)
+  // Positive speed  -> element drifts DOWN (lags behind the scroll)
   const layers = [...document.querySelectorAll('[data-parallax]')].map(el => {
     el.style.willChange = 'transform';
     return { el, speed: parseFloat(el.dataset.parallax || '0.1'), y: 0, targetY: 0 };
   });
 
-  // ── Depth cards  (data-depth="intensity") ────────────────────────────────
+  //  Depth cards  (data-depth="intensity") 
   // Cards tilt on the X axis + scale up + fade in as they enter the viewport
   const cards = [...document.querySelectorAll('[data-depth]')].map(el => {
     el.style.willChange = 'transform, opacity';
@@ -35,7 +35,7 @@
     };
   });
 
-  // ── Read scroll state → compute targets ──────────────────────────────────
+  //  Read scroll state -> compute targets 
   function readTargets() {
     layers.forEach(item => {
       if (isMobile() || !isReady(item.el)) return;
@@ -55,7 +55,7 @@
     });
   }
 
-  // ── RAF loop — runs until values settle ──────────────────────────────────
+  //  RAF loop - runs until values settle 
   let rafId = null;
 
   function tick() {

@@ -1,0 +1,96 @@
+.aura .aura-orb {
+  width: 136px;
+  height: 170px;
+}
+
+.aura-character {
+  position: relative;
+  display: block;
+  width: 132px;
+  height: 142px;
+  margin: 0 auto;
+  transform: translate(var(--gaze-x), var(--gaze-y));
+  transform-origin: 50% 90%;
+  transition: transform .15s ease-out, rotate .18s ease;
+  filter: drop-shadow(5px 9px 0 rgba(16,18,20,.78));
+  animation: aura-character-idle 4s ease-in-out infinite;
+}
+
+.aura-character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+}
+
+.character-status {
+  position: absolute;
+  top: 18px;
+  right: 5px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #101214;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #101214;
+  font: 700 7px var(--font-mono);
+  box-shadow: 2px 2px 0 #101214;
+}
+
+.aura .pet-label {
+  z-index: 2;
+  margin-top: -4px;
+  border: 2px solid #101214;
+  background: var(--primary);
+  color: #101214;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 #101214;
+  transform: rotate(-1deg);
+}
+
+.aura[data-aura-state='thinking'] .aura-character {
+  animation: aura-character-think .7s ease-in-out infinite alternate;
+}
+
+.aura[data-aura-state='listening'] .aura-character {
+  animation: aura-character-listen .55s ease-in-out infinite alternate;
+}
+
+.aura[data-aura-state='speaking'] .aura-character {
+  animation: aura-character-talk .42s ease-in-out infinite alternate;
+}
+
+.aura.scroll-down .aura-character { rotate: -4deg; translate: 0 4px; }
+.aura.scroll-up .aura-character { rotate: 4deg; translate: 0 -4px; }
+
+@keyframes aura-character-idle {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+
+@keyframes aura-character-think {
+  from { rotate: -2deg; }
+  to { rotate: 2deg; }
+}
+
+@keyframes aura-character-listen {
+  from { scale: 1; }
+  to { scale: 1.025; }
+}
+
+@keyframes aura-character-talk {
+  from { translate: 0 0; }
+  to { translate: 0 -3px; }
+}
+
+@media (max-width: 520px) {
+  .aura .aura-orb { width: 112px; height: 145px; }
+  .aura-character { width: 108px; height: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-character { animation: none !important; }
+}

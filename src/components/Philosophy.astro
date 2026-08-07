@@ -1,266 +1,167 @@
 ---
-// Chapter 05: The Belief — Philosophy
-const shifts = [
-  { from: "Interface Economy", to: "Intelligence Economy" },
-  { from: "Manual Oversight", to: "Embedded Logic" },
-  { from: "Reactive Systems", to: "Predictive Infrastructure" },
-];
-const principles = ["Anticipate friction", "Clarify authority", "Scale decision-making", "Integrate AI meaningfully"];
+// Philosophy - Manifesto style
 ---
 
 <section class="philosophy chapter-section" id="philosophy">
   <div class="container">
-    <span class="chapter-num reveal reveal-scale">CH.06</span>
-    <h2 class="section-heading reveal reveal-up delay-1">
-      The <em class="serif">Belief</em> System
-    </h2>
 
-    <div class="phil-layout">
+    <p class="section-eyebrow" data-reveal>Belief</p>
+
+    <blockquote class="manifesto-quote" data-reveal="clip" style="--reveal-delay: 80ms">
+      "The future isn't about better screens.<br class="br-lg"/>
+      It's about <em data-text="BETTER DECISIONS.">better decisions.</em>"
+    </blockquote>
+
+    <div class="phil-body" data-reveal style="--reveal-delay: 160ms">
       <div class="phil-left">
-        <!-- Big manifesto quote -->
-        <div class="manifesto reveal reveal-left delay-2">
-          <p class="mani-text serif">
-            "The future isn't about <em>better screens.</em><br/>
-            It's about <strong>better decisions.</strong>"
-          </p>
-          <div class="mani-attr mono">/ AKSHAYAN MOHANDASS</div>
-        </div>
-
-        <!-- Shifts -->
-        <div class="shifts reveal reveal-up delay-3">
-          {shifts.map(s => (
-            <div class="shift-row">
-              <span class="s-from">{s.from}</span>
-              <span class="s-arrow">→</span>
-              <span class="s-to">{s.to}</span>
-            </div>
-          ))}
-        </div>
+        <p class="phil-context">
+          The shift happening in product design isn't aesthetic - it's structural.
+          AI is moving from a feature to an operating layer. That changes what
+          a designer's job actually is.
+        </p>
+        <p class="phil-context">
+          I design toward systems that anticipate, clarify, and scale - not just
+          systems that look good in a presentation.
+        </p>
       </div>
 
       <div class="phil-right">
-        <div class="principles-card reveal reveal-right delay-3">
-          <div class="pc-header">
-            <span>SYSTEMS THAT:</span>
-          </div>
-          <ul class="pc-list">
-            {principles.map((p, i) => (
-              <li class={`reveal reveal-up delay-${i + 2}`}>
-                <span class="pc-num">{String(i + 1).padStart(2, '0')}</span>
-                <span class="pc-text">{p}</span>
-              </li>
-            ))}
-          </ul>
-          <div class="pc-footer">
-            <p class="serif"><em>That is the direction I design toward.</em></p>
-          </div>
-        </div>
+        <ul class="principles">
+          <li class="principle">
+            <span class="pr-num">01</span>
+            <span class="pr-text">Anticipate friction before it reaches the user</span>
+          </li>
+          <li class="principle">
+            <span class="pr-num">02</span>
+            <span class="pr-text">Clarify who holds authority at each decision point</span>
+          </li>
+          <li class="principle">
+            <span class="pr-num">03</span>
+            <span class="pr-text">Design for scale, not just the happy path</span>
+          </li>
+          <li class="principle">
+            <span class="pr-num">04</span>
+            <span class="pr-text">Integrate AI as structure, not decoration</span>
+          </li>
+          <li class="principle">
+            <span class="pr-num">05</span>
+            <span class="pr-text">Build systems that outlast the brief</span>
+          </li>
+        </ul>
       </div>
     </div>
+
   </div>
 </section>
 
 <style>
-  .phil-layout {
+  .manifesto-quote {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 9rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-transform: uppercase;
+    margin: 0 0 88px;
+    padding: 24px 0 24px 24px;
+    border: none;
+    border-left: 1px solid rgba(204, 255, 0, 0.12);
+    position: relative;
+  }
+
+  /* Corner marks on the quote */
+  .manifesto-quote::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 1px solid rgba(204, 255, 0, 0.2);
+    border-right: 1px solid rgba(204, 255, 0, 0.2);
+    pointer-events: none;
+  }
+
+  .manifesto-quote em {
+    color: var(--primary);
+    font-style: normal;
+    position: relative;
+  }
+
+
+
+  .br-lg { display: block; }
+
+  .phil-body {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
     align-items: start;
   }
 
-  /* Manifesto — neobrutalism dark card */
-  .manifesto {
-    padding: 40px 32px;
-    border: var(--border-brutal);
-    background: var(--black);
-    color: var(--white);
-    box-shadow: 12px 12px 0 var(--secondary);
-    margin-bottom: 40px;
-    transform: rotate(-1deg);
-    transition: all 0.15s ease;
+  .phil-context {
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    color: rgba(242, 237, 227, 0.5);
+    line-height: 1.85;
+    margin-bottom: 20px;
   }
 
-  .manifesto:hover {
-    box-shadow: 6px 6px 0 var(--secondary);
-    transform: rotate(0deg) translate(3px, 3px);
-  }
-
-  .mani-text {
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-    font-weight: 700;
-    line-height: 1.4;
-    margin-bottom: 16px;
-  }
-
-  .mani-text em { color: var(--secondary); font-style: italic; }
-  .mani-text strong { color: var(--primary); }
-
-  .mani-attr {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--grey);
-  }
-
-  /* Shifts — neobrutalism list */
-  .shifts {
+  /*  Principles  */
+  .principles {
+    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 0;
-    border: var(--border-brutal);
-    box-shadow: var(--shadow-sm);
   }
 
-  .shift-row {
+  .principle {
     display: flex;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: var(--border-thick);
+    align-items: baseline;
     gap: 16px;
-    transition: all 0.15s ease;
-    background: var(--white);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(204, 255, 0, 0.08);
+    transition: all 0s steps(1);
+    cursor: default;
   }
 
-  .shift-row:last-child { border-bottom: none; }
+  .principle:first-child { border-top: 1px solid rgba(204, 255, 0, 0.08); }
+  .principle:hover { padding-left: 6px; background: rgba(204, 255, 0, 0.03); }
+  .principle:hover .pr-text { color: var(--text); }
 
-  .shift-row:hover {
-    background: var(--primary);
-    padding-left: 28px;
-  }
-
-  .s-from {
-    font-size: var(--text-sm);
-    color: var(--grey);
-    text-decoration: line-through;
-    flex: 1;
-  }
-
-  .s-arrow {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    color: var(--secondary);
-    font-size: var(--text-lg);
+  .pr-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--primary);
+    letter-spacing: 0.04em;
     flex-shrink: 0;
+    width: 40px;
+    line-height: 1;
   }
 
-  .s-to {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    flex: 1;
-    text-align: right;
-    color: var(--text);
+  .pr-text {
+    font-size: 14px;
+    color: rgba(242, 237, 227, 0.55);
+    line-height: 1.5;
+    transition: color 0.2s ease;
   }
 
-  /* Principles — neobrutalism card */
-  .principles-card {
-    border: var(--border-brutal);
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    transition: all 0.15s ease;
-  }
-
-  .principles-card:hover {
-    box-shadow: none;
-    transform: translate(8px, 8px);
-  }
-
-  .pc-header {
-    padding: 14px 20px;
-    background: var(--primary);
-    border-bottom: var(--border-thick);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--black);
-  }
-
-  .pc-list {
-    list-style: none;
-  }
-
-  .pc-list li {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 20px;
-    border-bottom: var(--border-thin);
-    font-size: var(--text-base);
-    font-weight: 600;
-    transition: all 0.15s ease;
-    color: var(--text);
-  }
-
-  .pc-list li:hover {
-    background: var(--cream);
-    padding-left: 28px;
-  }
-
-  .pc-list li:last-child { border-bottom: none; }
-
-  .pc-num {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--secondary);
-    width: 28px;
-    flex-shrink: 0;
-  }
-
-  .pc-footer {
-    padding: 16px 20px;
-    border-top: var(--border-thick);
-    background: var(--cream);
-  }
-
-  .pc-footer p {
-    font-size: var(--text-sm);
-    color: var(--dark-grey);
-  }
-
-  @media (max-width: 1024px) {
-    .phil-layout { grid-template-columns: 1fr; gap: 32px; }
-    .manifesto { transform: rotate(0deg); }
+  @media (max-width: 768px) {
+    .phil-body { grid-template-columns: 1fr; gap: 40px; }
+    .br-lg { display: none; }
   }
 
   @media (max-width: 480px) {
-    .manifesto {
-      padding: 28px 20px;
-    }
-
-    .mani-text {
-      font-size: clamp(1.15rem, 4.5vw, 1.4rem);
-    }
-
-    .shift-row {
-      padding: 14px 16px;
-      gap: 10px;
-    }
-
-    .shift-row:hover {
-      padding-left: 20px;
-    }
-
-    .s-from,
-    .s-to {
-      font-size: var(--text-xs);
-    }
-
-    .s-arrow {
-      font-size: var(--text-base);
-    }
-
-    .pc-list li {
-      padding: 14px 16px;
-    }
-
-    .pc-list li:hover {
-      padding-left: 22px;
-    }
-
-    .pc-header,
-    .pc-footer {
-      padding: 12px 16px;
-    }
+    .manifesto-quote { font-size: clamp(1.6rem, 7vw, 2.5rem); margin-bottom: 40px; }
   }
+</style>
+
+<style>
+  /* Keep the manifesto as the visual event; remove competing background type. */
+  .philosophy::after { display: none; }
+  .manifesto-quote::before,
+
+  .phil-body { position: relative; z-index: 1; }
 </style>

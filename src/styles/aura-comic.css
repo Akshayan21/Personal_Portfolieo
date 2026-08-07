@@ -1,0 +1,232 @@
+.aura {
+  --gaze-x: 0px;
+  --gaze-y: 0px;
+  --bubble-paper: #f3f5f4;
+  --bubble-ink: #101214;
+}
+
+.aura .aura-panel {
+  width: min(306px, calc(100vw - 18px));
+  max-height: min(390px, var(--aura-panel-height, calc(100vh - 24px)));
+  overflow: visible;
+  border: 2px solid var(--bubble-ink);
+  border-radius: 19px 19px 19px 6px;
+  background:
+    radial-gradient(rgba(16,18,20,.055) .8px, transparent .9px) 0 0 / 8px 8px,
+    var(--bubble-paper);
+  color: var(--bubble-ink);
+  box-shadow:
+    6px 6px 0 var(--primary),
+    9px 9px 0 var(--bubble-ink);
+}
+
+.aura .aura-panel::before,
+.aura .aura-panel::after {
+  content: '';
+  position: absolute;
+  right: 30px;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.aura .aura-panel::before {
+  bottom: -22px;
+  width: 26px;
+  height: 22px;
+  background: var(--bubble-ink);
+}
+
+.aura .aura-panel::after {
+  right: 34px;
+  bottom: -15px;
+  width: 18px;
+  height: 16px;
+  background: var(--bubble-paper);
+}
+
+.aura.panel-left .aura-panel::before { left: 30px; right: auto; }
+.aura.panel-left .aura-panel::after { left: 34px; right: auto; }
+
+.aura.panel-below .aura-panel::before,
+.aura.panel-below .aura-panel::after {
+  top: -22px;
+  bottom: auto;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.aura.panel-below .aura-panel::after { top: -15px; }
+
+.aura.is-open .aura-orb {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.aura .aura-panel > header {
+  position: relative;
+  top: auto;
+  padding: 10px 12px 8px;
+  border-bottom: 2px solid var(--bubble-ink);
+  border-radius: 16px 16px 0 0;
+  background: transparent;
+  color: var(--bubble-ink);
+  font-size: 8px;
+}
+
+.aura .aura-panel > header i {
+  background: var(--secondary);
+  box-shadow: none;
+}
+
+.aura .aura-close {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--bubble-ink);
+  border-radius: 50%;
+  color: var(--bubble-ink);
+  font: 700 12px/1 var(--font-mono);
+}
+
+.aura .aura-close:hover {
+  background: var(--bubble-ink);
+  color: var(--bubble-paper);
+}
+
+.aura .aura-stage,
+.aura .privacy {
+  display: none;
+}
+
+.aura .aura-log {
+  min-height: 68px;
+  max-height: 148px;
+  overflow: auto;
+  padding: 13px 14px;
+  border: 0;
+  background: transparent;
+}
+
+.aura .aura-message {
+  color: var(--bubble-ink);
+  font: 600 11px/1.55 var(--font-mono);
+}
+
+.aura .aura-message::before {
+  content: 'AURA SAYS';
+  display: block;
+  width: max-content;
+  margin-bottom: 6px;
+  padding: 2px 5px;
+  background: var(--primary);
+  color: var(--bubble-ink);
+  font-size: 7px;
+  letter-spacing: 1.2px;
+  transform: rotate(-1deg);
+}
+
+.aura .prompts {
+  display: flex;
+  gap: 5px;
+  padding: 0 12px 8px;
+  overflow-x: auto;
+}
+
+.aura .prompts button {
+  padding: 5px 7px;
+  border: 1.5px solid var(--bubble-ink);
+  border-radius: 999px;
+  background: rgba(255,255,255,.42);
+  color: var(--bubble-ink);
+  font: 700 7px var(--font-mono);
+}
+
+.aura .prompts button:hover {
+  border-color: var(--bubble-ink);
+  background: var(--primary);
+  color: var(--bubble-ink);
+}
+
+.aura .aura-input {
+  grid-template-columns: minmax(0, 1fr) 34px;
+  padding: 8px 11px 11px;
+  border-top: 2px solid var(--bubble-ink);
+}
+
+.aura .aura-input input {
+  padding: 9px 10px;
+  border: 1.5px solid var(--bubble-ink);
+  border-right: 0;
+  background: #fff;
+  color: var(--bubble-ink);
+  font-size: 9px;
+}
+
+.aura .send {
+  border: 1.5px solid var(--bubble-ink);
+  background: var(--primary);
+  color: var(--bubble-ink);
+  font-size: 14px;
+}
+
+.aura .voice {
+  margin-top: 6px;
+  padding: 8px;
+  border: 1.5px solid var(--bubble-ink);
+  border-radius: 0 0 10px 10px;
+  background: var(--bubble-ink);
+  color: var(--primary);
+  font-size: 7px;
+}
+
+.aura .pet-face {
+  transform: translate(var(--gaze-x), var(--gaze-y));
+  transition: transform .12s ease-out;
+}
+
+.aura.scroll-down .aura-pet {
+  translate: 0 4px;
+  rotate: -3deg;
+}
+
+.aura.scroll-up .aura-pet {
+  translate: 0 -4px;
+  rotate: 3deg;
+}
+
+.aura.scroll-down .aura-panel { translate: 0 -3px; }
+.aura.scroll-up .aura-panel { translate: 0 3px; }
+
+.aura .aura-pet,
+.aura .aura-panel {
+  transition:
+    translate .18s ease,
+    rotate .18s ease,
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+@media (max-width: 520px) {
+  .aura .aura-panel {
+    position: absolute;
+    inset: auto;
+    width: min(286px, calc(100vw - 16px));
+    max-height: min(360px, var(--aura-panel-height, calc(100vh - 16px)));
+  }
+
+  .aura:not(.panel-below) .aura-panel { bottom: calc(100% + 10px); }
+  .aura.panel-below .aura-panel { top: calc(100% + 10px); }
+  .aura.panel-left .aura-panel { left: 0; right: auto; }
+  .aura:not(.panel-left) .aura-panel { right: 0; left: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura .pet-face { transform: none; }
+  .aura.scroll-down .aura-pet,
+  .aura.scroll-up .aura-pet,
+  .aura.scroll-down .aura-panel,
+  .aura.scroll-up .aura-panel {
+    translate: none;
+    rotate: none;
+  }
+}

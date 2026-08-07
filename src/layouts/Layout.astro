@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/animations.css';
+import Aura from '../components/Aura.astro';
 
 interface Props {
 	title?: string;
@@ -14,7 +15,7 @@ interface Props {
 
 const {
 	title = "Akshayan Mohandass | AI-Native Product Designer & Systems Thinker",
-	description = "Akshayan Mohandass — AI-Native Product Designer. Crafting intuitive digital products from enterprise UX systems to AI-native interfaces.",
+	description = "Akshayan Mohandass - AI-Native Product Designer. Crafting intuitive digital products from enterprise UX systems to AI-native interfaces.",
 	ogImage = "/final_state.jpg",
 	ogType = "website",
 	canonicalUrl = Astro.url.href,
@@ -54,12 +55,20 @@ const {
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 	</head>
 	<body>
+		<div class="grain-overlay" aria-hidden="true">
+			<svg xmlns="http://www.w3.org/2000/svg">
+				<filter id="portfolio-grain">
+					<feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+					<feColorMatrix type="saturate" values="0"/>
+				</filter>
+				<rect width="100%" height="100%" filter="url(#portfolio-grain)" opacity="0.45"/>
+			</svg>
+		</div>
 		<slot />
-		<script src="../scripts/scroll-reveal.js"></script>
-		<script src="../scripts/parallax.js"></script>
-		<script src="../scripts/three-background.ts"></script>
+		<Aura />
+		<script src="../scripts/scroll-animations.ts"></script>
 	</body>
 </html>
