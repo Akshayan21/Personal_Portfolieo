@@ -1,63 +1,58 @@
 ---
-// Chapter 02: The Origin — About
+// About - Clean prose layout
 ---
 
 <section class="about chapter-section" id="about">
   <div class="container">
+
+    <p class="section-eyebrow" data-reveal>About</p>
+    <h2 class="section-title" data-reveal="clip" style="--reveal-delay: 80ms">The maker<br/>behind the <em>work.</em></h2>
+
     <div class="about-layout">
-      <div class="about-left">
-        <span class="chapter-num reveal reveal-scale">CH.02</span>
-        <h2 class="section-heading reveal reveal-up delay-1">
-          The <em class="serif">Origin</em> Story
-        </h2>
-        <p class="about-body reveal reveal-up delay-2">
-          I design systems where decisions have consequences:
-          <strong>enterprise travel, finance workflows, and AI-driven products.</strong>
-          <br /><br />
-          These aren't just interfaces.<br />
-          They're environments where usability meets operations, constraints, and scale.
+
+      <div class="about-text" data-reveal style="--reveal-delay: 160ms">
+        <p>
+          I'm a product designer and systems thinker based in India, working at the intersection
+          of AI orchestration, enterprise UX, and complex operational workflows.
         </p>
-        <div
-          class="about-quote reveal reveal-left delay-3"
-        >
-          <div class="quote-mark">❝</div>
-          <p>
-            I don't start with screens.<br /><strong>I start with structure.</strong>
-          </p>
+        <p>
+          My process starts before the screen - understanding who makes decisions, what they're
+          trying to complete, and where friction exists. I design for environments where
+          usability meets operations, constraints, and scale.
+        </p>
+        <p>
+          Before joining Mondee, I shipped AI-native tooling at Kodecopter, a mental wellness
+          app at Bloom Majestic, and a government-approved health product at Aakam 360.
+          Each shaped how I think about designing under real constraints.
+        </p>
+      </div>
+
+      <div class="about-aside" data-reveal style="--reveal-delay: 280ms">
+        <blockquote class="about-quote">
+          "I don't start with screens.<br/>
+          I start with structure."
+        </blockquote>
+
+        <div class="about-meta" role="list">
+          <div class="am-row">
+            <span class="am-label">Currently</span>
+            <span class="am-val">UX Designer, Mondee</span>
+          </div>
+          <div class="am-row">
+            <span class="am-label">Focus</span>
+            <span class="am-val">AI-native products</span>
+          </div>
+          <div class="am-row">
+            <span class="am-label">Based in</span>
+            <span class="am-val">India</span>
+          </div>
+          <div class="am-row">
+            <span class="am-label">Open to</span>
+            <span class="am-val">Full-time roles</span>
+          </div>
         </div>
       </div>
 
-      <div class="about-right">
-        <div
-          class="question-block reveal reveal-right delay-2"
-        >
-          <div class="qb-header">
-            <span class="qb-tag">BEFORE I DESIGN, I ASK:</span>
-          </div>
-          <ul class="qb-list">
-            <li class="reveal reveal-up delay-2">
-              <span class="qb-num">01</span>
-              <span>Who is making the decision?</span>
-            </li>
-            <li class="reveal reveal-up delay-3">
-              <span class="qb-num">02</span>
-              <span>What are they trying to complete?</span>
-            </li>
-            <li class="reveal reveal-up delay-4">
-              <span class="qb-num">03</span>
-              <span>Where does friction exist?</span>
-            </li>
-            <li class="reveal reveal-up delay-5">
-              <span class="qb-num">04</span>
-              <span>What constraints must be respected?</span>
-            </li>
-          </ul>
-          <div class="qb-footer">
-            <p>Strong UX isn't decoration.</p>
-            <p><strong>It's structured problem-solving.</strong></p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -65,172 +60,92 @@
 <style>
   .about-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
     align-items: start;
   }
 
-  .about-body {
-    font-size: var(--text-base);
-    line-height: 1.8;
-    color: var(--dark-grey);
-    margin-bottom: var(--space-6);
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .about-body strong {
-    color: var(--black);
+  .about-text p {
+    font-size: clamp(1rem, 1.3vw, 1.05rem);
+    color: rgba(242, 237, 227, 0.6);
+    line-height: 1.85;
   }
 
   .about-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text);
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-left: 3px solid var(--primary);
+    padding-left: 24px;
+    margin: 0 0 36px;
+    position: relative;
+  }
+
+  .about-aside {
+    position: relative;
+  }
+
+  .about-aside::before,
+  .about-aside::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: rgba(204, 255, 0, 0.25);
+    border-style: solid;
+    pointer-events: none;
+  }
+
+  .about-aside::before { top: -8px; right: -8px; border-width: 1px 1px 0 0; }
+  .about-aside::after  { bottom: -8px; left: -8px; border-width: 0 0 1px 1px; }
+
+  .about-meta {
     display: flex;
-    gap: 12px;
-    padding: 20px;
-    border: var(--border-thick);
-    background: var(--primary);
-    box-shadow: var(--shadow-sm);
-    transform: rotate(-1deg);
-    transition: all 0.15s ease;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(204, 255, 0, 0.1);
   }
 
-  .about-quote:hover {
-    box-shadow: none;
-    transform: rotate(0deg) translate(4px, 4px);
-  }
-
-  .quote-mark {
-    font-size: 2rem;
-    font-family: var(--font-serif);
-    line-height: 1;
-    flex-shrink: 0;
-    color: var(--black);
-  }
-
-  .about-quote p {
-    font-size: var(--text-base);
-    line-height: 1.6;
-    color: var(--black);
-  }
-
-  .about-quote strong {
-    font-weight: 900;
-  }
-
-  /* Question block — neobrutalism card */
-  .question-block {
-    border: var(--border-brutal);
-    background: var(--white);
-    box-shadow: var(--shadow-md);
-    transition: all 0.15s ease;
-  }
-
-  .question-block:hover {
-    box-shadow: none;
-    transform: translate(6px, 6px);
-  }
-
-  .qb-header {
-    padding: 16px 24px;
-    border-bottom: var(--border-thick);
-    background: var(--secondary);
-  }
-
-  .qb-tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--white);
-  }
-
-  .qb-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  .qb-list li {
+  .am-row {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(204, 255, 0, 0.08);
     gap: 16px;
-    padding: 16px 24px;
-    border-bottom: var(--border-thin);
-    font-size: var(--text-sm);
-    transition: all 0.15s ease;
   }
 
-  .qb-list li:hover {
-    background: var(--cream);
-    padding-left: 32px;
-  }
-
-  .qb-list li:last-child {
-    border-bottom: none;
-  }
-
-  .qb-num {
+  .am-label {
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--secondary);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(242, 237, 227, 0.3);
     flex-shrink: 0;
-    width: 28px;
   }
 
-  .qb-footer {
-    padding: 16px 24px;
-    border-top: var(--border-thick);
-    background: var(--primary);
+  .am-val {
+    font-size: 13px;
+    color: rgba(242, 237, 227, 0.65);
+    text-align: right;
   }
 
-  .qb-footer p {
-    font-size: var(--text-sm);
-    color: var(--black);
-    line-height: 1.5;
-  }
-
-  .qb-footer strong {
-    color: var(--black);
-    font-weight: 900;
-  }
-
-  @media (max-width: 1024px) {
-    .about-layout {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .about-quote {
-      transform: rotate(0deg);
-    }
+  @media (max-width: 860px) {
+    .about-layout { grid-template-columns: 1fr; gap: 48px; }
   }
 
   @media (max-width: 480px) {
-    .about-layout {
-      gap: 28px;
-    }
-
-    .about-quote {
-      padding: 16px;
-      gap: 10px;
-    }
-
-    .quote-mark {
-      font-size: 1.5rem;
-    }
-
-    .qb-list li {
-      padding: 12px 16px;
-      gap: 12px;
-    }
-
-    .qb-list li:hover {
-      padding-left: 20px;
-    }
-
-    .qb-header {
-      padding: 12px 16px;
-    }
-
-    .qb-footer {
-      padding: 12px 16px;
-    }
+    .about-text p { font-size: 0.95rem; }
   }
 </style>

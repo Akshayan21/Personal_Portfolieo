@@ -3,7 +3,15 @@
     "allow": [
       "PowerShell(winget upgrade *)",
       "WebFetch(domain:staffezee.com)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "WebSearch",
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(curl -s http://localhost:4321)",
+      "Bash(npx astro *)",
+      "WebFetch(domain:rauno.me)",
+      "WebFetch(domain:in.nothing.tech)",
+      "WebFetch(domain:miraee.ai)"
     ]
   }
 }

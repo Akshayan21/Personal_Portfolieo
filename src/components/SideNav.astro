@@ -1,0 +1,128 @@
+---
+// Side dot navigation - fixed right, indicates current section
+const sections = [
+  { id: "hero",       label: "Intro" },
+  { id: "projects",  label: "Works" },
+  { id: "about",     label: "About" },
+  { id: "experience",label: "Journey" },
+  { id: "skills",    label: "Arsenal" },
+  { id: "philosophy",label: "Belief" },
+  { id: "contact",   label: "Signal" },
+];
+---
+
+<nav class="side-nav" id="side-nav" aria-label="Section navigation">
+  {sections.map(s => (
+    <a href={`#${s.id}`} class="sn-dot" data-section={s.id} aria-label={s.label}>
+      <span class="sn-pip"></span>
+      <span class="sn-label">{s.label}</span>
+    </a>
+  ))}
+</nav>
+
+<script>
+  const dots = document.querySelectorAll<HTMLElement>('.sn-dot');
+  const sectionIds = Array.from(dots).map(d => d.dataset.section!);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          dots.forEach(d => { d.classList.remove('active'); d.removeAttribute('aria-current'); });
+          const active = document.querySelector(`.sn-dot[data-section="${entry.target.id}"]`);
+          active?.classList.add('active');
+          active?.setAttribute('aria-current', 'location');
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+  );
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+<style>
+  .side-nav {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    opacity: 0;
+    animation: sn-fade 0.6s ease 1.2s forwards;
+  }
+
+  @keyframes sn-fade {
+    to { opacity: 1; }
+  }
+
+  .sn-dot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    flex-direction: row-reverse;
+  }
+
+  .sn-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(242, 237, 227, 0.2);
+    border: 1px solid rgba(242, 237, 227, 0.15);
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .sn-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--grey);
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Hover: show label */
+  .sn-dot:hover .sn-pip {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.4);
+  }
+
+  .sn-dot:hover .sn-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--primary);
+  }
+
+  /* Active state */
+  .sn-dot.active .sn-pip {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.6);
+  }
+
+  .sn-dot.active .sn-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--primary);
+  }
+
+  /* Hide on small screens */
+  @media (max-width: 1024px) {
+    .side-nav { display: none; }
+  }
+</style>

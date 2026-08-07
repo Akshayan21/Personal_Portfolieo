@@ -1,4 +1,4 @@
-// Cursor Glow — follows cursor on desktop
+// Cursor Glow - follows cursor on desktop
 document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth < 1024) return;
 

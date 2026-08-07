@@ -1,0 +1,249 @@
+.aura .aura-orb {
+  width: 112px;
+  height: 126px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  overflow: visible;
+}
+
+.aura.is-dragging .aura-orb { cursor: grabbing; }
+
+.aura-pet {
+  position: relative;
+  width: 92px;
+  height: 88px;
+  margin: 12px auto 0;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .48));
+  animation: aura-pet-float 3.6s ease-in-out infinite;
+}
+
+.pet-ear {
+  position: absolute;
+  top: 1px;
+  width: 28px;
+  height: 34px;
+  border: 1px solid rgba(183, 243, 91, .62);
+  background: #171a1d;
+  clip-path: polygon(0 0, 100% 42%, 77% 100%, 15% 77%);
+  transform-origin: bottom center;
+}
+
+.pet-ear::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  background: rgba(183, 243, 91, .16);
+  clip-path: inherit;
+}
+
+.pet-ear--left { left: 2px; transform: rotate(-13deg); }
+.pet-ear--right { right: 2px; transform: scaleX(-1) rotate(-13deg); }
+
+.pet-head {
+  position: absolute;
+  left: 7px;
+  bottom: 0;
+  width: 78px;
+  height: 66px;
+  border: 1px solid rgba(183, 243, 91, .62);
+  border-radius: 24px 24px 30px 30px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.07), transparent 32%),
+    #15191b;
+  box-shadow:
+    inset 0 0 0 5px #101214,
+    inset 0 -16px 30px rgba(109, 124, 255, .08),
+    0 0 24px rgba(183, 243, 91, .11);
+}
+
+.pet-head::before {
+  content: 'A-01';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  translate: -50% 0;
+  color: rgba(183, 243, 91, .35);
+  font: 5px var(--font-mono);
+  letter-spacing: 1.5px;
+}
+
+.pet-face {
+  position: absolute;
+  inset: 20px 12px 9px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  justify-items: center;
+  column-gap: 12px;
+}
+
+.pet-eye {
+  width: 10px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px rgba(183,243,91,.9), 0 0 18px rgba(183,243,91,.35);
+  transform-origin: center;
+  animation: aura-pet-blink 5.2s infinite;
+}
+
+.pet-mouth {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 24px;
+  height: 9px;
+  margin-top: 5px;
+}
+
+.pet-mouth i {
+  width: 2px;
+  height: 2px;
+  background: rgba(183,243,91,.62);
+  transition: height .16s ease;
+}
+
+.pet-status {
+  position: absolute;
+  right: 5px;
+  bottom: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.pet-shadow {
+  position: absolute;
+  left: 21px;
+  bottom: -8px;
+  width: 50px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.45);
+  filter: blur(4px);
+  animation: aura-pet-shadow 3.6s ease-in-out infinite;
+}
+
+.pet-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px auto 0;
+  padding: 5px 8px;
+  border: 1px solid rgba(183,243,91,.24);
+  background: rgba(16,18,20,.88);
+  color: rgba(243,245,244,.6);
+  font: 7px var(--font-mono);
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+}
+
+.pet-label::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 7px var(--primary);
+}
+
+.pet-hint {
+  position: absolute;
+  right: calc(100% + 9px);
+  top: 39px;
+  padding: 6px 8px;
+  border: 1px solid rgba(183,243,91,.18);
+  background: rgba(16,18,20,.92);
+  color: rgba(243,245,244,.43);
+  font: 7px var(--font-mono);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(5px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+
+.aura-orb:hover .pet-hint,
+.aura-orb:focus-visible .pet-hint {
+  opacity: 1;
+  transform: none;
+}
+
+.aura[data-aura-state='listening'] .pet-ear--left { animation: aura-ear-left .6s ease-in-out infinite alternate; }
+.aura[data-aura-state='listening'] .pet-ear--right { animation: aura-ear-right .6s ease-in-out infinite alternate; }
+.aura[data-aura-state='listening'] .pet-eye { width: 13px; height: 16px; animation: none; }
+.aura[data-aura-state='thinking'] .pet-eye { height: 4px; border-radius: 2px; animation: aura-pet-scan .65s ease-in-out infinite alternate; }
+.aura[data-aura-state='speaking'] .pet-eye { height: 8px; border-radius: 8px 8px 2px 2px; animation: none; }
+.aura[data-aura-state='speaking'] .pet-mouth i { animation: aura-pet-talk .36s ease-in-out infinite alternate; }
+.aura[data-aura-state='speaking'] .pet-mouth i:nth-child(2) { animation-delay: -.22s; }
+.aura[data-aura-state='speaking'] .pet-mouth i:nth-child(3) { animation-delay: -.1s; }
+.aura[data-aura-state='error'] .pet-eye { background: var(--error); box-shadow: 0 0 9px var(--error); }
+
+.aura.panel-below .aura-panel { top: calc(100% + 10px); bottom: auto; transform-origin: top right; }
+.aura.panel-left .aura-panel { left: 0; right: auto; transform-origin: bottom left; }
+.aura.panel-below.panel-left .aura-panel { transform-origin: top left; }
+
+@keyframes aura-pet-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes aura-pet-shadow {
+  0%, 100% { transform: scaleX(1); opacity: .45; }
+  50% { transform: scaleX(.76); opacity: .25; }
+}
+
+@keyframes aura-pet-blink {
+  0%, 44%, 48%, 100% { transform: scaleY(1); }
+  46% { transform: scaleY(.08); }
+}
+
+@keyframes aura-pet-scan {
+  from { transform: translateX(-5px); }
+  to { transform: translateX(5px); }
+}
+
+@keyframes aura-pet-talk {
+  from { height: 2px; }
+  to { height: 9px; }
+}
+
+@keyframes aura-ear-left {
+  to { transform: rotate(-23deg); }
+}
+
+@keyframes aura-ear-right {
+  to { transform: scaleX(-1) rotate(-23deg); }
+}
+
+@media (max-width: 520px) {
+  .aura .aura-orb { width: 96px; height: 116px; padding: 0; }
+  .aura-pet { transform: scale(.9); transform-origin: bottom center; }
+  .pet-hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-pet,
+  .pet-shadow,
+  .pet-eye,
+  .pet-ear,
+  .pet-mouth i {
+    animation: none !important;
+  }
+}

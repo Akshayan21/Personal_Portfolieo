@@ -1,19 +1,19 @@
 ---
-// Navbar — Neobrutalism
+// Navbar - Neobrutalism
 ---
 
 <nav class="nav" id="navbar">
   <div class="nav-inner">
-    <div></div>
+    <a href="#hero" class="nav-logo">AM</a>
     <div class="nav-links" id="nav-links">
-      <a href="#about" class="nav-link">01.About</a>
-      <a href="#experience" class="nav-link">02.Journey</a>
-      <a href="#projects" class="nav-link">03.Works</a>
+      <a href="#projects" class="nav-link">01.Works</a>
+      <a href="#about" class="nav-link">02.About</a>
+      <a href="#experience" class="nav-link">03.Journey</a>
       <a href="#skills" class="nav-link">04.Arsenal</a>
       <a href="#philosophy" class="nav-link">05.Belief</a>
-      <a href="#contact" class="nav-cta">SAY HELLO ✦</a>
+      <a href="#contact" class="nav-cta">Say hello -></a>
     </div>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -29,11 +29,24 @@
   burger?.addEventListener('click', () => {
     navLinks?.classList.toggle('open');
     burger.classList.toggle('active');
+    const isOpen = navLinks?.classList.contains('open') ?? false;
+    burger.setAttribute('aria-expanded', String(isOpen));
+    burger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !navLinks?.classList.contains('open')) return;
+    navLinks.classList.remove('open');
+    burger?.classList.remove('active');
+    burger?.setAttribute('aria-expanded', 'false');
+    burger?.setAttribute('aria-label', 'Open menu');
+    burger?.focus();
   });
   navLinks?.querySelectorAll('a').forEach(l => {
     l.addEventListener('click', () => {
       navLinks.classList.remove('open');
       burger?.classList.remove('active');
+      burger?.setAttribute('aria-expanded', 'false');
+      burger?.setAttribute('aria-label', 'Open menu');
     });
   });
 </script>
@@ -41,16 +54,17 @@
 <style>
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 16px 0;
-    transition: all 0.3s ease;
+    padding: 20px 0;
+    transition: all 0.4s ease;
     background: transparent;
   }
 
   .nav.scrolled {
-    background: var(--bg);
-    border-bottom: var(--border-thick);
-    padding: 10px 0;
-    box-shadow: 0 4px 0 var(--primary);
+    background: rgba(13, 12, 11, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(242, 237, 227, 0.08);
+    padding: 14px 0;
   }
 
   .nav-inner {
@@ -58,64 +72,57 @@
     display: flex; align-items: center; justify-content: space-between;
   }
 
-  .logo-box {
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: var(--primary);
-    color: var(--black);
-    padding: 8px 14px;
-    border: var(--border-thick);
-    box-shadow: var(--shadow-sm);
-    display: inline-block;
-    transition: all 0.15s ease;
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: color 0.2s ease;
   }
 
-  .logo-box:hover {
-    box-shadow: none;
-    transform: translate(4px, 4px);
-  }
+  .nav-logo:hover { color: var(--primary); }
 
   .nav-links {
-    display: flex; align-items: center; gap: 24px;
+    display: flex; align-items: center; gap: 32px;
   }
 
   .nav-link {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--black);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--dark-grey);
     padding: 4px 0;
-    border-bottom: 3px solid transparent;
-    transition: all 0.15s ease;
+    border-bottom: none;
+    transition: color 0.2s ease;
   }
 
   .nav-link:hover {
-    border-bottom-color: var(--secondary);
-    color: var(--secondary);
+    color: var(--text);
   }
 
   .nav-cta {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background: var(--primary);
-    color: var(--black);
-    padding: 10px 18px;
-    border: var(--border-thick);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.15s ease;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    padding: 4px 0;
+    background: transparent;
+    border: none;
+    letter-spacing: 0;
+    text-transform: none;
+    transition: opacity 0.2s ease;
   }
 
   .nav-cta:hover {
+    opacity: 0.7;
+    background: transparent;
+    color: var(--primary);
+    transform: none;
     box-shadow: none;
-    transform: translate(4px, 4px);
-    background: var(--secondary);
-    color: var(--white);
   }
 
   .nav-burger {
@@ -123,7 +130,7 @@
   }
 
   .nav-burger span {
-    width: 24px; height: 3px; background: var(--black); transition: all 0.3s ease;
+    width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s ease;
   }
 
   .nav-burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
@@ -133,24 +140,22 @@
   @media (max-width: 768px) {
     .nav-burger { display: flex; }
     .nav-links {
-      position: fixed; top: 0; right: -100%; width: 85%; max-width: 300px;
-      height: 100vh; background: var(--bg); border-left: var(--border-brutal);
-      box-shadow: -8px 0 0 var(--primary);
-      flex-direction: column; justify-content: center; gap: 16px; padding: 40px 28px;
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 280px;
+      height: 100vh;
+      background: rgba(13, 12, 11, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(242, 237, 227, 0.08);
+      flex-direction: column; justify-content: center; gap: 12px; padding: 40px 28px;
       transition: right 0.3s ease;
       overflow-y: auto;
     }
     .nav-links.open { right: 0; }
-    .nav-link { font-size: var(--text-sm); }
+    .nav-link { font-size: 15px; color: var(--dark-grey); }
+    .nav-cta { font-size: 15px; }
   }
 
   @media (max-width: 480px) {
-    .nav-links {
-      width: 100%;
-      max-width: 100%;
-      padding: 80px 24px 40px;
-      gap: 12px;
-    }
-    .nav-cta { text-align: center; }
+    .nav-links { width: 100%; max-width: 100%; padding: 80px 24px 40px; gap: 10px; }
   }
 </style>

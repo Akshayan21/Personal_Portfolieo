@@ -1,22 +1,20 @@
 /**
- * Three.js Scroll-Driven 3D Background — LIGHT THEME
- * Cream background (#f5f0e8) with dark wireframes and subtle neon accents.
- * Canvas is transparent; the body cream color shows through.
+ * Three.js Scroll-Driven 3D Background - DARK THEME
+ * Dark background (#0D0C0B) with warm metallic wireframes and amber accents.
+ * Canvas is transparent; the body dark color shows through.
  */
 import * as THREE from 'three';
 
-// ─── LIGHT-THEME PALETTE ─────────────────────────────────
+//  DARK-THEME PALETTE 
 const C = {
-  dark:    0x0a0a0a,   // deep black — wireframe lines
-  grey:    0x888888,   // mid grey
-  ltGrey:  0xcccccc,   // light grey for subtle geo
-  green:   0x7ab83c,   // muted neon green
-  pink:    0xff3c78,   // neon pink
-  blue:    0x4d7cff,   // neon blue
-  yellow:  0xffe14d,   // neon yellow
+  amber:   0xE8B84B,   // amber gold - primary accent
+  rust:    0xC75E3A,   // terracotta rust
+  ivory:   0xF2EDE3,   // warm ivory
+  dimGold: 0x9A7A2C,   // dim gold
+  grey:    0x5C5550,   // muted grey
 };
 
-// ─── ENGINE ──────────────────────────────────────────────
+//  ENGINE 
 let renderer: THREE.WebGLRenderer;
 let scene: THREE.Scene;
 let camera: THREE.PerspectiveCamera;
@@ -32,7 +30,7 @@ function init() {
   if (!(tc.getContext('webgl') || tc.getContext('experimental-webgl'))) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Canvas — transparent so cream body shows through
+  // Canvas - transparent so cream body shows through
   const canvas = document.createElement('canvas');
   canvas.id = 'three-bg';
   canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;';
@@ -64,20 +62,20 @@ function init() {
   animate();
 }
 
-// ─── HERO: Scattered wireframe octahedrons ───────────────
+//  HERO: Scattered wireframe octahedrons 
 function buildHero() {
   const g = new THREE.Group();
 
   // Central rotating shape
   const coreGeo = new THREE.IcosahedronGeometry(4, 1);
-  const coreMat = new THREE.MeshBasicMaterial({ color: C.dark, wireframe: true, transparent: true, opacity: 0.04 });
+  const coreMat = new THREE.MeshBasicMaterial({ color: C.amber, wireframe: true, transparent: true, opacity: 0.04 });
   g.add(new THREE.Mesh(coreGeo, coreMat));
 
   // Scattered shards
   for (let i = 0; i < 18; i++) {
     const size = 0.2 + Math.random() * 0.5;
     const geo = new THREE.OctahedronGeometry(size, 0);
-    const colors = [C.dark, C.grey, C.green, C.blue];
+    const colors = [C.amber, C.grey, C.rust, C.amber];
     const mat = new THREE.MeshBasicMaterial({
       color: colors[i % 4],
       wireframe: true,
@@ -95,11 +93,11 @@ function buildHero() {
   groups.push(g);
 }
 
-// ─── ABOUT: Grid floor with rising dots ──────────────────
+//  ABOUT: Grid floor with rising dots 
 function buildAbout() {
   const g = new THREE.Group();
 
-  const grid = new THREE.GridHelper(28, 28, C.dark, C.ltGrey);
+  const grid = new THREE.GridHelper(28, 28, C.amber, C.grey);
   grid.position.y = -5;
   (grid.material as THREE.Material).transparent = true;
   (grid.material as THREE.Material).opacity = 0.04;
@@ -115,7 +113,7 @@ function buildAbout() {
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const pMat = new THREE.PointsMaterial({ color: C.dark, size: 0.04, transparent: true, opacity: 0.12 });
+  const pMat = new THREE.PointsMaterial({ color: C.amber, size: 0.04, transparent: true, opacity: 0.12 });
   g.add(new THREE.Points(pGeo, pMat));
 
   g.position.z = -30;
@@ -123,7 +121,7 @@ function buildAbout() {
   groups.push(g);
 }
 
-// ─── EXPERIENCE: Rising pillars ──────────────────────────
+//  EXPERIENCE: Rising pillars 
 function buildExperience() {
   const g = new THREE.Group();
   const heights = [2, 3.5, 5.5, 7, 9];
@@ -131,7 +129,7 @@ function buildExperience() {
   for (let i = 0; i < heights.length; i++) {
     const geo = new THREE.BoxGeometry(0.8, heights[i], 0.8);
     const mat = new THREE.MeshBasicMaterial({
-      color: i % 2 === 0 ? C.dark : C.green,
+      color: i % 2 === 0 ? C.amber : C.rust,
       wireframe: true,
       transparent: true,
       opacity: 0.06,
@@ -142,7 +140,7 @@ function buildExperience() {
   }
 
   // Connecting lines
-  const lMat = new THREE.LineBasicMaterial({ color: C.dark, transparent: true, opacity: 0.04 });
+  const lMat = new THREE.LineBasicMaterial({ color: C.amber, transparent: true, opacity: 0.04 });
   for (let i = 0; i < heights.length - 1; i++) {
     const pts = [
       new THREE.Vector3((i - 2) * 3.5, heights[i] - 5, 0),
@@ -156,10 +154,10 @@ function buildExperience() {
   groups.push(g);
 }
 
-// ─── SKILLS: Orbiting clusters + wireframe torus ─────────
+//  SKILLS: Orbiting clusters + wireframe torus 
 function buildSkills() {
   const g = new THREE.Group();
-  const clrPalette = [C.dark, C.blue, C.pink, C.green];
+  const clrPalette = [C.amber, C.amber, C.ivory, C.rust];
 
   for (let c = 0; c < 4; c++) {
     const n = 60;
@@ -181,7 +179,7 @@ function buildSkills() {
   // Torus
   const tGeo = new THREE.TorusGeometry(2.5, 0.6, 8, 16);
   g.add(new THREE.Mesh(tGeo, new THREE.MeshBasicMaterial({
-    color: C.dark, wireframe: true, transparent: true, opacity: 0.035,
+    color: C.amber, wireframe: true, transparent: true, opacity: 0.035,
   })));
 
   g.position.z = -90;
@@ -189,7 +187,7 @@ function buildSkills() {
   groups.push(g);
 }
 
-// ─── PHILOSOPHY: Flowing curve with nodes ────────────────
+//  PHILOSOPHY: Flowing curve with nodes 
 function buildPhilosophy() {
   const g = new THREE.Group();
 
@@ -203,13 +201,13 @@ function buildPhilosophy() {
   const curve = new THREE.CatmullRomCurve3(pts);
   g.add(new THREE.Line(
     new THREE.BufferGeometry().setFromPoints(curve.getPoints(80)),
-    new THREE.LineBasicMaterial({ color: C.dark, transparent: true, opacity: 0.06 })
+    new THREE.LineBasicMaterial({ color: C.amber, transparent: true, opacity: 0.06 })
   ));
 
   for (const p of pts) {
     const nGeo = new THREE.DodecahedronGeometry(0.4, 0);
     const n = new THREE.Mesh(nGeo, new THREE.MeshBasicMaterial({
-      color: C.blue, wireframe: true, transparent: true, opacity: 0.1,
+      color: C.amber, wireframe: true, transparent: true, opacity: 0.1,
     }));
     n.position.copy(p);
     g.add(n);
@@ -220,11 +218,11 @@ function buildPhilosophy() {
   groups.push(g);
 }
 
-// ─── CONTACT: Converging lines + pulsing center ──────────
+//  CONTACT: Converging lines + pulsing center 
 function buildContact() {
   const g = new THREE.Group();
 
-  const lMat = new THREE.LineBasicMaterial({ color: C.dark, transparent: true, opacity: 0.04 });
+  const lMat = new THREE.LineBasicMaterial({ color: C.amber, transparent: true, opacity: 0.04 });
   for (let i = 0; i < 14; i++) {
     const a = (i / 14) * Math.PI * 2;
     g.add(new THREE.Line(
@@ -239,7 +237,7 @@ function buildContact() {
   // Center
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 12, 12),
-    new THREE.MeshBasicMaterial({ color: C.green, transparent: true, opacity: 0.15 })
+    new THREE.MeshBasicMaterial({ color: C.rust, transparent: true, opacity: 0.15 })
   );
   sphere.userData.isCenter = true;
   g.add(sphere);
@@ -247,7 +245,7 @@ function buildContact() {
   // Ring
   g.add(new THREE.Mesh(
     new THREE.RingGeometry(3.5, 3.6, 48),
-    new THREE.MeshBasicMaterial({ color: C.dark, side: THREE.DoubleSide, transparent: true, opacity: 0.04 })
+    new THREE.MeshBasicMaterial({ color: C.amber, side: THREE.DoubleSide, transparent: true, opacity: 0.04 })
   ));
 
   g.position.z = -150;
@@ -255,7 +253,7 @@ function buildContact() {
   groups.push(g);
 }
 
-// ─── VISIBILITY ──────────────────────────────────────────
+//  VISIBILITY 
 function vis(idx: number, progress: number, total: number): number {
   const sz = 1 / total;
   const start = idx * sz;
@@ -268,7 +266,7 @@ function vis(idx: number, progress: number, total: number): number {
   return 1;
 }
 
-// ─── ANIMATE ─────────────────────────────────────────────
+//  ANIMATE 
 function animate() {
   requestAnimationFrame(animate);
 
@@ -358,7 +356,7 @@ function onResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// ─── START ───────────────────────────────────────────────
+//  START 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {

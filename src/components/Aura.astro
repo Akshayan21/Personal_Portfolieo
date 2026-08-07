@@ -1,0 +1,83 @@
+---
+import { projects } from '../data/projects';
+
+const auraProjectSlugs = ['paydart', 'pregtrack-app', 'famconnect', 'staffezee', 'pharmavault'];
+const auraProjects = auraProjectSlugs.flatMap(slug => {
+  const project = projects.find(item => item.slug === slug);
+  if (!project) return [];
+  if (slug === 'pharmavault') return [{
+    ...project,
+    duration: 'Not published',
+    team: 'Not published',
+    overview: project.desc,
+    problem: 'Detailed case-study evidence has not been published yet.',
+    painPoints: [], researchMethods: [], insights: [], processSteps: [], screens: [], decisions: [], outcomes: [],
+    learnings: { worked: [], improve: [] },
+  }];
+  return [project];
+});
+const auraProjectJson = JSON.stringify(auraProjects).replace(/</g, '\u003c');
+---
+<aside class="aura" data-aura-state="idle" aria-label="AURA portfolio assistant">
+  <button class="aura-orb" type="button" aria-expanded="false" aria-controls="aura-panel" aria-label="Open AURA. Drag to move.">
+    <span class="aura-character" aria-hidden="true">
+      <img src="/assets/aura-guide.png" alt="" width="512" height="512" decoding="async" />
+      <span class="character-status">A</span>
+    </span>
+    <span class="pet-label">AURA / ONLINE</span>
+    <span class="pet-hint">DRAG ME / CLICK TO TALK</span>
+  </button>
+  <section class="aura-panel" id="aura-panel" aria-hidden="true">
+    <header><div><i></i><b>AURA / AKSHAYAN</b></div><button class="aura-close" type="button" aria-label="Close AURA">&times;</button></header>
+    <div class="aura-stage">
+      <div class="sigil" aria-hidden="true"><span>A</span></div>
+      <p class="kicker">PORTFOLIO LINK ESTABLISHED</p>
+      <h2>Ask beyond<br/><em>the resume.</em></h2>
+      <p>I can unpack Akshayan's decisions, projects, experience, and fit, locally, in voice or text.</p>
+    </div>
+    <div class="aura-log" aria-live="polite"><p class="aura-message">Ask about Akshayan's work, thinking, or fit.</p></div>
+    <div class="prompts" aria-label="Suggested questions">
+      <button type="button">Why hire Akshayan?</button><button type="button">Show me his AI work</button><button type="button">What is his process?</button>
+    </div>
+    <form class="aura-input">
+      <label class="sr-only" for="aura-question">Ask AURA</label>
+      <input id="aura-question" autocomplete="off" placeholder="Ask about Akshayan..." />
+      <button class="send" type="submit" aria-label="Send question">-></button>
+      <button class="voice" type="button"><span>o</span> <b>START VOICE</b></button>
+    </form>
+    <p class="privacy">Local AI + neural voice. First use downloads models; later visits use the browser cache.</p>
+  </section>
+  
+</aside>
+
+<script id="aura-project-knowledge" type="application/json" is:inline set:html={auraProjectJson}></script>
+<script src="../scripts/aura-intelligent.ts"></script>
+
+<style>
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}.aura{position:fixed;right:22px;bottom:22px;z-index:9998;font-family:var(--font-sans)}.aura-orb{position:relative;width:270px;height:66px;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:11px;padding:10px 14px;border:1px solid rgba(183,243,91,.45);background:rgba(16,18,20,.92);color:var(--text);box-shadow:0 0 32px rgba(183,243,91,.12);backdrop-filter:blur(16px);text-align:left}.orb-ring{position:absolute;left:13px;width:42px;height:42px;border:1px solid rgba(183,243,91,.24);border-radius:50%;animation:radar 2.8s ease-out infinite}.orb-core{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--primary);border-radius:50%;color:var(--primary);font:23px var(--font-display)}.orb-copy{display:flex;flex-direction:column;line-height:1}.orb-copy b{font:11px var(--font-mono);letter-spacing:2px}.orb-copy small{margin-top:6px;color:rgba(243,245,244,.45);font-size:10px}.orb-state{font:8px var(--font-mono);letter-spacing:1px;color:var(--primary)}.aura-panel{position:absolute;right:0;bottom:0;width:min(440px,calc(100vw - 28px));max-height:min(760px,calc(100vh - 28px));overflow:auto;border:1px solid rgba(183,243,91,.32);background:rgba(16,18,20,.98);box-shadow:0 20px 80px #000,0 0 50px rgba(183,243,91,.08);opacity:0;transform:translateY(18px) scale(.98);transform-origin:bottom right;pointer-events:none;transition:.25s ease}.is-open .aura-panel{opacity:1;transform:none;pointer-events:auto}.is-open .aura-orb{opacity:0;pointer-events:none}.aura-panel>header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid rgba(183,243,91,.15);background:#101214;font:9px var(--font-mono);letter-spacing:1.5px}.aura-panel>header div{display:flex;align-items:center;gap:9px}.aura-panel>header i{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 12px var(--primary)}.aura-close{color:#999;font-size:23px}.aura-stage{padding:30px 28px 22px;text-align:center;background-image:radial-gradient(rgba(183,243,91,.08) 1px,transparent 1px);background-size:18px 18px}.sigil{display:grid;place-items:center;width:112px;height:112px;margin:0 auto 22px;border:1px dashed rgba(183,243,91,.3);border-radius:50%}.sigil span{display:grid;place-items:center;width:66px;height:66px;border:1px solid var(--primary);border-radius:50%;font:46px var(--font-display);color:var(--primary);box-shadow:inset 0 0 28px rgba(183,243,91,.12),0 0 32px rgba(183,243,91,.12)}[data-aura-state=listening] .sigil,[data-aura-state=speaking] .sigil{animation:pulse 1.1s infinite}.kicker{font:8px var(--font-mono);letter-spacing:2px;color:var(--primary)}.aura-stage h2{margin:8px 0 12px;font:42px/.9 var(--font-display);letter-spacing:.035em;text-transform:uppercase}.aura-stage h2 em{color:var(--primary);font-style:normal}.aura-stage>p:last-child{max-width:330px;margin:auto;color:rgba(243,245,244,.52);font-size:12px;line-height:1.6}.aura-log{min-height:66px;padding:16px 20px;border-block:1px solid rgba(183,243,91,.1);background:#0c0e0f}.aura-message{color:rgba(243,245,244,.75);font:11px/1.6 var(--font-mono)}.aura-message:before{content:'AURA / ';color:var(--primary)}.prompts{display:flex;gap:6px;padding:14px 18px 6px;overflow:auto}.prompts button{flex:none;padding:7px 9px;border:1px solid rgba(243,245,244,.13);color:#888;font:9px var(--font-mono)}.prompts button:hover{border-color:var(--primary);color:var(--primary)}.aura-input{display:grid;grid-template-columns:1fr 38px;padding:10px 18px 6px}.aura-input input{min-width:0;padding:12px;border:1px solid #444;border-right:0;background:var(--white);color:var(--text);font:12px var(--font-mono);outline:none}.send{border:1px solid var(--primary);background:var(--primary);color:var(--on-primary);font-size:18px}.voice{grid-column:1/-1;margin-top:8px;padding:12px;border:1px solid rgba(183,243,91,.32);color:var(--primary);font:9px var(--font-mono);letter-spacing:1.5px}.voice span{font-size:7px}.privacy{padding:7px 18px 16px;color:#555;font:8px/1.5 var(--font-mono)}@keyframes radar{to{transform:scale(1.35);opacity:0}}@keyframes pulse{50%{box-shadow:0 0 42px rgba(183,243,91,.2)}}@media(max-width:520px){.aura{right:14px;bottom:14px}.aura-orb{width:60px;grid-template-columns:1fr;padding:9px}.orb-copy,.orb-state{display:none}.aura-panel{position:fixed;inset:12px;width:auto;max-height:none}}@media(prefers-reduced-motion:reduce){.orb-ring,.sigil{animation:none!important}}
+  .aura.is-open .aura-panel > header .aura-close {
+    position: relative;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    padding: 0;
+    border: 2px solid #101214;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #101214;
+    opacity: 1;
+    visibility: visible;
+    font: 800 20px/1 var(--font-sans);
+    box-shadow: 2px 2px 0 #101214;
+  }
+  .aura.is-open .aura-panel > header .aura-close:hover,
+  .aura.is-open .aura-panel > header .aura-close:focus-visible {
+    background: #101214;
+    color: #fffef8;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+</style>
