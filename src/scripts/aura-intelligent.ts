@@ -202,7 +202,7 @@ function initAura() {
   let microphoneReady = false;
   let localSTT: { stop: () => void } | null = null;
   let localSTTStarting = false;
-  let preferLocalSTT = false;
+  let preferLocalSTT = true;
   let speechGeneration = 0;
   let followUpTimer = 0;
   let brainProgressVisible = false;
@@ -334,13 +334,19 @@ function initAura() {
       console.error('[AURA local voice]', error);
       root.dataset.voiceError = error instanceof Error ? error.message : 'Local voice failed';
       preferLocalSTT = false;
-      voiceMode = false;
-      processingVoice = false;
-      speaking = false;
-      root.dataset.auraState = 'idle';
       sessionStorage.setItem('aura-prefer-local-stt', 'native');
-      setVoiceLabel('LOCAL VOICE FAILED - TRY AGAIN');
-      message.textContent = 'Local voice recognition could not load. Check the connection once so its model can be cached, or type your question.';
+      if (voiceMode && recognition) {
+        setVoiceLabel('USING BROWSER VOICE');
+        message.textContent = 'Local voice could not load. Switching to browser voice recognition...';
+        resumeRecognition(250);
+      } else {
+        voiceMode = false;
+        processingVoice = false;
+        speaking = false;
+        root.dataset.auraState = 'idle';
+        setVoiceLabel('LOCAL VOICE FAILED - TRY AGAIN');
+        message.textContent = 'Local voice recognition could not load. Check the connection once so its model can be cached, or type your question.';
+      }
     } finally {
       localSTTStarting = false;
     }
@@ -360,7 +366,7 @@ function initAura() {
         .then(({ CreateMLCEngine }) => CreateMLCEngine(MODEL_ID, {
           initProgressCallback: progress => {
             const value = Math.round((progress.progress || 0) * 100);
-            if (brainProgressVisible) setStatus(`Loading local intelligence · ${value}% · first visit only`);
+            if (brainProgressVisible) setStatus(`Loading local intelligence - ${value}% - first visit only`);
           },
         }))
         .then(value => (engine = value));
@@ -643,8 +649,7 @@ function initAura() {
       voiceButton.disabled = true;
       setVoiceLabel('MIC UNAVAILABLE - TYPE YOUR QUESTION');
     } else {
-      voiceButton.disabled = true;
-      setVoiceLabel('VOICE UNAVAILABLE - TYPE YOUR QUESTION');
+      setVoiceLabel('START LOCAL VOICE');
     }
   } else {
     recognition = new SpeechRecognition();
@@ -652,19 +657,15 @@ function initAura() {
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.maxAlternatives = 3;
-    setVoiceLabel('START VOICE MODE');
+    setVoiceLabel(preferLocalSTT ? 'START LOCAL VOICE' : 'START VOICE MODE');
 
     const domainTerms = [
       'Akshayan Mohandass', 'AURA', 'Mondee', 'Kodecopter', 'Aakam 360',
       'Bloom Majestic', 'Staffezee', 'PregTrack', 'FamConnect', 'Ops 360',
       'PharmaVault', 'product designer', 'systems thinking', 'Figma', 'Astro', 'Flutter',
     ];
-    const SpeechRecognitionPhrase = (window as any).SpeechRecognitionPhrase;
-    if (SpeechRecognitionPhrase && 'phrases' in recognition) {
-      try {
-        recognition.phrases = domainTerms.map(term => new SpeechRecognitionPhrase(term, 5));
-      } catch { /* Contextual biasing is experimental and may not be accepted. */ }
-    }
+    // Chrome may expose the experimental `phrases` property and still reject
+    // it with `phrases-not-supported` when recognition starts.
 
     recognition.onstart = () => {
       listening = true;
@@ -738,6 +739,13 @@ function initAura() {
     };
     recognition.onerror = (event: any) => {
       root.dataset.voiceError = String(event.error || 'unknown');
+      if (event.error === 'phrases-not-supported') {
+        try { recognition.phrases = []; } catch { /* Property may be read-only. */ }
+        recognitionErrorCount = 0;
+        recognitionRetryDelay = 250;
+        resumeRecognition(recognitionRetryDelay);
+        return;
+      }
       if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
         voiceMode = false;
         setVoiceLabel('MIC BLOCKED - TYPE YOUR QUESTION');

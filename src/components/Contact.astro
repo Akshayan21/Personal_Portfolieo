@@ -41,7 +41,11 @@
           <span class="cf-corner cf-bl"></span>
           <span class="cf-corner cf-br"></span>
         </div>
-        <form class="contact-form" id="contact-form">`n          <div class="cf-honeypot" aria-hidden="true">`n            <label for="c-website">Website</label>`n            <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off" />`n          </div>
+        <form class="contact-form" id="contact-form">
+          <div class="cf-honeypot" aria-hidden="true">
+            <label for="c-website">Website</label>
+            <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <p class="cf-title"><span>Project brief</span> Share a little context</p>
           <div class="cf-group">
             <label for="c-name">Name</label>
@@ -55,7 +59,7 @@
             <label for="c-msg">Message</label>
             <textarea id="c-msg" name="message" rows="5" placeholder="What are you building?" maxlength="2000" required></textarea>
           </div>
-          <button type="submit" class="cf-submit" id="cf-btn">Send message -></button>
+          <button type="submit" class="cf-submit" id="cf-btn">Send message</button>
           <p class="cf-feedback" id="cf-feedback" aria-live="polite"></p>
         </form>
       </div>
@@ -265,7 +269,8 @@
   @media (max-width: 480px) {
     .contact-heading { font-size: clamp(2rem, 8vw, 3rem); }
   }
-  .cf-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }`n</style>
+  .cf-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+</style>
 
 <script>
   import emailjs from '@emailjs/browser';
@@ -293,7 +298,7 @@
     }
 
     btn.disabled = true;
-    btn.textContent = 'Send message ->';
+    btn.textContent = 'Send message';
     feedback.textContent = '';
     feedback.className = 'cf-feedback';
 
@@ -308,7 +313,7 @@
       feedback.className = 'cf-feedback error';
     } finally {
       btn.disabled = false;
-      btn.textContent = 'Send message ->';
+      btn.textContent = 'Send message';
     }
   });
 </script>
