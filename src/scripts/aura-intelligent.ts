@@ -1,9 +1,6 @@
 import type { MLCEngine } from '@mlc-ai/web-llm';
 import type { Project } from '../data/projects';
 import { startLocalSTT } from './aura-local-stt';
-import './aura-pet';
-import './aura-reactive';
-import './aura-panel-drag';
 
 const MODEL_ID = 'Qwen2.5-1.5B-Instruct-q4f16_1-MLC';
 
@@ -462,7 +459,119 @@ function initAura() {
     await neuralSpeak(response);
   };
 
-  orb.addEventListener('click', () => setOpen(!root.classList.contains('is-open')));
+  let petDragging = false;
+  let suppressPetClick = false;
+  let playTimer = 0;
+  let playResetTimer = 0;
+  let activePointerId: number | null = null;
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+  let petOriginX = 0;
+  let petOriginY = 0;
+  let petWidth = 0;
+  let petHeight = 0;
+
+  const setPetHint = (text: string) => {
+    const hint = root.querySelector<HTMLElement>('.pet-hint');
+    if (hint) hint.textContent = text;
+  };
+
+  const playWithAura = () => {
+    if (root.classList.contains('is-open')) return;
+    window.clearTimeout(playResetTimer);
+    root.dataset.petMode = 'play';
+    setPetHint('NICE MOVE. AGAIN?');
+    playResetTimer = window.setTimeout(() => {
+      delete root.dataset.petMode;
+      setPetHint('DRAG ME OR ASK ME');
+    }, 1800);
+  };
+
+  const restorePetPosition = () => {
+    try {
+      const saved = sessionStorage.getItem('aura-pet-position');
+      if (!saved) return;
+      const { x, y } = JSON.parse(saved);
+      if (Number.isFinite(x) && Number.isFinite(y)) {
+        root.style.left = `${x}px`;
+        root.style.top = `${y}px`;
+        root.style.right = 'auto';
+        root.style.bottom = 'auto';
+      }
+    } catch { /* Position persistence is optional. */ }
+  };
+
+  const finishPetInteraction = () => {
+    if (activePointerId === null) return;
+    window.clearTimeout(playTimer);
+    try { orb.releasePointerCapture(activePointerId); } catch { /* Capture may already be released. */ }
+    activePointerId = null;
+    if (!petDragging) return;
+    suppressPetClick = true;
+    const current = root.getBoundingClientRect();
+    try {
+      sessionStorage.setItem('aura-pet-position', JSON.stringify({
+        x: Math.round(current.left),
+        y: Math.round(current.top),
+      }));
+    } catch { /* Position persistence is optional. */ }
+    window.setTimeout(() => { suppressPetClick = false; }, 80);
+  };
+
+  restorePetPosition();
+  orb.addEventListener('dragstart', event => event.preventDefault());
+  orb.addEventListener('pointerdown', (event) => {
+    if (root.classList.contains('is-open') || event.button !== 0) return;
+    event.preventDefault();
+    activePointerId = event.pointerId;
+    pointerStartX = event.clientX;
+    pointerStartY = event.clientY;
+    const rect = orb.getBoundingClientRect();
+    petOriginX = rect.left;
+    petOriginY = rect.top;
+    petWidth = rect.width;
+    petHeight = rect.height;
+    petDragging = false;
+    window.clearTimeout(playTimer);
+    playTimer = window.setTimeout(() => {
+      if (!petDragging && activePointerId === event.pointerId) {
+        suppressPetClick = true;
+        playWithAura();
+      }
+    }, 650);
+    orb.setPointerCapture(event.pointerId);
+  });
+
+  orb.addEventListener('pointermove', (event) => {
+    if (event.pointerId !== activePointerId) return;
+    const dx = event.clientX - pointerStartX;
+    const dy = event.clientY - pointerStartY;
+    if (!petDragging && Math.abs(dx) + Math.abs(dy) < 5) return;
+    event.preventDefault();
+    petDragging = true;
+    window.clearTimeout(playTimer);
+    const maxX = Math.max(8, window.innerWidth - petWidth - 8);
+    const maxY = Math.max(8, window.innerHeight - petHeight - 8);
+    const nextX = Math.min(maxX, Math.max(8, petOriginX + dx));
+    const nextY = Math.min(maxY, Math.max(8, petOriginY + dy));
+    root.style.left = `${nextX}px`;
+    root.style.top = `${nextY}px`;
+    root.style.right = 'auto';
+    root.style.bottom = 'auto';
+  });
+
+  orb.addEventListener('pointerup', finishPetInteraction);
+  orb.addEventListener('pointercancel', finishPetInteraction);
+
+  orb.addEventListener('click', (event) => {
+    if (suppressPetClick) {
+      event.preventDefault();
+      event.stopPropagation();
+      suppressPetClick = false;
+      return;
+    }
+    setOpen(!root.classList.contains('is-open'));
+  });
   root.querySelector('.aura-close')?.addEventListener('click', () => {
     clearFollowUp();
     speechGeneration += 1;
