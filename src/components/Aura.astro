@@ -1,12 +1,23 @@
 ---
 import { projects } from '../data/projects';
+import { auraProfile } from '../data/aura-profile';
 
-const auraProjectSlugs = ['paydart', 'pregtrack-app', 'famconnect', 'staffezee', 'pharmavault'];
-const auraProjects = auraProjectSlugs.flatMap((slug) => {
-  const project = projects.find((item) => item.slug === slug);
-  if (!project) return [];
-  if (slug === 'pharmavault') {
-    return [{
+const confidentialProjectSlugs = new Set(['miraee-booking-engine']);
+const incompleteProjectSlugs = new Set(['pharmavault']);
+const auraProjects = projects.map((project) => {
+  if (confidentialProjectSlugs.has(project.slug)) {
+    return {
+      ...project,
+      duration: 'Confidential',
+      team: 'Confidential',
+      overview: 'A confidential AI-native enterprise travel engagement at Mondee. Only the public role and product area can be discussed.',
+      problem: 'Detailed product constraints, research, decisions, and outcomes are protected and are not part of the public portfolio.',
+      painPoints: [], researchMethods: [], insights: [], processSteps: [], screens: [], decisions: [], outcomes: [],
+      learnings: { worked: [], improve: [] },
+    };
+  }
+  if (incompleteProjectSlugs.has(project.slug)) {
+    return {
       ...project,
       duration: 'Not published',
       team: 'Not published',
@@ -14,11 +25,12 @@ const auraProjects = auraProjectSlugs.flatMap((slug) => {
       problem: 'Detailed case-study evidence has not been published yet.',
       painPoints: [], researchMethods: [], insights: [], processSteps: [], screens: [], decisions: [], outcomes: [],
       learnings: { worked: [], improve: [] },
-    }];
+    };
   }
-  return [project];
+  return project;
 });
 const auraProjectJson = JSON.stringify(auraProjects).replace(/</g, '\\u003c');
+const auraProfileJson = JSON.stringify(auraProfile).replace(/</g, '\\u003c');
 ---
 
 <aside class="aura" data-aura-state="idle" aria-label="AURA portfolio assistant">
@@ -70,6 +82,7 @@ const auraProjectJson = JSON.stringify(auraProjects).replace(/</g, '\\u003c');
 </aside>
 
 <script id="aura-project-knowledge" type="application/json" is:inline set:html={auraProjectJson}></script>
+<script id="aura-profile-knowledge" type="application/json" is:inline set:html={auraProfileJson}></script>
 <script src="../scripts/aura-intelligent.ts"></script>
 
 <style>
