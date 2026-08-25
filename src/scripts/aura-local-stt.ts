@@ -7,9 +7,9 @@ type LocalSTTOptions = {
 export type LocalSTTController = { stop: () => void };
 
 const TARGET_SAMPLE_RATE = 16_000;
-const SILENCE_MS = 900;
+const SILENCE_MS = 600;
 const MAX_UTTERANCE_MS = 15_000;
-const MIN_UTTERANCE_MS = 320;
+const MIN_UTTERANCE_MS = 250;
 
 let transcriberPromise: Promise<any> | null = null;
 
@@ -139,7 +139,7 @@ export async function startLocalSTT(options: LocalSTTOptions): Promise<LocalSTTC
     if (stopped) return { stop: cleanup };
 
     source = audioContext.createMediaStreamSource(stream);
-    processor = audioContext.createScriptProcessor(4096, 1, 1);
+    processor = audioContext.createScriptProcessor(2048, 1, 1);
     source.connect(processor);
     const silentGain = audioContext.createGain();
     silentGain.gain.value = 0;
