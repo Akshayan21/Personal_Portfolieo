@@ -32,6 +32,8 @@ const currentIndex = publicProjects.findIndex((item) => item.slug === slug);
 const prevProject = publicProjects[currentIndex - 1] ?? null;
 const nextProject = publicProjects[currentIndex + 1] ?? null;
 const banner = slug ? bannerMap[slug] ?? null : null;
+const isMobileCaseStudy = ['paydart', 'pregtrack-app'].includes(project.slug);
+const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
 ---
 
 <Layout 
@@ -117,7 +119,7 @@ const banner = slug ? bannerMap[slug] ?? null : null;
 
     <nav class="cs-case-toc" aria-label="Case study sections">
       <div class="cs-container">
-        <a href="#cs-overview">Overview</a><a href="#cs-challenge">Challenge</a><a href="#cs-research">Research</a><a href="#cs-process">Process</a><a href="#cs-screens">Solution</a><a href="#cs-decisions">Decisions</a><a href="#cs-outcomes">Outcomes</a><a href="#cs-learnings">Learnings</a>
+        <a href="#cs-overview">Overview</a><a href="#cs-challenge">Challenge</a><a href="#cs-research">Research</a><a href="#cs-process">Process</a>{project.strategy && <a href="#cs-strategy">Strategy</a>}<a href="#cs-screens">Solution</a><a href="#cs-decisions">Decisions</a><a href="#cs-outcomes">Outcomes</a>{project.nextSteps && <a href="#cs-next">Next</a>}<a href="#cs-learnings">Learnings</a>
       </div>
     </nav>
 
@@ -144,6 +146,17 @@ const banner = slug ? bannerMap[slug] ?? null : null;
           </div>
         </div>
       </section>
+
+      {project.responsibilities && (
+        <section class="cs-section" id="cs-ownership">
+          <h2 class="cs-section-label mono">OWNERSHIP & RESPONSIBILITIES</h2>
+          <div class="cs-responsibility-grid">
+            {project.responsibilities.map((item, i) => (
+              <div class="cs-responsibility-item"><span class="mono">{String(i + 1).padStart(2, '0')}</span><p>{item}</p></div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <!--  THE CHALLENGE  -->
       <section class="cs-section" id="cs-challenge">
@@ -211,19 +224,72 @@ const banner = slug ? bannerMap[slug] ?? null : null;
         </div>
       </section>
 
+      {project.strategy && (
+        <section class="cs-section" id="cs-strategy">
+          <h2 class="cs-section-label mono">EXPERIENCE STRATEGY</h2>
+          <div class="cs-strategy-statement" style={`--accent: ${project.accent}`}>
+            <span class="mono">CORE PRODUCT PRINCIPLE</span>
+            <h3>{project.strategy.title}</h3>
+            <p>{project.strategy.desc}</p>
+          </div>
+          {project.architecture && (
+            <div class="cs-architecture-grid">
+              {project.architecture.map((item, i) => (
+                <article class="cs-architecture-card"><span class="mono">LAYER {String(i + 1).padStart(2, '0')}</span><h3>{item.label}</h3><p>{item.desc}</p></article>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
       <!--  SOLUTION WALKTHROUGH  -->
       <section class="cs-section" id="cs-screens">
         <h2 class="cs-section-label mono">SOLUTION WALKTHROUGH</h2>
-        <div class="cs-solution-grid">
+        {isMobileCaseStudy && (
+          <div class="cs-mobile-intro">
+            <span class="mono">MOBILE APPLICATION / PORTRAIT UI</span>
+            <p>Replace each placeholder with an exported {project.title} screen. Recommended ratio: 9:19.5, PNG or WebP.</p>
+          </div>
+        )}
+        <div class:list={["cs-solution-grid", { "cs-mobile-solution-grid": isMobileCaseStudy }]}>
           {project.screens.map((screen, i) => (
-            <article class="cs-solution-step" style={`--accent: ${project.accent}`}>
-              <span class="cs-solution-index mono">{String(i + 1).padStart(2, '0')}</span>
-              <div>
-                <span class="cs-solution-kicker mono">DESIGN MOMENT</span>
-                <h3 class="cs-screen-title">{screen.title}</h3>
-                <p class="cs-screen-desc">{screen.desc}</p>
-              </div>
-            </article>
+            isMobileCaseStudy ? (
+              <article class="cs-mobile-screen" style={`--accent: ${project.accent}`}>
+                <div class="cs-phone" aria-label={`${screen.title} mobile UI ${screen.image ? 'screenshot' : 'placeholder'}`}>
+                  <div class="cs-phone-speaker" aria-hidden="true"></div>
+                  <div class="cs-phone-viewport">
+                    {screen.image ? (
+                      <img src={screen.image} alt={`${project.title} ${screen.title} screen`} loading="lazy" style={`object-fit: ${screen.imageFit ?? 'cover'}`} />
+                    ) : hasEmptyPhoneFrames ? (
+                      <div class="cs-ui-placeholder cs-ui-placeholder--empty" aria-hidden="true"></div>
+                    ) : (
+                      <div class="cs-ui-placeholder">
+                        <span class="cs-ui-slot mono">UI SLOT {String(i + 1).padStart(2, '0')}</span>
+                        <strong>{screen.title}</strong>
+                        <span class="cs-ui-hint mono">ADD MOBILE SCREEN</span>
+                      </div>
+                    )}
+                  </div>
+                  <div class="cs-phone-home" aria-hidden="true"></div>
+                </div>
+                <div class="cs-mobile-caption">
+                  <span class="cs-solution-index mono">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3 class="cs-screen-title">{screen.title}</h3>
+                    <p class="cs-screen-desc">{screen.desc}</p>
+                  </div>
+                </div>
+              </article>
+            ) : (
+              <article class="cs-solution-step" style={`--accent: ${project.accent}`}>
+                <span class="cs-solution-index mono">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <span class="cs-solution-kicker mono">DESIGN MOMENT</span>
+                  <h3 class="cs-screen-title">{screen.title}</h3>
+                  <p class="cs-screen-desc">{screen.desc}</p>
+                </div>
+              </article>
+            )
           ))}
         </div>
       </section>
@@ -260,7 +326,24 @@ const banner = slug ? bannerMap[slug] ?? null : null;
             </div>
           ))}
         </div>
+        {project.evidenceNote && (
+          <div class="cs-evidence-note"><span class="mono">EVIDENCE BOUNDARY</span><p>{project.evidenceNote}</p></div>
+        )}
       </section>
+
+      {(project.validation || project.nextSteps) && (
+        <section class="cs-section" id="cs-next">
+          <h2 class="cs-section-label mono">VALIDATION & NEXT STEPS</h2>
+          <div class="cs-next-grid">
+            {project.validation && (
+              <div class="cs-validation-panel"><span class="cs-next-kicker mono">WHAT I WOULD MEASURE OR TEST</span><ul>{project.validation.map(item => <li>{item}</li>)}</ul></div>
+            )}
+            {project.nextSteps && (
+              <div class="cs-next-list">{project.nextSteps.map((item, i) => <article><span class="mono">PRIORITY {String(i + 1).padStart(2, '0')}</span><h3>{item.label}</h3><p>{item.desc}</p></article>)}</div>
+            )}
+          </div>
+        </section>
+      )}
 
       <!--  LEARNINGS  -->
       <section class="cs-section" id="cs-learnings">
@@ -1222,8 +1305,53 @@ const banner = slug ? bannerMap[slug] ?? null : null;
   .cs-solution-step:hover { background: var(--cream); }
   .cs-solution-index { color: var(--secondary); font-size: var(--text-xs); font-weight: 700; }
   .cs-solution-kicker { display: block; color: var(--grey); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 14px; }
+  .cs-mobile-intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin: -8px 0 36px; padding-bottom: 18px; border-bottom: var(--border-thin); }
+  .cs-mobile-intro span { color: var(--primary); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; }
+  .cs-mobile-intro p { max-width: 48ch; color: var(--grey); font-size: var(--text-sm); line-height: 1.55; text-align: right; }
+  .cs-mobile-solution-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 5vw, 64px) clamp(20px, 4vw, 48px); border: 0; overflow: visible; }
+  .cs-mobile-screen { min-width: 0; }
+  .cs-phone { width: min(100%, 280px); aspect-ratio: 9 / 19.5; margin: 0 auto; padding: 12px 9px 14px; display: grid; grid-template-rows: 17px 1fr 16px; background: #080a0c; border: 1px solid rgba(243,245,244,.3); border-radius: 38px; box-shadow: 0 0 0 4px #171b1e, 0 24px 55px rgba(0,0,0,.35); overflow: hidden; }
+  .cs-phone-speaker { width: 29%; height: 5px; align-self: center; justify-self: center; border-radius: 999px; background: #31373b; }
+  .cs-phone-viewport { min-height: 0; overflow: hidden; border: 1px solid rgba(183,243,91,.13); border-radius: 24px; background: #111518; }
+  .cs-phone-viewport img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; }
+  .cs-ui-placeholder { height: 100%; min-height: 0; padding: 24px 18px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; text-align: center; background: repeating-linear-gradient(135deg, rgba(183,243,91,.035) 0 10px, transparent 10px 20px), radial-gradient(circle at 50% 38%, rgba(253,200,0,.12), transparent 42%); }
+  .cs-ui-placeholder::before { content: ''; width: 44%; aspect-ratio: 1; border: 1px dashed rgba(253,200,0,.5); border-radius: 18px; background: linear-gradient(135deg, rgba(253,200,0,.08), rgba(183,243,91,.03)); }
+  .cs-ui-placeholder--empty { padding: 0; background: #111518; }
+  .cs-ui-placeholder--empty::before { content: none; }
+  .cs-ui-slot, .cs-ui-hint { color: var(--grey); font-size: 9px; letter-spacing: 1.5px; }
+  .cs-ui-placeholder strong { max-width: 9ch; color: var(--text); font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 400; line-height: .9; text-transform: uppercase; }
+  .cs-ui-hint { padding: 7px 9px; color: var(--primary); border: 1px solid rgba(183,243,91,.25); }
+  .cs-phone-home { width: 30%; height: 4px; align-self: end; justify-self: center; border-radius: 999px; background: #596166; }
+  .cs-mobile-caption { display: grid; grid-template-columns: auto 1fr; gap: 14px; max-width: 320px; margin: 24px auto 0; }
+  .cs-mobile-caption .cs-screen-title { margin-bottom: 7px; }
+  .cs-mobile-caption .cs-screen-desc { color: var(--grey); }
+  .cs-responsibility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: var(--border-thin); border-radius: 16px; overflow: hidden; }
+  .cs-responsibility-item { display: grid; grid-template-columns: auto 1fr; gap: 18px; padding: 24px; background: var(--white); border-right: var(--border-thin); border-bottom: var(--border-thin); }
+  .cs-responsibility-item:nth-child(2n) { border-right: 0; }
+  .cs-responsibility-item:nth-last-child(-n + 2) { border-bottom: 0; }
+  .cs-responsibility-item:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: 0; }
+  .cs-responsibility-item > span { color: var(--primary); font-size: 10px; font-weight: 700; }
+  .cs-responsibility-item p { color: var(--text); font-size: var(--text-sm); line-height: 1.6; }
+  .cs-strategy-statement { padding: clamp(30px, 5vw, 56px); border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 16px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--white)), var(--white) 68%); }
+  .cs-strategy-statement > span, .cs-architecture-card > span, .cs-next-kicker, .cs-next-list article > span, .cs-evidence-note > span { color: var(--primary); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; }
+  .cs-strategy-statement h3 { max-width: 18ch; margin: 18px 0; color: var(--text); font-family: var(--font-display); font-size: clamp(2.7rem, 6vw, 5.8rem); font-weight: 400; line-height: .9; text-transform: uppercase; }
+  .cs-strategy-statement p { max-width: 70ch; color: var(--dark-grey); font-size: var(--text-base); line-height: 1.7; }
+  .cs-architecture-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 24px; padding: 1px; border-radius: 16px; overflow: hidden; background: rgba(183,243,91,.16); }
+  .cs-architecture-card { min-height: 170px; padding: 26px; background: var(--white); }
+  .cs-architecture-card h3, .cs-next-list h3 { margin: 14px 0 8px; color: var(--text); font-size: var(--text-lg); }
+  .cs-architecture-card p, .cs-next-list p, .cs-evidence-note p { color: var(--grey); font-size: var(--text-sm); line-height: 1.65; }
+  .cs-evidence-note { display: grid; grid-template-columns: 180px 1fr; gap: 24px; margin-top: 24px; padding: 22px 24px; border: 1px dashed rgba(183,243,91,.32); border-radius: 14px; background: rgba(183,243,91,.035); }
+  .cs-next-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; align-items: start; }
+  .cs-validation-panel, .cs-next-list { border: var(--border-thin); border-radius: 16px; overflow: hidden; background: var(--white); }
+  .cs-validation-panel { padding: 26px; }
+  .cs-validation-panel ul { margin: 22px 0 0; padding: 0; list-style: none; }
+  .cs-validation-panel li { position: relative; padding: 14px 0 14px 24px; border-top: var(--border-thin); color: var(--text); font-size: var(--text-sm); line-height: 1.55; }
+  .cs-validation-panel li::before { content: '+'; position: absolute; left: 0; color: var(--primary); font-family: var(--font-mono); }
+  .cs-next-list article { padding: 24px; border-bottom: var(--border-thin); }
+  .cs-next-list article:last-child { border-bottom: 0; }
   @media (max-width: 1024px) { .cs-solution-grid { grid-template-columns: 1fr 1fr; } .cs-solution-step:nth-child(2n) { border-right: 0; } .cs-solution-step:nth-child(n + 3) { border-top: var(--border-thick); } }
-  @media (max-width: 768px) { .cs-executive-summary { grid-template-columns: 1fr; } .cs-executive-summary > div { border-right: 0; border-bottom: var(--border-thin); } .cs-executive-summary > div:last-child { border-bottom: 0; } .cs-case-toc { top: 56px; } .cs-solution-grid { grid-template-columns: 1fr; } .cs-solution-step, .cs-solution-step:nth-child(2n) { border-right: 0; border-top: var(--border-thick); } .cs-solution-step:first-child { border-top: 0; } }
+  @media (max-width: 1024px) { .cs-mobile-solution-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 768px) { .cs-executive-summary { grid-template-columns: 1fr; } .cs-executive-summary > div { border-right: 0; border-bottom: var(--border-thin); } .cs-executive-summary > div:last-child { border-bottom: 0; } .cs-case-toc { top: 56px; } .cs-solution-grid { grid-template-columns: 1fr; } .cs-solution-step, .cs-solution-step:nth-child(2n) { border-right: 0; border-top: var(--border-thick); } .cs-solution-step:first-child { border-top: 0; } .cs-mobile-intro { align-items: start; flex-direction: column; } .cs-mobile-intro p { text-align: left; } .cs-mobile-solution-grid { grid-template-columns: 1fr; gap: 56px; } .cs-phone { width: min(78vw, 300px); } .cs-responsibility-grid, .cs-architecture-grid, .cs-next-grid { grid-template-columns: 1fr; } .cs-responsibility-item, .cs-responsibility-item:nth-child(2n), .cs-responsibility-item:nth-last-child(-n + 2) { border-right: 0; border-bottom: var(--border-thin); } .cs-responsibility-item:last-child { border-bottom: 0; } .cs-evidence-note { grid-template-columns: 1fr; gap: 10px; } }
 
   /* Case studies use the same dark fieldbook system as the homepage. */
   .case-study { background: var(--bg); color: var(--text); }
