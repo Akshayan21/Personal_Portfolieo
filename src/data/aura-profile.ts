@@ -126,7 +126,7 @@ export const auraProfile: AuraProfile = {
   experience: [
     {
       company: 'Mondee Tech Pvt Ltd', period: 'November 2025 - 2026', role: 'UX Designer and GTM Strategist',
-      publicSummary: 'Works on Miraee, a confidential NDA-protected project. Only his role and employment may be acknowledged; product details and internal responsibilities or deliverables cannot be discussed.',
+      publicSummary: 'Works on a confidential NDA-protected enterprise product. Only his role and employment may be acknowledged; product details and internal responsibilities or deliverables cannot be discussed.',
     },
     {
       company: 'Kodecopter', period: 'September 2024 - January 2026', role: 'UI/UX Designer Intern, then UI/UX Trainee, then UX Designer and Junior Product Manager',

@@ -26,7 +26,7 @@ AKSHAYAN
 Akshayan Mohandass is a Product and UX Designer based in India with a B.Tech in Artificial Intelligence and Data Science. He works across UX, product thinking, business strategy, GTM communication, technology, and implementation-aware design. His principle is: "I don't start with screens. I start with structure."
 
 EXPERIENCE
-- Mondee Tech, November 2025-2026: UX Designer and GTM Strategist. Miraee is protected by NDA; disclose no product or internal-work details.
+- Mondee Tech, November 2025-2026: UX Designer and GTM Strategist on a confidential enterprise product; disclose no product or internal-work details.
 - Kodecopter, September 2024-January 2026: progressed from UI/UX Designer Intern to UI/UX Trainee to UX Designer and Junior Product Manager.
 - Aakam 360 5(I), October 2023-September 2024: UI/UX Designer Intern. Worked on PregTrack and supported mobile UX, wireframing, prototyping, and product flows.
 - Bloom Majestic, 2022-2023: UI/UX Designer. Designed Inniyal, a mental-wellness mobile experience focused on clarity, emotional safety, and low cognitive load.
@@ -73,7 +73,7 @@ const hasDetailedEvidence = (project: Project) => Boolean(
 );
 
 const publicProjectSummary = (project: Project) => {
-  if (project.slug === 'miraee-booking-engine') {
+  if (project.slug === 'enterprise-travel-intelligence') {
     return `${project.title} is confidential AI-native enterprise travel work at Mondee. Akshayan's public role covers product experience and content strategy, but project research, decisions, metrics, and client details are not available for public discussion.`;
   }
   if (project.slug === 'pharmavault') {
@@ -245,7 +245,7 @@ const recognizedTermCorrections: Array<[RegExp, string]> = [
   [/\b(?:code engine|coat engine|kode engine)\b/gi, 'KodeEngine'],
   [/\bops three sixty\b/gi, 'Ops 360'],
   [/\b(?:pharma vault|farmer vault)\b/gi, 'PharmaVault'],
-  [/\b(?:mirror booking|mira booking|my ray booking)\b/gi, 'Miraee Booking Engine'],
+  [/\b(?:enterprise travel project|confidential travel project)\b/gi, 'Enterprise Travel Intelligence'],
 ];
 
 const correctRecognizedQuestion = (value: string) => recognizedTermCorrections
@@ -271,7 +271,7 @@ const personalProfileAnswer = (question: string) => {
     return { answer: `${auraProfile.summary} ${auraProfile.positioning}`, section: 'about' };
   }
   if (/\b(?:current role|current job|currently work|working now|where does (?:he|akshayan) work|what company|mondee)\b/i.test(query)) {
-    return { answer: `${identity.fullName} currently works as ${identity.currentRole}. His work there involves Miraee, which is protected by NDA, so AURA can acknowledge his role and employment but cannot discuss internal responsibilities, deliverables, product details, or strategy.`, section: 'experience' };
+    return { answer: `${identity.fullName} currently works as ${identity.currentRole} on a confidential enterprise product protected by NDA. AURA can acknowledge his role and employment but cannot discuss internal responsibilities, deliverables, product details, or strategy.`, section: 'experience' };
   }
   if (/\b(?:where is (?:he|akshayan)|where (?:does he|does akshayan) live|based|location|country)\b/i.test(query)) {
     return { answer: `${identity.fullName} is based in ${identity.location}.`, section: 'about' };
@@ -312,9 +312,9 @@ const fallbackAnswer = (question: string) => {
       answer: "Hello! I'm AURA, Akshayan's interactive portfolio guide. I can explain his projects, research, design decisions, process, experience, technical skills, AI work, and fit for a team. Ask me about a specific project, compare his work, or ask what makes his approach different.",
     };
   }
-  if (/\bmiraee\b/i.test(normalized)) {
+  if (/\b(?:confidential project|enterprise travel intelligence)\b/i.test(normalized)) {
     return {
-      answer: "Miraee is a confidential project covered under NDA, so I can't disclose details about the product, features, users, strategy, research, design decisions, architecture, brand work, internal deliverables, or technical implementation. I can discuss Akshayan's public projects and transferable product, UX, strategy, and technical skills instead.",
+      answer: "This enterprise project is covered under NDA, so I can't disclose details about the product, features, users, strategy, research, design decisions, architecture, brand work, internal deliverables, or technical implementation. I can discuss Akshayan's public projects and transferable product, UX, strategy, and technical skills instead.",
       section: 'experience',
     };
   }
