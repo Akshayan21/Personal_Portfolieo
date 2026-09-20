@@ -793,9 +793,10 @@ export const projects: Project[] = [
     ],
     screens: [
       { title: "Operational Dashboard", desc: "A role-aware decision surface highlights workload, pipeline health, ageing records, and items requiring attention." },
-      { title: "Consultants & Hotlists", desc: "Central profiles, availability, readiness data, and structured distribution reduce repeated setup work." },
+      { title: "Bench Consultants", desc: "A filterable consultant directory combines availability, skills, visa status, location, ownership, profile completeness, and follow-up activity." },
+      { title: "Consultant Profile", desc: "A single consultant record connects identity, availability, skills, certifications, work history, resume quality, submissions, interviews, and recent activity." },
       { title: "Submission Pipeline", desc: "Dense, actionable tables combine status, consultant, client or vendor, owner, activity, next action, filters, and bulk controls." },
-      { title: "Placements & Invoices", desc: "Successful submissions carry verified context into placement operations and finance preparation instead of recreating records." },
+      { title: "Requirements Board", desc: "A stage-based board helps recruiters scan priority roles, ownership, candidate volume, client review, and closed requirements without losing workflow context." },
     ],
     decisions: [
       { decision: "Design the lifecycle, not isolated modules", rationale: "A consultant should not become a new unrelated record at each stage. Shared context reduces duplication and improves downstream handoffs." },
