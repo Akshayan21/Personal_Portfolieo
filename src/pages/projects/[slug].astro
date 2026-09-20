@@ -1,12 +1,39 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { projects } from '../../data/projects';
+import { Image } from 'astro:assets';
+import { pageUrl, publicProjectSlugs, projectUrl } from '../../data/urls';
+import { projects, type Project } from '../../data/projects';
 
 import paydartBanner from '../../assets/paydart__banner.png';
 import pregtrackBanner from '../../assets/Pregtrack_banner.png';
 import famconnectBanner from '../../assets/famconnect__banner.png';
 import staffezeeBanner from '../../assets/staffezee_banner.png';
 import pharmavaultBanner from '../../assets/Pharamavault__banner.png';
+import paydartLogin from '../../assets/paydart/paydart _Login_screen.png';
+import paydartDashboard from '../../assets/paydart/Paydart_Dashboard.png';
+import paydartFeeDetails from '../../assets/paydart/Paydart_fees_Details.png';
+import paydartPaymentHistory from '../../assets/paydart/Paydart_payment_history.png';
+import paydartReceipt from '../../assets/paydart/Paydart_recipet_Generatore_screen.png';
+import pregtrackLogin from '../../assets/pregtrack/Login Screen.png';
+import pregtrackProfile from '../../assets/pregtrack/Detailes Gathering.png';
+import pregtrackDueDate from '../../assets/pregtrack/Due Date Calculation.png';
+import pregtrackDashboard from '../../assets/pregtrack/User Dashboard.png';
+import pregtrackTimeline from '../../assets/pregtrack/Time Line.png';
+import pregtrackGrowth from '../../assets/pregtrack/Baby Growth Chart Screen.png';
+import pregtrackHospitals from '../../assets/pregtrack/Hospitals.png';
+import famconnectOnboardingOne from '../../assets/Famconnet/Onboarding Screen 1.png';
+import famconnectOnboardingTwo from '../../assets/Famconnet/Onboarding Screen 2.png';
+import famconnectOnboardingThree from '../../assets/Famconnet/Onboarding Screen 3.png';
+import famconnectVerification from '../../assets/Famconnet/Verification screen.png';
+import famconnectAccountConfirmation from '../../assets/Famconnet/Account Confiremation.png';
+import famconnectPersonalDetails from '../../assets/Famconnet/Sign Up (Personal Details Capturing Screen).png';
+import famconnectFamilyIntro from '../../assets/Famconnet/Family Adding Intro.png';
+import famconnectFamilyCreation from '../../assets/Famconnet/Sign Up (Family Creating Screen).png';
+import famconnectFamilyInvitation from '../../assets/Famconnet/Sign Up (Invitation for Joining Family).png';
+import famconnectAddress from '../../assets/Famconnet/Sign Up (Address Capturing Screen).png';
+import famconnectSchoolDetails from '../../assets/Famconnet/Sign Up (School Capturing Screen).png';
+import famconnectSchoolDetailsMore from '../../assets/Famconnet/Sign Up (School Capturing Screen)-1.png';
+import famconnectSchoolCreation from '../../assets/Famconnet/Sign Up (School Creation).png';
 
 const bannerMap: Record<string, ImageMetadata> = {
   'paydart': paydartBanner,
@@ -16,11 +43,9 @@ const bannerMap: Record<string, ImageMetadata> = {
   'pharmavault': pharmavaultBanner,
 };
 
-const publicProjectSlugs = ['paydart', 'pregtrack-app', 'famconnect', 'staffezee', 'pharmavault'];
 const publicProjects = projects.filter((project) => publicProjectSlugs.includes(project.slug));
 
 export function getStaticPaths() {
-  const publicProjectSlugs = ['paydart', 'pregtrack-app', 'famconnect', 'staffezee', 'pharmavault'];
   return projects.filter((project) => publicProjectSlugs.includes(project.slug)).map((project) => ({ params: { slug: project.slug } }));
 }
 
@@ -32,15 +57,55 @@ const currentIndex = publicProjects.findIndex((item) => item.slug === slug);
 const prevProject = publicProjects[currentIndex - 1] ?? null;
 const nextProject = publicProjects[currentIndex + 1] ?? null;
 const banner = slug ? bannerMap[slug] ?? null : null;
-const isMobileCaseStudy = ['paydart', 'pregtrack-app'].includes(project.slug);
-const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
+const paydartScreenMap: Record<string, ImageMetadata> = {
+  'Login': paydartLogin,
+  'Student Overview': paydartDashboard,
+  'Upcoming Fees': paydartFeeDetails,
+  'Payment History': paydartPaymentHistory,
+  'Digital Receipt': paydartReceipt,
+};
+const pregtrackScreenMap: Record<string, ImageMetadata> = {
+  'Sign In': pregtrackLogin,
+  'Profile Setup': pregtrackProfile,
+  'Due Date Setup': pregtrackDueDate,
+  'Dashboard': pregtrackDashboard,
+  'Pregnancy Timeline': pregtrackTimeline,
+  'Baby Growth Chart': pregtrackGrowth,
+  'Hospital Discovery': pregtrackHospitals,
+};
+const famconnectScreenMap: Record<string, ImageMetadata> = {
+  'Welcome to FamConnect': famconnectOnboardingOne,
+  'Private Community Spaces': famconnectOnboardingTwo,
+  'Stay Connected': famconnectOnboardingThree,
+  'Account Verification': famconnectVerification,
+  'Account Confirmation': famconnectAccountConfirmation,
+  'Personal Details': famconnectPersonalDetails,
+  'Family Setup Introduction': famconnectFamilyIntro,
+  'Create a Family': famconnectFamilyCreation,
+  'Join a Family': famconnectFamilyInvitation,
+  'Add an Address': famconnectAddress,
+  'School Details': famconnectSchoolDetails,
+  'School Information': famconnectSchoolDetailsMore,
+  'Create a School Community': famconnectSchoolCreation,
+};
+const screenMaps: Record<string, Record<string, ImageMetadata>> = {
+  paydart: paydartScreenMap,
+  'pregtrack-app': pregtrackScreenMap,
+  famconnect: famconnectScreenMap,
+};
+const getScreenImage = (screen: Project['screens'][number]) => screenMaps[project.slug]?.[screen.title];
+const screenImages = project.screens.map(screen => ({ screen, image: getScreenImage(screen) })).filter(item => item.image);
+const textOnlyScreens = project.screens.filter(screen => !getScreenImage(screen));
+const hasScreenImages = screenImages.length > 0;
 ---
 
 <Layout 
   title={`${project.title} | ${project.type} Case Study - Akshayan Mohandass`}
   description={project.desc}
-  ogImage="/final_state.jpg"
+  ogImage={banner?.src ?? "/final_state.jpg"}
+  ogImageAlt={banner ? `${project.title} UX case study cover` : `${project.title} case study by Akshayan Mohandass`}
   ogType="article"
+  showAura={false}
   keywords={`${project.title}, ${project.type}, ${project.tools.join(', ')}, ${project.tags.join(', ')}, Akshayan Mohandass, Product Design Case Study`}
 >
   <div class="case-study">
@@ -49,9 +114,9 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
       <!--  TOP NAV  -->
       <nav class="cs-topnav" id="cs-topnav" aria-label="Case study navigation">
       <div class="cs-topnav-inner">
-        <a href="/#projects" class="cs-back">Back to all works</a>
+        <a href={pageUrl('/')} class="cs-back">Back to home</a>
         <span class="cs-breadcrumb mono">
-          <a href="/">Home</a> / <a href="/#projects">Works</a> / {project.title}
+          <a href={pageUrl('/')}>Home</a> / {project.title}
         </span>
       </div>
     </nav>
@@ -107,10 +172,8 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
             </div>
             <div class={`cs-cover-screen ${banner ? 'has-banner' : ''}`}>
               {banner ? (
-                <img src={banner.src} alt={`${project.title} banner`} class="cs-cover-banner-img" loading="eager" />
-              ) : (
-                <span class="cs-cover-label mono">{project.title.toUpperCase()}<br/>- PROJECT VISUALS -<br/>COMING SOON</span>
-              )}
+                <Image src={banner} alt={`${project.title} UX case study cover showing the product interface`} title={`${project.title} case study cover`} widths={[640, 960, 1280]} sizes="(max-width: 1100px) 100vw, 1100px" format="webp" quality={82} class="cs-cover-banner-img" loading="eager" decoding="async" fetchpriority="high" />
+              ) : null}
             </div>
           </div>
         </div>
@@ -137,6 +200,18 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
               <div class="cs-stat-hero" style={`--accent: ${project.accent}`}>
                 <span class="cs-stat-num">{o.metric}</span>
                 <span class="cs-stat-label mono">{o.label}</span>
+                {project.liveUrl && (
+                  <a
+                    class="cs-stat-action mono"
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${project.title} on Google Play in a new tab`}
+                  >
+                    <span>{project.liveLabel ?? 'View live product'}</span>
+                    <span class="cs-stat-action-arrow" aria-hidden="true">↗</span>
+                  </a>
+                )}
               </div>
             ))}
             <div class="cs-team-card">
@@ -245,30 +320,20 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
       <!--  SOLUTION WALKTHROUGH  -->
       <section class="cs-section" id="cs-screens">
         <h2 class="cs-section-label mono">SOLUTION WALKTHROUGH</h2>
-        {isMobileCaseStudy && (
+        {hasScreenImages && (
           <div class="cs-mobile-intro">
             <span class="mono">MOBILE APPLICATION / PORTRAIT UI</span>
-            <p>Replace each placeholder with an exported {project.title} screen. Recommended ratio: 9:19.5, PNG or WebP.</p>
+            <p>Selected interface moments from the working {project.title} experience.</p>
           </div>
         )}
-        <div class:list={["cs-solution-grid", { "cs-mobile-solution-grid": isMobileCaseStudy }]}>
-          {project.screens.map((screen, i) => (
-            isMobileCaseStudy ? (
+        {hasScreenImages && (
+        <div class="cs-solution-grid cs-mobile-solution-grid">
+          {screenImages.map(({ screen, image }, i) => (
               <article class="cs-mobile-screen" style={`--accent: ${project.accent}`}>
-                <div class="cs-phone" aria-label={`${screen.title} mobile UI ${screen.image ? 'screenshot' : 'placeholder'}`}>
+                <div class="cs-phone" aria-label={`${screen.title} mobile UI screenshot`}>
                   <div class="cs-phone-speaker" aria-hidden="true"></div>
-                  <div class="cs-phone-viewport">
-                    {screen.image ? (
-                      <img src={screen.image} alt={`${project.title} ${screen.title} screen`} loading="lazy" style={`object-fit: ${screen.imageFit ?? 'cover'}`} />
-                    ) : hasEmptyPhoneFrames ? (
-                      <div class="cs-ui-placeholder cs-ui-placeholder--empty" aria-hidden="true"></div>
-                    ) : (
-                      <div class="cs-ui-placeholder">
-                        <span class="cs-ui-slot mono">UI SLOT {String(i + 1).padStart(2, '0')}</span>
-                        <strong>{screen.title}</strong>
-                        <span class="cs-ui-hint mono">ADD MOBILE SCREEN</span>
-                      </div>
-                    )}
+                  <div class="cs-phone-viewport" style={project.slug === 'pregtrack-app' ? `aspect-ratio: ${image!.width} / ${image!.height}` : undefined}>
+                    <Image src={image!} alt={`${project.title} ${screen.title} mobile application screen`} title={`${project.title} — ${screen.title}`} widths={[320, 480]} sizes="(max-width: 600px) 78vw, 300px" format="webp" quality={80} loading="lazy" decoding="async" />
                   </div>
                   <div class="cs-phone-home" aria-hidden="true"></div>
                 </div>
@@ -280,7 +345,12 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
                   </div>
                 </div>
               </article>
-            ) : (
+          ))}
+        </div>
+        )}
+        {textOnlyScreens.length > 0 && (
+        <div class="cs-solution-grid">
+          {textOnlyScreens.map((screen, i) => (
               <article class="cs-solution-step" style={`--accent: ${project.accent}`}>
                 <span class="cs-solution-index mono">{String(i + 1).padStart(2, '0')}</span>
                 <div>
@@ -289,9 +359,9 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
                   <p class="cs-screen-desc">{screen.desc}</p>
                 </div>
               </article>
-            )
           ))}
         </div>
+        )}
       </section>
 
       <!--  DESIGN DECISIONS  -->
@@ -379,17 +449,17 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
       <div class="cs-container">
         <div class="cs-pnav-inner">
           {prevProject ? (
-            <a href={`/projects/${prevProject.slug}`} class="cs-pnav-card cs-pnav-prev">
+            <a href={projectUrl(prevProject.slug)} class="cs-pnav-card cs-pnav-prev">
               <span class="cs-pnav-dir mono">Previous work</span>
               <span class="cs-pnav-title">{prevProject.title}</span>
               <span class="cs-pnav-type mono">{prevProject.type}</span>
             </a>
           ) : <div />}
 
-          <a href="/#projects" class="cs-pnav-all mono">ALL WORKS -></a>
+          <a href={pageUrl('/')} class="cs-pnav-all mono">HOME -></a>
 
           {nextProject ? (
-            <a href={`/projects/${nextProject.slug}`} class="cs-pnav-card cs-pnav-next">
+            <a href={projectUrl(nextProject.slug)} class="cs-pnav-card cs-pnav-next">
               <span class="cs-pnav-dir mono">NEXT -></span>
               <span class="cs-pnav-title">{nextProject.title}</span>
               <span class="cs-pnav-type mono">{nextProject.type}</span>
@@ -406,7 +476,7 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
   /*  Base  */
   .case-study {
     background: var(--bg);
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .cs-container {
@@ -683,6 +753,50 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
     transform: none;
   }
 
+  .cs-stat-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+    color: var(--primary);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .cs-stat-action > span:first-child {
+    white-space: nowrap;
+  }
+
+  .cs-stat-action-arrow {
+    flex: 0 0 auto;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .cs-stat-action:hover,
+  .cs-stat-action:focus-visible {
+    color: var(--text);
+    border-color: var(--primary);
+  }
+
+  .cs-stat-action:hover .cs-stat-action-arrow,
+  .cs-stat-action:focus-visible .cs-stat-action-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .cs-stat-action:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 6px;
+  }
+
   .cs-stat-num {
     display: block;
     font-size: clamp(3rem, 6vw, 4.5rem);
@@ -694,11 +808,14 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
   }
 
   .cs-stat-label {
+    display: block;
+    max-width: 100%;
     font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--grey);
     text-transform: uppercase;
+    overflow-wrap: anywhere;
   }
 
   .cs-team-card {
@@ -1310,10 +1427,12 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
   .cs-mobile-intro p { max-width: 48ch; color: var(--grey); font-size: var(--text-sm); line-height: 1.55; text-align: right; }
   .cs-mobile-solution-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 5vw, 64px) clamp(20px, 4vw, 48px); border: 0; overflow: visible; }
   .cs-mobile-screen { min-width: 0; }
-  .cs-phone { width: min(100%, 280px); aspect-ratio: 9 / 19.5; margin: 0 auto; padding: 12px 9px 14px; display: grid; grid-template-rows: 17px 1fr 16px; background: #080a0c; border: 1px solid rgba(243,245,244,.3); border-radius: 38px; box-shadow: 0 0 0 4px #171b1e, 0 24px 55px rgba(0,0,0,.35); overflow: hidden; }
-  .cs-phone-speaker { width: 29%; height: 5px; align-self: center; justify-self: center; border-radius: 999px; background: #31373b; }
-  .cs-phone-viewport { min-height: 0; overflow: hidden; border: 1px solid rgba(183,243,91,.13); border-radius: 24px; background: #111518; }
-  .cs-phone-viewport img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; }
+  /* The screenshot owns the display area. The device chrome is outside it, so no UI can be clipped. */
+  .cs-phone { width: min(100%, 280px); margin: 0 auto; position: relative; padding: 12px 7px 10px; display: flex; flex-direction: column; background: linear-gradient(135deg, #30363a, #080a0c 22%, #12171a 78%, #41494d); border: 1px solid rgba(243,245,244,.48); border-radius: 42px; box-shadow: 0 0 0 3px #080a0c, 0 0 0 5px #353c40, 0 24px 55px rgba(0,0,0,.42); }
+  .cs-phone::before { content: ''; position: absolute; z-index: 3; top: 20%; right: -3px; width: 3px; height: 13%; border-radius: 0 3px 3px 0; background: #3d4549; box-shadow: 0 34px 0 #3d4549, 0 51px 0 #3d4549; }
+  .cs-phone-speaker { width: 30%; height: 4px; flex: 0 0 auto; margin: 0 auto 8px; border-radius: 99px; background: #010203; box-shadow: inset 0 1px 1px rgba(255,255,255,.15); }
+  .cs-phone-viewport { position: relative; width: 100%; aspect-ratio: 9 / 19.5; flex: 0 0 auto; overflow: hidden; border-radius: 32px; background: #0b0d0f; line-height: 0; }
+  .cs-phone-viewport img { width: 100%; height: auto; min-height: 100%; display: block; object-fit: cover; object-position: top center; background: #0b0d0f; }
   .cs-ui-placeholder { height: 100%; min-height: 0; padding: 24px 18px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; text-align: center; background: repeating-linear-gradient(135deg, rgba(183,243,91,.035) 0 10px, transparent 10px 20px), radial-gradient(circle at 50% 38%, rgba(253,200,0,.12), transparent 42%); }
   .cs-ui-placeholder::before { content: ''; width: 44%; aspect-ratio: 1; border: 1px dashed rgba(253,200,0,.5); border-radius: 18px; background: linear-gradient(135deg, rgba(253,200,0,.08), rgba(183,243,91,.03)); }
   .cs-ui-placeholder--empty { padding: 0; background: #111518; }
@@ -1321,7 +1440,7 @@ const hasEmptyPhoneFrames = project.slug === 'pregtrack-app';
   .cs-ui-slot, .cs-ui-hint { color: var(--grey); font-size: 9px; letter-spacing: 1.5px; }
   .cs-ui-placeholder strong { max-width: 9ch; color: var(--text); font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 400; line-height: .9; text-transform: uppercase; }
   .cs-ui-hint { padding: 7px 9px; color: var(--primary); border: 1px solid rgba(183,243,91,.25); }
-  .cs-phone-home { width: 30%; height: 4px; align-self: end; justify-self: center; border-radius: 999px; background: #596166; }
+  .cs-phone-home { width: 32%; height: 4px; flex: 0 0 auto; margin: 9px auto 0; border-radius: 999px; background: rgba(255,255,255,.78); box-shadow: 0 1px 2px rgba(0,0,0,.45); }
   .cs-mobile-caption { display: grid; grid-template-columns: auto 1fr; gap: 14px; max-width: 320px; margin: 24px auto 0; }
   .cs-mobile-caption .cs-screen-title { margin-bottom: 7px; }
   .cs-mobile-caption .cs-screen-desc { color: var(--grey); }

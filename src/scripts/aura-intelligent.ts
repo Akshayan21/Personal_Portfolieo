@@ -32,11 +32,7 @@ EXPERIENCE
 - Bloom Majestic, 2022-2023: UI/UX Designer. Designed Inniyal, a mental-wellness mobile experience focused on clarity, emotional safety, and low cognitive load.
 
 PROJECTS
-- Staffezee: B2B SaaS for UK IT staffing agencies. Akshayan worked across design, product management, and development. Consultant-first operating model, availability, submission pipeline, real-time duplicate detection, interviews, and UK compliance. Strongest systems-thinking example.
-- PregTrack: pregnancy health experience designed around trust, clarity, sensitive needs, real constraints, and implementation.
-- FamConnect: one platform for family, housing-society, and verified-alumni communities. Role-aware access maintains distinct trust boundaries.
-- Ops 360: college operations platform connecting admissions, staff availability, and student meeting booking across student, staff, and management roles.
-- PharmaVault: incomplete case study. Do not claim unpublished outcomes.
+The supplied SELECTED WORKS OVERVIEW or RELEVANT PROJECT EVIDENCE is the current source of truth for public case studies. Use its actual status, screen descriptions, roles, evidence limits, and next steps rather than older summaries. Screenshots demonstrate interface design; they do not prove measured usability or clinical outcomes. Do not suggest that unpublished projects have accessible case-study pages.
 
 CAPABILITIES
 Design: Figma, UX architecture, AI UX, design systems, user research, interaction design, wireframing, prototyping.
@@ -52,7 +48,7 @@ const fallbackKnowledge = [
   { terms: ['ai', 'artificial intelligence', 'agent', 'agents', 'llm', 'automation', 'generative', 'intelligent product'], answer: 'Akshayan designs AI-native product experiences with an emphasis on understandable behaviour, useful guidance, human control, and decision clarity. His work treats AI as part of the product structure rather than a decorative feature.', section: 'experience' },
   { terms: ['process', 'approach', 'method', 'workflow', 'research', 'decision', 'decide', 'problem solving', 'discovery', 'design thinking', 'how does he design'], answer: 'He begins by mapping who decides, what they need to complete, where friction appears, and which constraints are real. Research and system structure guide the flow; screens come after the underlying decisions are understood.', section: 'philosophy' },
   { terms: ['staffezee', 'systems thinking', 'staffing', 'consultant', 'recruiter'], answer: 'Staffezee is his strongest systems-thinking example: a consultant-first operating model connecting availability, submissions, duplicate prevention, interviews, and UK compliance.', section: 'projects' },
-  { terms: ['pregtrack', 'preg track', 'pregnancy', 'maternal', 'health'], answer: 'PregTrack is a government-approved pregnancy health product. Akshayan helped take it from concept to launch, designing for clarity and trust while supporting frontend implementation.', section: 'projects' },
+  { terms: ['pregtrack', 'preg track', 'pregnancy', 'maternal', 'health'], answer: 'PregTrack is a released Android pregnancy companion. Its case study includes seven UI screens covering sign-in, profile setup, due-date setup, dashboard, timeline, baby growth, and hospital discovery. Akshayan contributed as a UI/UX Designer Intern; clinical impact and engagement improvements are not measured in the published evidence.', section: 'projects' },
   { terms: ['famconnect', 'fam connect', 'family', 'alumni', 'community'], answer: 'FamConnect unifies several community types while preserving distinct trust boundaries through role-aware access.', section: 'projects' },
   { terms: ['ops 360', 'ops360', 'college', 'admission', 'student booking'], answer: 'Ops 360 connects college admissions, staff availability, and student meeting booking across student, staff, and management roles.', section: 'projects' },
   { terms: ['skill', 'skills', 'figma', 'technical', 'code', 'developer', 'technology', 'tech stack', 'tools', 'frontend', 'programming', 'implementation'], answer: 'Akshayan combines UX architecture, AI UX, research, interaction design, and design systems with implementation literacy across React, TypeScript, Astro, Flutter, Node, and Tailwind.', section: 'skills' },
@@ -76,9 +72,6 @@ const publicProjectSummary = (project: Project) => {
   if (project.slug === 'enterprise-travel-intelligence') {
     return `${project.title} is confidential AI-native enterprise travel work at Mondee. Akshayan's public role covers product experience and content strategy, but project research, decisions, metrics, and client details are not available for public discussion.`;
   }
-  if (project.slug === 'pharmavault') {
-    return `${project.title} (${project.type}, ${project.year}) is an incomplete case study about pharmaceutical inventory, prescription tracking, and compliance workflows. Detailed research, decisions, and outcomes are not yet published; never infer them.`;
-  }
   const outcomes = project.outcomes.length
     ? ` Outcomes: ${project.outcomes.map(item => `${item.metric} ${item.label}`).join('; ')}.`
     : '';
@@ -86,7 +79,6 @@ const publicProjectSummary = (project: Project) => {
 };
 
 const detailedProjectKnowledge = (project: Project) => {
-  if (project.slug === 'pharmavault') return publicProjectSummary(project);
   return [
     `${project.title} | ${project.type} | ${project.company} | ${project.year} | ${project.duration}`,
     `Role and team: ${project.role}; ${project.team}. Tools: ${project.tools.join(', ')}.`,
@@ -97,6 +89,10 @@ const detailedProjectKnowledge = (project: Project) => {
     `Insights: ${project.insights.join(' | ')}`,
     `Process: ${project.processSteps.map(item => `${item.title}: ${item.desc}`).join(' | ')}`,
     `Solutions: ${project.screens.map(item => `${item.title}: ${item.desc}`).join(' | ')}`,
+    `Responsibilities: ${(project.responsibilities ?? []).join(' | ')}`,
+    `Evidence limits: ${project.evidenceNote ?? 'No additional verified measurements supplied.'}`,
+    `Planned validation, NOT measured results: ${(project.validation ?? []).join(' | ')}`,
+    `Next steps, NOT shipped features: ${(project.nextSteps ?? []).map(item => `${item.label}: ${item.desc}`).join(' | ')}`,
     `Decisions: ${project.decisions.map(item => `${item.decision} BECAUSE ${item.rationale}`).join(' | ')}`,
     `Outcomes: ${project.outcomes.map(item => `${item.metric} ${item.label}`).join(' | ')}`,
     `Reflection - worked: ${project.learnings.worked.join(' | ')}. Improve: ${project.learnings.improve.join(' | ')}.`,
@@ -182,13 +178,23 @@ const projectFallbackAnswer = (question: string) => {
     const sentence = (value: string) => /[.!?]$/.test(value.trim()) ? value.trim() : `${value.trim()}.`;
     const answer = (value: string) => ({ answer: value, section: 'projects' });
 
+    if (/\b(?:screens?|screenshots?|ui|interfaces?|walkthrough|solution|features?)\b/i.test(query)) {
+      const specific = target.screens.find(screen => query.includes(screen.title.toLowerCase()));
+      return answer(specific
+        ? `${target.title} — ${specific.title}: ${specific.desc}`
+        : `${target.title}'s solution walkthrough covers ${target.screens.length} interface moments: ${target.screens.map(screen => screen.title).join(', ')}. Ask about an individual screen for its purpose and interaction details.`);
+    }
+    if (/\b(?:next steps?|planned|future|validation|validate)\b/i.test(query)) {
+      return answer(`${target.title}'s planned validation includes ${(target.validation ?? []).join('; ') || 'no published measures'}. These are future checks, not measured outcomes. ${target.evidenceNote ?? ''}`);
+    }
+
     if (/\b(?:role|contribution|responsibility|responsibilities|team|ownership|what did (?:he|akshayan) do)\b/i.test(query)) {
       return answer(`${target.title}: Akshayan's published role was ${target.role}. The team was ${target.team}. ${sentence(target.desc)}`);
     }
     if (/\b(?:research|interview|testing|test|method|evidence|insight|learned from users|user feedback)\b/i.test(query)) {
       const methods = target.researchMethods.slice(0, 3).map(item => `${item.label}: ${item.desc}`).join('; ');
       const insights = target.insights.slice(0, 2).map(sentence).join(' ');
-      return answer(`${target.title} used ${methods}. The strongest published insights were: ${insights}`);
+      return answer(`${target.title}'s published research framing: ${methods}. Published insights: ${insights} ${target.evidenceNote ?? ''}`);
     }
     if (/\b(?:problem|challenge|pain point|friction|issue|constraint|why was it needed)\b/i.test(query)) {
       const pains = target.painPoints.slice(0, 2).map(sentence).join(' ');
@@ -201,7 +207,7 @@ const projectFallbackAnswer = (question: string) => {
       return answer(`${target.title}'s published design reasoning: ${decisions}`);
     }
     if (/\b(?:outcomes?|results?|impact|metrics?|improve|improvements?|success|performance)\b/i.test(query)) {
-      return answer(`${target.title}'s published outcomes are ${target.outcomes.map(item => `${item.metric} ${item.label}`).join('; ')}. These are the portfolio's stated results; AURA does not infer additional impact.`);
+      return answer(`${target.title}'s published outcomes are ${target.outcomes.map(item => `${item.metric} ${item.label}`).join('; ')}. ${target.evidenceNote ?? 'AURA does not infer additional impact.'}`);
     }
     if (/\b(?:tool|tools|technology|tech stack|software|built with|figma|flutter|react)\b/i.test(query)) {
       return answer(`${target.title} lists these tools: ${target.tools.join(', ')}. Akshayan's role was ${target.role}.`);
@@ -225,7 +231,7 @@ const projectFallbackAnswer = (question: string) => {
 
   if (/project|case stud|research|design decision|trade-?off|outcome/i.test(question)) {
     return {
-      answer: 'The portfolio shows different kinds of systems thinking: Staffezee restructures UK staffing around consultant availability, PayDart makes financial authority and automation visible, PregTrack reduces medical and digital complexity, and FamConnect preserves trust boundaries across community types. Ask me to compare any two, defend a design decision, or trace research evidence to an outcome.',
+      answer: `The public case studies are ${selectedProjects.map(project => project.title).join(', ')}. Ask about a project's screens, role, process, decisions, or evidence. Prototypes, released products, and development-stage work are described separately; planned validation is not a measured outcome.`,
       section: 'projects',
     };
   }
@@ -324,7 +330,6 @@ const fallbackAnswer = (question: string) => {
   const contextualQuestion = isFollowUp && previousQuestion && !namesProject ? `${previousQuestion} ${question}` : question;
 
   const profileAnswer = personalProfileAnswer(contextualQuestion);
-  if (profileAnswer?.section === 'projects') return profileAnswer;
   const projectAnswer = projectFallbackAnswer(contextualQuestion);
   if (projectAnswer) return projectAnswer;
   if (profileAnswer) return profileAnswer;

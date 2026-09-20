@@ -1,6 +1,7 @@
 ---
 // Footer - Minimal endcap
 const year = new Date().getFullYear();
+import { pageUrl } from '../data/urls';
 ---
 
 <footer class="footer" id="footer">
@@ -17,11 +18,12 @@ const year = new Date().getFullYear();
         <a href="#skills" class="footer-link">Skills</a>
         <a href="#philosophy" class="footer-link">Philosophy</a>
         <a href="#contact" class="footer-link">Contact</a>
+        <a href={pageUrl('/privacy/')} class="footer-link">Privacy</a>
       </nav>
     </div>
 
     <div class="footer-bottom">
-      <p>(c) {year} Akshayan Mohandass</p>
+      <p>© {year} Akshayan Mohandass</p>
       <p>Product Designer | Systems Thinker</p>
     </div>
   </div>

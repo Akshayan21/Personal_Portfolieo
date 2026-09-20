@@ -2,33 +2,58 @@
 import '../styles/global.css';
 import '../styles/animations.css';
 import Aura from '../components/Aura.astro';
+import { assetUrl, pageUrl } from '../data/urls';
 
 interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	ogImageAlt?: string;
 	ogType?: string;
 	canonicalUrl?: string;
 	keywords?: string;
 	author?: string;
+	showAura?: boolean;
 }
 
 const {
 	title = "Akshayan Mohandass | AI-Native Product Designer & Systems Thinker",
 	description = "Akshayan Mohandass - AI-Native Product Designer. Crafting intuitive digital products from enterprise UX systems to AI-native interfaces.",
 	ogImage = "/final_state.jpg",
+	ogImageAlt = "Portrait of product designer Akshayan Mohandass",
 	ogType = "website",
-	canonicalUrl = Astro.url.href,
+	canonicalUrl: requestedCanonical,
 	keywords = "Akshayan Mohandass, Product Designer, AI UX Design, Systems Thinker, UX Architect, Design Sandbox, Portfolio, Enterprise UX, Frontend Developer, Astro, Figma Canvas",
-	author = "Akshayan Mohandass"
+	author = "Akshayan Mohandass",
+	showAura = true
 } = Astro.props;
+// Never publish localhost/preview-host canonicals, query strings, or fragments.
+const canonical = Astro.site ? new URL(requestedCanonical ?? Astro.url.pathname, Astro.site) : undefined;
+if (canonical) {
+  canonical.search = '';
+  canonical.hash = '';
+  canonical.pathname = canonical.pathname.replace(/\/+$/, '') + '/';
+}
+const canonicalUrl = canonical?.href;
+const socialImage = /^https:\/\//.test(ogImage) ? ogImage : Astro.site ? new URL(assetUrl(ogImage), Astro.site).href : undefined;
+const personSchema = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Akshayan Mohandass',
+	jobTitle: 'Product Designer',
+	url: Astro.site ? new URL(pageUrl('/'), Astro.site).href : undefined,
+	sameAs: ['https://www.linkedin.com/in/akshayan-mohandass-'],
+}).replace(/</g, '\\u003c');
 ---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="theme-color" content="#101214" />
+		<meta name="color-scheme" content="dark" />
+		<link rel="icon" type="image/svg+xml" href={assetUrl('/favicon.svg')} />
+		<link rel="manifest" href={assetUrl('/site.webmanifest')} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Primary SEO Meta Tags -->
@@ -36,22 +61,26 @@ const {
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		<meta name="author" content={author} />
-		<link rel="canonical" href={canonicalUrl} />
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		<meta name="robots" content="index, follow" />
 
 		<!-- Open Graph / Facebook / LinkedIn -->
 		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.url).href} />
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+		{socialImage && <meta property="og:image" content={socialImage} />}
+		{socialImage && <meta property="og:image:secure_url" content={socialImage} />}
+		<meta property="og:image:alt" content={ogImageAlt} />
 		<meta property="og:site_name" content="Akshayan Mohandass Portfolio" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.url).href} />
+		{socialImage && <meta name="twitter:image" content={socialImage} />}
+		<meta name="twitter:image:alt" content={ogImageAlt} />
+		<script type="application/ld+json" is:inline set:html={personSchema}></script>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,7 +97,7 @@ const {
 			</svg>
 		</div>
 		<slot />
-		<Aura />
+		{showAura && <Aura />}
 		<script src="../scripts/scroll-animations.ts"></script>
 	</body>
 </html>

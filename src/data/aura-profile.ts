@@ -1,3 +1,5 @@
+import { contactUrls } from './urls';
+
 export interface AuraProfile {
   identity: {
     fullName: string;
@@ -134,7 +136,7 @@ export const auraProfile: AuraProfile = {
     },
     {
       company: 'Aakam 360 5(I) Pvt Ltd', period: 'October 2023 - September 2024', role: 'UI/UX Designer Intern',
-      publicSummary: 'Supported end-to-end flows and frontend implementation for PregTrack, a government-approved pregnancy health product brought from concept to launch.',
+      publicSummary: 'Contributed research framing, information architecture, user flows, wireframes, prototypes, and implementation reviews for PregTrack, a released Android pregnancy companion.',
     },
     {
       company: 'Bloom Majestic', period: '2022 - 2023', role: 'UI/UX Designer',
@@ -149,7 +151,7 @@ export const auraProfile: AuraProfile = {
   },
   contact: {
     email: 'akshayanmohandass@gmail.com',
-    linkedIn: 'https://www.linkedin.com/in/akshayan-mohandass-',
+    linkedIn: contactUrls.linkedIn,
   },
   // Add new entries here to teach AURA exact answers to common questions.
   // `topics` should contain short phrases visitors are likely to use.
@@ -216,12 +218,12 @@ export const auraProfile: AuraProfile = {
     },
     {
       topics: ['pharmavault', 'pharma vault'],
-      answer: 'PharmaVault is an offline-first desktop pharmacy POS and inventory-management concept focused on billing, stock, vendors, purchase invoices, OCR-assisted invoice entry, batch and expiry tracking, alerts, returns, reports, barcodes, backups, and profit-and-loss visibility. Its technical context includes Electron, SQLite, Drizzle ORM, optional Python OCR, and Google Drive backup. AURA does not claim unpublished outcomes or metrics.',
+      answer: 'PharmaVault is a development-stage pharmacy operations product connecting OCR-assisted medicine capture, billing, inventory, purchasing, vendors, and multi-branch workflows. Akshayan contributed across research, product definition, UX/UI design, prototyping, and front-end implementation. Its published benefits remain qualitative because verified before-and-after product measurements are not yet available.',
       section: 'projects',
     },
     {
       topics: ['pregtrack', 'preg track'],
-      answer: 'PregTrack is a pregnancy-tracking mobile application designed to support expecting mothers with week-by-week guidance, baby-growth information, a pregnancy calendar, due-date tracking, hospital information, exercise and food recommendations, and multilingual support. Akshayan contributed UX design, mobile UI, wireframing, prototyping, user flows, and information organization.',
+      answer: 'PregTrack is a released Android pregnancy companion. Its case study now shows seven UI screens: Sign In, Profile Setup, Due Date Setup, Dashboard, Pregnancy Timeline, Baby Growth Chart, and Hospital Discovery. Akshayan contributed as a UI/UX Designer Intern at Aakam 360. The screenshots illustrate design decisions, not proof of clinical benefit, measured engagement, or formal usability-test results.',
       section: 'projects',
     },
     {
