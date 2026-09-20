@@ -1,5 +1,6 @@
 ---
 // Contact
+import { contactUrls } from '../data/urls';
 ---
 
 <section class="contact chapter-section" id="contact">
@@ -19,15 +20,15 @@
         </p>
 
         <div class="contact-links" data-reveal style="--reveal-delay: 240ms">
-          <a href="mailto:akshayanmohandass@gmail.com" class="cl-item">
+          <a href={contactUrls.email} class="cl-item">
             <span class="cl-label">Email</span>
             <span class="cl-val">akshayanmohandass@gmail.com -></span>
           </a>
-          <a href="https://www.linkedin.com/in/akshayan-mohandass-" target="_blank" rel="noopener noreferrer" class="cl-item">
+          <a href={contactUrls.linkedIn} target="_blank" rel="noopener noreferrer" class="cl-item">
             <span class="cl-label">LinkedIn</span>
             <span class="cl-val">akshayan-mohandass -></span>
           </a>
-          <a href="https://drive.google.com/uc?export=download&id=1JxVQMcN5wL2YpTLA3L74jXCL82JdWJon" target="_blank" rel="noopener noreferrer" class="cl-item">
+          <a href={contactUrls.resume} target="_blank" rel="noopener noreferrer" class="cl-item">
             <span class="cl-label">Resume</span>
             <span class="cl-val">Download PDF -></span>
           </a>
@@ -41,7 +42,7 @@
           <span class="cf-corner cf-bl"></span>
           <span class="cf-corner cf-br"></span>
         </div>
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" novalidate>
           <div class="cf-honeypot" aria-hidden="true">
             <label for="c-website">Website</label>
             <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off" />
@@ -49,18 +50,18 @@
           <p class="cf-title"><span>Project brief</span> Share a little context</p>
           <div class="cf-group">
             <label for="c-name">Name</label>
-            <input type="text" id="c-name" name="name" placeholder="Your name" maxlength="100" required />
+            <input type="text" id="c-name" name="name" placeholder="Your name" autocomplete="name" maxlength="100" required />
           </div>
           <div class="cf-group">
             <label for="c-email">Email</label>
-            <input type="email" id="c-email" name="email" placeholder="your@email.com" maxlength="254" required />
+            <input type="email" id="c-email" name="email" placeholder="your@email.com" autocomplete="email" inputmode="email" maxlength="254" required />
           </div>
           <div class="cf-group">
             <label for="c-msg">Message</label>
-            <textarea id="c-msg" name="message" rows="5" placeholder="What are you building?" maxlength="2000" required></textarea>
+            <textarea id="c-msg" name="message" rows="5" placeholder="What are you building?" autocomplete="off" minlength="10" maxlength="2000" required></textarea>
           </div>
           <button type="submit" class="cf-submit" id="cf-btn">Send message</button>
-          <p class="cf-feedback" id="cf-feedback" aria-live="polite"></p>
+          <p class="cf-feedback" id="cf-feedback" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -289,6 +290,7 @@
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!btn || !feedback || !form) return;
+    if (!form.reportValidity()) return;
     const website = (form.elements.namedItem('website') as HTMLInputElement | null)?.value.trim();
     if (website) return;
     if (Date.now() - lastSubmissionAt < 30_000) {
@@ -298,7 +300,7 @@
     }
 
     btn.disabled = true;
-    btn.textContent = 'Send message';
+    btn.textContent = 'Sending...';
     feedback.textContent = '';
     feedback.className = 'cf-feedback';
 

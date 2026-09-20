@@ -1,5 +1,6 @@
 ---
 // Hero - Nothing Tech pixel layout
+import { assetUrl, contactUrls } from '../data/urls';
 ---
 
 <section class="hero" id="hero">
@@ -44,7 +45,7 @@
 
         <div class="hero-actions">
           <a href="#contact" class="cta-primary">GET IN TOUCH -></a>
-          <a href="https://drive.google.com/uc?export=download&id=1JxVQMcN5wL2YpTLA3L74jXCL82JdWJon"
+          <a href={contactUrls.resume}
              target="_blank" rel="noopener noreferrer" class="cta-secondary">RESUME -></a>
           <button class="copy-btn" id="copy-email-btn" data-email="akshayanmohandass@gmail.com">
             <span class="copy-addr">akshayanmohandass@gmail.com</span>
@@ -63,8 +64,8 @@
           <div class="photo-mark pm-br" aria-hidden="true"></div>
 
           <div class="hero-photo-wrap">
-            <img class="hp-bw" src="/inttial_state.jpg" alt="Akshayan Mohandass" loading="eager" />
-            <img class="hp-color" src="/final_state.jpg" alt="Akshayan Mohandass" loading="eager" />
+            <img class="hp-bw" src={assetUrl('/inttial_state.jpg')} alt="Black-and-white portrait of Akshayan Mohandass, product and UX designer" title="Akshayan Mohandass — Product and UX Designer" width="800" height="800" loading="eager" decoding="async" fetchpriority="high" />
+            <img class="hp-color" src={assetUrl('/final_state.jpg')} alt="Colour portrait of Akshayan Mohandass, product and UX designer" title="Akshayan Mohandass — Product and UX Designer" width="800" height="800" loading="eager" decoding="async" fetchpriority="high" />
             <div class="photo-dot-overlay" aria-hidden="true"></div>
           </div>
         </div>
@@ -74,19 +75,19 @@
     <!-- Nothing-style spec grid -->
     <div class="hero-specs">
       <div class="spec-cell">
-        <span class="spec-label">Case studies</span>
-        <span class="spec-val stat-num">10+</span>
-        <span class="spec-unit">DOCUMENTED</span>
+        <span class="spec-label">Public case studies</span>
+        <span class="spec-val stat-num">5</span>
+        <span class="spec-unit">PUBLISHED</span>
       </div>
       <div class="spec-cell">
-        <span class="spec-label">Products shipped</span>
-        <span class="spec-val stat-num">5+</span>
-        <span class="spec-unit">WORKS</span>
+        <span class="spec-label">Selected projects</span>
+        <span class="spec-val stat-num">6</span>
+        <span class="spec-unit">FEATURED</span>
       </div>
       <div class="spec-cell">
         <span class="spec-label">Industry verticals</span>
-        <span class="spec-val stat-num">3</span>
-        <span class="spec-unit">DOMAINS</span>
+        <span class="spec-val stat-num">6</span>
+        <span class="spec-unit">REPRESENTED</span>
       </div>
       <div class="spec-cell">
         <span class="spec-label">Design scope</span>
@@ -100,7 +101,7 @@
 
 <style>
   .hero {
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     padding: clamp(80px, 12vh, 120px) 0 0;

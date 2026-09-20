@@ -1,6 +1,8 @@
 ---
 // Selected Works - Scroll-pinned card deck
+import { Image } from 'astro:assets';
 import paydartBanner from '../assets/paydart__banner.png';
+import { projectUrl } from '../data/urls';
 import pregtrackBanner from '../assets/Pregtrack_banner.png';
 import famconnectBanner from '../assets/famconnect__banner.png';
 import staffezeeBanner from '../assets/staffezee_banner.png';
@@ -12,28 +14,28 @@ const projects = [
     type: "Education FinTech | Mobile", year: "2024",
     desc: "Student fee-management prototype unifying dues, additional charges, payment history, and downloadable receipts.",
     proof: "End-to-end Flutter prototype | UX/UI design + implementation",
-    link: "/projects/paydart", banner: paydartBanner, confidential: false,
+    link: projectUrl('paydart'), banner: paydartBanner, confidential: false,
   },
   {
     num: "02", title: "PregTrack",
     type: "Maternal Health | Android", year: "2023",
     desc: "A shipped pregnancy companion organising weekly development, maternal guidance, profiles, and planning around the user's current stage.",
     proof: "Published on Google Play | UI/UX design internship",
-    link: "/projects/pregtrack-app", banner: pregtrackBanner, confidential: false,
+    link: projectUrl('pregtrack-app'), banner: pregtrackBanner, confidential: false,
   },
   {
     num: "03", title: "FamConnect",
     type: "Private Communities | Figma", year: "2024",
     desc: "A flexible private-community platform for structured updates, events, polls, resources, participation, and role-based control.",
     proof: "Completed Figma prototype | UI/UX + product design",
-    link: "/projects/famconnect", banner: famconnectBanner, confidential: false,
+    link: projectUrl('famconnect'), banner: famconnectBanner, confidential: false,
   },
   {
     num: "04", title: "Staffezee",
     type: "B2B SaaS | Staffing Operations", year: "2024",
     desc: "A connected bench-sales operating system spanning consultants, hotlists, submissions, placements, invoices, and reporting.",
     proof: "Live customer product | UI/UX designer + product manager",
-    link: "/projects/staffezee", banner: staffezeeBanner, confidential: false,
+    link: projectUrl('staffezee'), banner: staffezeeBanner, confidential: false,
   },
   {
     num: "05", title: "Enterprise Travel Intelligence",
@@ -47,7 +49,7 @@ const projects = [
     type: "Pharmacy Operations | OCR", year: "2024",
     desc: "An OCR-enabled platform connecting pharmacy billing, medicines, inventory, purchases, vendors, and branch operations.",
     proof: "Development-stage product | Research, UX, product + front-end",
-    link: "/projects/pharmavault", banner: pharmavaultBanner, confidential: false,
+    link: projectUrl('pharmavault'), banner: pharmavaultBanner, confidential: false,
   },];
 ---
 
@@ -57,7 +59,7 @@ const projects = [
     <header class="works-header" data-reveal>
       <div class="wh-counter">
         <span class="wh-rule"></span>
-        <span class="wh-count-text">06 &nbsp;/&nbsp; CASE STUDIES</span>
+        <span class="wh-count-text">06 &nbsp;/&nbsp; SELECTED PROJECTS</span>
         <span class="wh-rule"></span>
       </div>
       <h2 class="wh-title">
@@ -68,7 +70,7 @@ const projects = [
         <span>Product Design</span><span class="wh-dot">|</span>
         <span>UX Systems</span><span class="wh-dot">|</span>
         <span>AI Products</span><span class="wh-dot">|</span>
-        <span>2023 - 2024</span>
+        <span>2023 - PRESENT</span>
       </div>
     </header>
   </div>
@@ -99,7 +101,7 @@ const projects = [
 
             <div class="dc-right">
               {p.banner ? (
-              <img src={p.banner.src} alt={`${p.title} project preview`} loading="lazy" />
+              <Image src={p.banner} alt={`${p.title} UX case study preview`} title={`${p.title} case study`} widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 58vw" format="webp" quality={78} loading="lazy" decoding="async" />
             ) : (
               <div class="dc-placeholder" style={`--project-accent: #6D7CFF`}>
                 <span>Enterprise travel</span>
@@ -171,7 +173,7 @@ const projects = [
   .deck-sticky {
     position: sticky;
     top: 80px;
-    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
     display: flex;
     flex-direction: column;
     max-width: 1280px;
@@ -351,7 +353,7 @@ const projects = [
     .deck-card { grid-template-columns:1fr; grid-template-rows:1fr 200px; }
     .dc-left { border-right:none; border-bottom:1px solid rgba(204,255,0,0.07); padding:24px; }
     .dc-title { font-size:clamp(2.5rem,9vw,4rem); }
-    .deck-sticky { top:64px; height:calc(100vh - 80px); }
+    .deck-sticky { top:64px; height:calc(100dvh - 80px); }
   }
 
   @media (max-width: 480px) {

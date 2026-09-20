@@ -1,0 +1,11 @@
+{
+  "name": "Akshayan Mohandass — Product Designer",
+  "short_name": "AM Portfolio",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101214",
+  "theme_color": "#101214",
+  "icons": [
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

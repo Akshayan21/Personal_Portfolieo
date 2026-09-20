@@ -1,34 +1,49 @@
-# build output
+# Build output
 dist/
 
-#folders
+# Local agent and editor folders
 skills/
 agents/
 antigravity/
-skills/
+.claude/
+.skills/
+.idea/
+.vscode/
 
-#files
+# Markdown documentation
 *.md
 
 
-# generated types
+# Generated Astro files
 .astro/
 
-# dependencies
+# Dependencies
 node_modules/
 
-# logs
+# Test and tool output
+coverage/
+*.tsbuildinfo
+.eslintcache
+
+# Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# environment variables
+# Environment variables
 .env
+.env.local
+.env.*.local
 .env.production
+!.env.example
 
-# macOS-specific files
+# Hosting provider state
+.vercel/
+.netlify/
+
+# Operating system files
 .DS_Store
-
-# jetbrains setting folder
-.idea/
+Thumbs.db
+Desktop.ini

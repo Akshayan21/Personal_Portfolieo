@@ -1,0 +1,14 @@
+PREGTRACK MOBILE UI SCREENSHOTS
+
+Add portrait PNG or WebP exports for:
+- sign in
+- profiles and patients
+- trimester nutrition
+- weekly overview
+- calendar and due date
+- exercise and care
+
+Then open src/data/projects.ts and set the matching PregTrack image value.
+
+Example:
+image: "/projects/pregtrack/screens/weekly-overview.webp"

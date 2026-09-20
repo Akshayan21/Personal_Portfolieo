@@ -21,6 +21,8 @@ export interface Project {
   screens: { title: string; desc: string; image?: string; imageFit?: "cover" | "contain" }[];
   decisions: { decision: string; rationale: string }[];
   outcomes: { metric: string; label: string }[];
+  liveUrl?: string;
+  liveLabel?: string;
   responsibilities?: string[];
   strategy?: { title: string; desc: string };
   architecture?: { label: string; desc: string }[];
@@ -76,7 +78,6 @@ export const projects: Project[] = [
       { title: "Login", desc: "Student ID and password entry with a direct route to account recovery.", image: "" },
       { title: "Student Overview", desc: "Authenticated identity and academic context confirm that the student is in the correct account.", image: "" },
       { title: "Upcoming Fees", desc: "Term fee, amount, due date, and duration stay together so the obligation is easy to interpret.", image: "" },
-      { title: "Additional Fees", desc: "Non-term charges remain distinct from standard dues while using the same familiar card pattern.", image: "" },
       { title: "Payment History", desc: "Previous transactions remain accessible with status, amount, date, and receipt reference.", image: "" },
       { title: "Digital Receipt", desc: "A portable PDF record preserves identity, fee description, balance, date, and transaction reference.", image: "" },
     ],
@@ -306,6 +307,8 @@ export const projects: Project[] = [
     accent: "#92278F",
     accentDark: "#6d1d6b",
     desc: "A shipped Android pregnancy companion that makes stage-relevant guidance easier to understand, follow, and revisit week by week.",
+    liveUrl: "https://play.google.com/store/apps/details?id=com.aakam360.pregtrack&pcampaignid=web_share",
+    liveLabel: "View on Google Play",
     overview: "As a UI/UX Designer Intern, I contributed to research framing, information architecture, user flows, wireframes, prototypes, and implementation reviews for an end-to-end pregnancy companion. PregTrack connects onboarding, patient profiles, weekly development, due-date planning, nutrition, exercise, hospital information, and multilingual access in one mobile experience.",
     problem: "Pregnancy information is often fragmented across disconnected sources, difficult to time correctly, and overwhelming for first-time mothers. The experience needed to make guidance relevant to the current week or trimester, translate complex topics into mobile-friendly content, and preserve context across repeated visits.",
     painPoints: [
@@ -334,11 +337,12 @@ export const projects: Project[] = [
     ],
     screens: [
       { title: "Sign In", desc: "Familiar mobile-number and social sign-in options provide a low-friction route into the pregnancy profile.", image: "" },
-      { title: "Profiles & Patients", desc: "Structured profile and patient records preserve pregnancy context for returning users and care workflows.", image: "" },
-      { title: "Trimester Nutrition", desc: "Scannable food guidance is filtered by trimester and presented as short, repeatable content cards.", image: "" },
-      { title: "Weekly Overview", desc: "A future portfolio slot for the current pregnancy week, baby development, and timely maternal guidance.", image: "" },
-      { title: "Calendar & Due Date", desc: "A future portfolio slot for milestones, reminders, appointments, and expected delivery context.", image: "" },
-      { title: "Exercise & Care", desc: "A future portfolio slot for stage-appropriate activity and nearby hospital information.", image: "" },
+      { title: "Profile Setup", desc: "A short form gathers name, age, pregnancy status, and whether the user has children before continuing into the experience.", image: "" },
+      { title: "Due Date Setup", desc: "A calculation-method selector and date field establish the pregnancy timeline, with guidance that the selection can be changed later.", image: "" },
+      { title: "Dashboard", desc: "A date strip and baby-growth summary sit above shortcuts to the timeline, exercises, hospitals, and food guidance.", image: "" },
+      { title: "Pregnancy Timeline", desc: "A week-based timeline uses coloured bands to organise pregnancy-related events and planning information.", image: "" },
+      { title: "Baby Growth Chart", desc: "Week selectors, a familiar size comparison, and length and weight fields make development information scannable.", image: "" },
+      { title: "Hospital Discovery", desc: "Search, a map, and hospital cards bring location, distance, ratings, and availability into one care-discovery view.", image: "" },
     ],
     decisions: [
       { decision: "Use pregnancy stage as the primary context", rationale: "A week-by-week structure makes guidance timely, reduces search effort, and gives users a clear reason to return as pregnancy progresses." },
@@ -643,10 +647,19 @@ export const projects: Project[] = [
       { num: "04", title: "Prototype", desc: "Built and iterated a high-fidelity end-to-end Figma prototype" },
     ],
     screens: [
-      { title: "Personal Home", desc: "Joined communities, invitations, and cross-community highlights give each person one starting point." },
-      { title: "Community Feed", desc: "A dedicated trusted space keeps updates, announcements, and pinned information within the correct membership boundary." },
-      { title: "Create & Participate", desc: "Purpose-built flows support updates, event RSVPs, poll voting, comments, reactions, and shared documents." },
-      { title: "Members & Roles", desc: "Profiles, invitations, approval states, and explicit permissions make access and administration understandable." },
+      { title: "Welcome to FamConnect", desc: "The opening screen introduces FamConnect as a private place for the communities that matter to each person." },
+      { title: "Private Community Spaces", desc: "Onboarding explains how family, school, and local groups can keep their conversations and activity organised." },
+      { title: "Stay Connected", desc: "The final introduction establishes the value of receiving updates and participating across trusted spaces." },
+      { title: "Account Verification", desc: "A focused verification step confirms the user's contact details before any private community information is created." },
+      { title: "Account Confirmation", desc: "Clear confirmation closes the verification loop and prepares the user to continue account setup." },
+      { title: "Personal Details", desc: "A concise profile form captures the identity information needed to participate recognisably within private groups." },
+      { title: "Family Setup Introduction", desc: "A dedicated transition explains the next setup decision before asking the user to create or join a family." },
+      { title: "Create a Family", desc: "The creation flow captures the family identity and establishes a new private space for relatives." },
+      { title: "Join a Family", desc: "Invitation-based joining gives people a clear route into an existing family while preserving its membership boundary." },
+      { title: "Add an Address", desc: "Address capture adds useful household context without mixing location details into unrelated profile fields." },
+      { title: "School Details", desc: "The school setup flow gathers the core information required to identify an education community." },
+      { title: "School Information", desc: "An additional school-details step progressively collects the remaining context instead of overloading one form." },
+      { title: "Create a School Community", desc: "The completed school-creation flow turns the captured details into a structured private community." },
     ],
     decisions: [
       { decision: "Use templates without creating separate products", rationale: "Family, school, apartment, and club spaces need different setup language, but their core actions are similar. One adaptable structure avoids fragmented product experiences." },

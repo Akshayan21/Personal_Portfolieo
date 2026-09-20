@@ -1,0 +1,16 @@
+PAYDART MOBILE UI SCREENSHOTS
+
+Export the application screens as portrait PNG or WebP files. A 9:19.5 aspect ratio works best.
+
+Suggested filenames:
+- login.webp
+- student-overview.webp
+- upcoming-fees.webp
+- additional-fees.webp
+- payment-history.webp
+- digital-receipt.webp
+
+After adding the files here, open src/data/projects.ts and set the matching PayDart image value.
+
+Example:
+image: "/projects/paydart/screens/login.webp"
